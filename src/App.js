@@ -72,10 +72,13 @@ function App() {
 
   return (
     <>
-      <SignupForm/>
+      <SignupForm 
+        submitSignup={handleSignupSubmit} 
+        submitSignin={handleSigninSubmit} 
+        change={handleLoginChange} 
+        loginState={loginFormState}/>
 
-
-      <h1>
+<h1>
       --------------------------------
       </h1>
 <Box>
@@ -90,14 +93,6 @@ function App() {
 sx={{ width: 100, height: 30}}/>
 <h1> Favorite Pet: Panda </h1>
 </Box>
-
-
-
-      <SignupForm 
-        submitSignup={handleSignupSubmit} 
-        submitSignin={handleSigninSubmit} 
-        change={handleLoginChange} 
-        loginState={loginFormState}/>
     </>
   );
 }
