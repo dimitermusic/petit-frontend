@@ -40,9 +40,39 @@ function App() {
     }
   }
 
+  const handleSigninSubmit = event=>{
+    event.preventDefault();
+    axios.post("https://localhost:3001/signin", {
+      usernameSignIn: usernameSignIn,
+      passwordSignIn: passwordSignIn})
+    .then(res=>{
+      console.log(res.data)
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+
+  const handleSignupSubmit = event=>{
+    event.preventDefault();
+    axios.post("https://localhost:3001/signup", {
+      emailSignUp: emailSignUp,
+      usernameSignUp: usernameSignUp,
+      passwordSignUp: passwordSignUp
+    })
+    .then(res=>{
+      console.log(res.data)
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+
   return (
     <>
-      <SignupForm change={handleLoginChange} loginState={loginFormState}/>
+      <SignupForm 
+        submitSignup={handleSignupSubmit} 
+        submitSignin={handleSigninSubmit} 
+        change={handleLoginChange} 
+        loginState={loginFormState}/>
     </>
   );
 }

@@ -12,6 +12,7 @@ function SignupForm(props) {
             <h1>Sign In</h1>
 
             <Box
+
                 component="form"
                 noValidate
                 autoComplete="off"
@@ -19,6 +20,7 @@ function SignupForm(props) {
                     display: "flex",
                     justifyContent: "center"
                 }}
+                onSubmit={props.submit}
             >
         
                 <TextField  
