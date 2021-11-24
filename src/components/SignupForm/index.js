@@ -5,31 +5,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 
-function SignupForm() {
-
-    const [usernameSignIn, setUsernameSignIn] = useState('');
-    const [passwordSignIn, setPasswordSignIn] = useState('');
-    const [emailSignUp, setEmailSignUp] = useState('');
-    const [usernameSignUp, setUsernameSignUp] = useState('');
-    const [PasswordSignUp, setPasswordSignUp] = useState('');
-
-    const handleInputChange = (e) =>{
-        const {name, value} = e.target
-        console.log(name)
-        if (name === "usernameSignIn"){
-            return setUsernameSignIn(e.target.value)
-        }
-        if (name === "passwordSignIn"){
-            return setPasswordSignIn(value)
-        }
-        if (name === "usernameSignUp"){
-            return setUsernameSignUp(value)
-        }
-        if (name === "emailSignUp"){
-            return setEmailSignUp(value)
-        }
-        return setPasswordSignUp(value)
-    }
+function SignupForm(props) {
 
     return (
         <div >
@@ -47,17 +23,17 @@ function SignupForm() {
         
                 <TextField  
                     label="Username"
-                    value={usernameSignIn}
+                    value={props.loginState.usernameSignIn}
                     name="usernameSignIn"
-                    onChange={handleInputChange}
+                    onChange={props.change}
                     margin="dense" 
                     variant="outlined" />
 
                 <TextField 
                     type="password" 
-                    value={passwordSignIn} 
+                    value={props.loginState.passwordSignIn} 
                     name="passwordSignIn"
-                    onChange={handleInputChange}
+                    onChange={props.change}
                     margin="dense" 
                     label="Password" 
                     variant="outlined" />
@@ -85,25 +61,25 @@ function SignupForm() {
 
                     <TextField  
                         label="Email" 
-                        value={emailSignUp}
+                        value={props.loginState.emailSignUp}
                         name="emailSignUp"
-                        onChange={handleInputChange}
+                        onChange={props.change}
                         margin="dense" 
                         variant="outlined" />
 
                     <TextField  
                         label="Username"
-                        value={usernameSignUp}
+                        value={props.loginState.usernameSignUp}
                         name="usernameSignUp"
-                        onChange={handleInputChange} 
+                        onChange={props.change} 
                         margin="dense" 
                         variant="outlined" />
 
                     <TextField 
                         type="password"
-                        value={PasswordSignUp}
+                        value={props.loginState.passwordSignUp}
                         name="passwordSignUp"
-                        onChange={handleInputChange}  
+                        onChange={props.change}  
                         margin="dense" 
                         label="Password" 
                         variant="outlined" />
