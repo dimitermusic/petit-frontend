@@ -43,7 +43,7 @@ function SignupForm(props) {
                 <Button 
                     variant="contained"
                     >
-                    Sign Up
+                    Sign In
                 </Button>
 
             </Box>
@@ -86,7 +86,7 @@ function SignupForm(props) {
                         label="Password" 
                         variant="outlined" />
                 
-                    <Button variant="contained">Sign In</Button>
+                    <Button variant="contained">Sign Up</Button>
             </Box>
 
         </div>
