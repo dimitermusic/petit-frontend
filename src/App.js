@@ -1,6 +1,7 @@
-import SignupForm from "./components/SignupForm/index.js"
+import SignupForm from "./components/SignupForm/index.js";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+const axios = require("axios")
 
 function App() {
   const [loginFormState, setLoginFormState] = useState ({
@@ -43,8 +44,8 @@ function App() {
   const handleSigninSubmit = event=>{
     event.preventDefault();
     axios.post("https://localhost:3001/signin", {
-      usernameSignIn: usernameSignIn,
-      passwordSignIn: passwordSignIn})
+      usernameSignIn: loginFormState.usernameSignIn,
+      passwordSignIn: loginFormState.passwordSignIn})
     .then(res=>{
       console.log(res.data)
     }).catch(err=>{
@@ -55,9 +56,9 @@ function App() {
   const handleSignupSubmit = event=>{
     event.preventDefault();
     axios.post("https://localhost:3001/signup", {
-      emailSignUp: emailSignUp,
-      usernameSignUp: usernameSignUp,
-      passwordSignUp: passwordSignUp
+      emailSignUp: loginFormState.emailSignUp,
+      usernameSignUp: loginFormState.usernameSignUp,
+      passwordSignUp: loginFormState.passwordSignUp
     })
     .then(res=>{
       console.log(res.data)
