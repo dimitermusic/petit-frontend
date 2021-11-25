@@ -7,6 +7,6 @@ const API = {
     login:(usrData)=>{
         return axios.post(`${URL_PREFIX}/login`,usrData)
     },
-}
+};
 
-export default API
+export default API;
