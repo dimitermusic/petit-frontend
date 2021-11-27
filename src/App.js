@@ -1,12 +1,19 @@
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
 import Discover from "./pages/Discover/index.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import API from "./utils/api";
 const axios = require("axios");
 
 function App() {
+
+  const [userState,setUserState]= useState({
+    username:"",
+    id:0
+  })
+  
+  const [token, setToken] = useState("")
 
   const [searchFormState, setSearchFormState] = useState({
     search: "",
@@ -21,6 +28,28 @@ function App() {
     usernameSignUp:"",
     passwordSignUp:""
   });
+
+  useEffect(()=>{
+    const myToken = localStorage.getItem("token")
+    console.log("successfully used")
+    console.log(myToken)
+
+    if(myToken){
+      API.getProfile(myToken)
+      .then(res=>{
+        console.log("successfully obtained token!")
+        setToken(myToken)
+        setUserState({
+          username: res.data.username,
+          id: res.data.id
+        })
+      }).catch(err=>{
+        console.log("whoops")
+        console.log(err)
+        localStorage.removeItem("token")
+      })
+    }
+  },[])
 
   const handleSearchChange= event =>{
     console.log(event.target.value)
@@ -73,11 +102,18 @@ function App() {
 
   const handleSigninSubmit = event=>{
     event.preventDefault();
-    axios.post("https://localhost:3001/signin", {
+    API.login({
       username: loginFormState.usernameSignIn,
-      password: loginFormState.passwordSignIn})
+      password: loginFormState.passwordSignIn
+    })
     .then(res=>{
       console.log(res.data)
+      setUserState({
+        username: res.data.user.username,
+        id: res.data.user.id
+      })
+      setToken(res.data.token)
+      localStorage.setItem("token", res.data.token)
     }).catch(err=>{
       console.log(err);
     })
