@@ -1,94 +1,54 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import style from "./style.css"
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from "@mui/material/Button";
 
 function SignupForm(props) {
 
     return (
-        <div >
-            <h1>Sign In</h1>
+        <div>
+{/* LOGIN */}
+            <h1 className="uk-flex uk-flex-center">Login</h1>
+            <div className="uk-card">
+                {/* Username for signin */}
+                <div className="uk-inline uk-margin-auto uk-flex uk-form-width-medium">
+                    <span className="uk-form-icon" uk-icon="icon: user"></span>
+                    <input className="uk-input" type="text" value={props.loginState.usernameSignIn} name="usernameSignIn" onChange={props.change}/>
+                </div>
 
-            <Box
+                {/* Password for signin */}
+                <div className="uk-inline uk-margin-auto uk-form-width-medium uk-flex">
+                    <span className="uk-form-icon " uk-icon="icon: lock"></span>
+                    <input className="uk-input" type="password" value={props.loginState.passwordSignIn} name="passwordSignIn" onChange={props.change}/>
+                </div>
 
-                component="form"
-                noValidate
-                autoComplete="off"
-                sx={{
-                    display: "flex",
-                    justifyContent: "center"
-                }}
-                onSubmit={props.submit}
-            >
-        
-                <TextField  
-                    label="Username"
-                    value={props.loginState.usernameSignIn}
-                    name="usernameSignIn"
-                    onChange={props.change}
-                    margin="dense" 
-                    variant="outlined" />
+                {/* button for signin */}
+                <button className="uk-button uk-margin-auto uk-flex uk-button-default" onClick={props.handleSigninSubmit}>Login</button>
+            </div>
 
-                <TextField 
-                    type="password" 
-                    value={props.loginState.passwordSignIn} 
-                    name="passwordSignIn"
-                    onChange={props.change}
-                    margin="dense" 
-                    label="Password" 
-                    variant="outlined" />
+{/* CREATE ACCOUNT */}
+            <h1 className="uk-flex uk-flex-center">Create Account</h1>
+            <div className="uk-card">
+                {/* Username for create account */}
+                <div className="uk-inline uk-margin-auto uk-flex uk-form-width-medium">
+                    <span className="uk-form-icon" uk-icon="icon: user"></span>
+                    <input className="uk-input" type="text" value={props.loginState.usernameSignUp} name="usernameSignUp" onChange={props.change}/>
+                </div>
+
+                {/* email for create account */}
+                <div className="uk-inline uk-margin-auto uk-form-width-medium uk-flex">
+                    <span className="uk-form-icon" uk-icon="icon: mail"></span>
+                    <input className="uk-input" type="email" value={props.loginState.emailSignUp} name="emailSignUp" onChange={props.change}/>
+                </div>
                 
-                <Button 
-                    variant="contained"
-                    >
-                    Sign Up
-                </Button>
+                {/* Password for create account */}
+                <div className="uk-inline uk-margin-auto uk-form-width-medium uk-flex">
+                    <span className="uk-form-icon" uk-icon="icon: lock"></span>
+                    <input className="uk-input" type="password" value={props.loginState.passwordSignUp} name="passwordSignUp" onChange={props.change}/>
+                </div>
 
-            </Box>
-
-            <h1>Sign Up</h1>
-
-            <Box
-                component="form"
-                noValidate
-                autoComplete="off"
-                sx={{
-                    display: "flex-box",
-                    justifyContent: "center",
-                    flexDirection: "column"
-                }}
-            >
-
-                    <TextField  
-                        label="Email" 
-                        value={props.loginState.emailSignUp}
-                        name="emailSignUp"
-                        onChange={props.change}
-                        margin="dense" 
-                        variant="outlined" />
-
-                    <TextField  
-                        label="Username"
-                        value={props.loginState.usernameSignUp}
-                        name="usernameSignUp"
-                        onChange={props.change} 
-                        margin="dense" 
-                        variant="outlined" />
-
-                    <TextField 
-                        type="password"
-                        value={props.loginState.passwordSignUp}
-                        name="passwordSignUp"
-                        onChange={props.change}  
-                        margin="dense" 
-                        label="Password" 
-                        variant="outlined" />
-                
-                    <Button variant="contained">Sign In</Button>
-            </Box>
-
+                {/* button for create account */}
+                <button className="uk-button uk-margin-auto uk-flex uk-button-default" onClick={props.handleSignupSubmit}>Create Account</button>
+            </div>
         </div>
     )
 }
