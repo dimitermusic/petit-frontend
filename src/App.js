@@ -3,12 +3,15 @@ import SearchBar from "./components/SearchBar/index.js";
 import Discover from "./pages/Discover/index.js";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import API from "./utils/api";
 const axios = require("axios");
 
 function App() {
 
   const [searchFormState, setSearchFormState] = useState({
-    search: ""
+    search: "",
+    city:"",
+    type:""
   })
 
   const [loginFormState, setLoginFormState] = useState ({
@@ -19,14 +22,25 @@ function App() {
     passwordSignUp:""
   });
 
-  const handleSearchChange = event =>{
-    if(event.target.name === "search"){
+  const handleSearchChange= event =>{
+    console.log(event.target.value)
+  if(event.target.name === "search"){
+    setSearchFormState({
+      ...searchFormState,
+      search: event.target.value
+    })
+  } else if (event.target.name === "city") {
       setSearchFormState({
-        ...searchFormState,
-        search: event.target.value
+          ...searchFormState,
+          city: event.target.value
       })
-    }
+  } else {
+      setSearchFormState({
+          ...searchFormState,
+          type: event.target.value  
+      })
   }
+}
 
   const handleLoginChange = event=>{
     if(event.target.name==="usernameSignIn"){
