@@ -5,15 +5,19 @@ import { getThemeProps } from "@mui/system";
 function SearchBar(props) {
 
     return (
-        <div>
+        <>
             <div class="uk-flex uk-flex-center uk-margin">
-                <form class="uk-search uk-search-default">
-                    <a href="" class="uk-search-icon-flip" uk-search-icon></a>
-                    <input name="search" class="uk-search-input" type="search" value={props.searchState.search} onChange placeholder="Search"/>
-                    <button class="uk-button uk-button-default">Button</button>
+                <form class="uk-flex-inline uk-search">
+                    <input name="search" class="uk-search-input" type="search" value={props.searchState.search} onChange placeholder="Name" />
+                    <input name="search" class="uk-search-input" type="search" value={props.searchState.search} onChange placeholder="City" />
+                    <select class="uk-select" id="form-stacked-select">
+                        <option>Establishment</option>
+                        <option>Job</option>
+                    </select>
                 </form>
+                    <button class="uk-button uk-button-default">Button</button>
             </div>
-        </div>
+        </>
     )
 }
 

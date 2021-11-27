@@ -1,5 +1,6 @@
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
+import Discover from "./pages/Discover/index.js";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 const axios = require("axios");
@@ -59,8 +60,8 @@ function App() {
   const handleSigninSubmit = event=>{
     event.preventDefault();
     axios.post("https://localhost:3001/signin", {
-      usernameSignIn: loginFormState.usernameSignIn,
-      passwordSignIn: loginFormState.passwordSignIn})
+      username: loginFormState.usernameSignIn,
+      password: loginFormState.passwordSignIn})
     .then(res=>{
       console.log(res.data)
     }).catch(err=>{
@@ -71,9 +72,9 @@ function App() {
   const handleSignupSubmit = event=>{
     event.preventDefault();
     axios.post("https://localhost:3001/signup", {
-      emailSignUp: loginFormState.emailSignUp,
-      usernameSignUp: loginFormState.usernameSignUp,
-      passwordSignUp: loginFormState.passwordSignUp
+      email: loginFormState.emailSignUp,
+      username: loginFormState.usernameSignUp,
+      password: loginFormState.passwordSignUp
     })
     .then(res=>{
       console.log(res.data)
@@ -83,16 +84,23 @@ function App() {
   }
 
   return (
-    <>
+    <>      
+  <h1>==========SearchBar==========</h1>
+    <SearchBar
+        searchState={searchFormState}
+        change={handleSearchChange}
+        />
+        
+  <h1>==========Login==========</h1>
       <SignupForm 
         submitSignup={handleSignupSubmit} 
         submitSignin={handleSigninSubmit} 
         change={handleLoginChange} 
         loginState={loginFormState}/>
-      <h1>==========SearchBar==========</h1>
-      <SearchBar
-        searchState={searchFormState}
-        change={handleSearchChange}/>
+
+  <h1>==========Discover==========</h1>
+      <Discover/>
+
     </>
   );
 }
