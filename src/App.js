@@ -133,6 +133,12 @@ function App() {
     })
   }
 
+  const logOut=()=>{
+    setUserState({username:"", id:0})
+    setToken("")
+    localStorage.removeItem("token")
+  }
+
   return (
     <>      
   <h1>==========SearchBar==========</h1>
