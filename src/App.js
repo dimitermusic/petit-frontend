@@ -4,6 +4,7 @@ import Discover from "./pages/Discover/index.js";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import API from "./utils/api";
+import Profile from "./pages/Profile/index.js";
 const axios = require("axios");
 
 function App() {
@@ -156,6 +157,13 @@ function App() {
 
   <h1>==========Discover==========</h1>
       <Discover/>
+
+  <h1>==========Profile==========</h1>
+ 
+      <Profile/>
+
+  <h1>==========Edit Profile==========</h1>
+
 
     </>
   );
