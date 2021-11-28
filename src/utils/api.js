@@ -6,9 +6,11 @@ const URL_PREFIX = "http://localhost:3001"
 
 const API = {
     login:(usrData)=>{
-        return axios.post(`${URL_PREFIX}/login`,usrData)
+        return axios.post(`${URL_PREFIX}/api/users/login`,usrData)
     },
-
+    signup:(usrData)=>{
+        return axios.post(`${URL_PREFIX}/api/users/signup`,usrData)
+    }
 };
 
 export default API;
