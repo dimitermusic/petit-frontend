@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import style from "./style.css"
+import style from "./style.css";
+import App from "../../App"
 
 function SignupForm(props) {
 
@@ -22,7 +23,7 @@ function SignupForm(props) {
                 </div>
 
                 {/* button for signin */}
-                <button className="uk-button uk-margin-auto uk-flex uk-button-default" onClick={props.handleSigninSubmit}>Login</button>
+                <button className="uk-button uk-margin-auto uk-flex uk-button-default" onClick={props.submitSignin}>Login</button>
             </div>
 
 {/* CREATE ACCOUNT */}
@@ -47,7 +48,7 @@ function SignupForm(props) {
                 </div>
 
                 {/* button for create account */}
-                <button className="uk-button uk-margin-auto uk-flex uk-button-default" onClick={props.handleSignupSubmit}>Create Account</button>
+                <button className="uk-button uk-margin-auto uk-flex uk-button-default" onClick={props.submitSignup}>Create Account</button>
             </div>
         </div>
     )

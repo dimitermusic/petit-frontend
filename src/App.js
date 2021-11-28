@@ -110,8 +110,8 @@ function App() {
     .then(res=>{
       console.log(res.data)
       setUserState({
-        username: res.data.user.username,
-        id: res.data.user.id
+        username: res.data.username,
+        id: res.data.id
       })
       setToken(res.data.token)
       localStorage.setItem("token", res.data.token)
@@ -121,14 +121,26 @@ function App() {
   }
 
   const handleSignupSubmit = event=>{
-    event.preventDefault();
-    axios.post("https://localhost:3001/signup", {
+    // event.preventDefault();
+    console.log("event is triggered")
+    API.signup({
       email: loginFormState.emailSignUp,
       username: loginFormState.usernameSignUp,
       password: loginFormState.passwordSignUp
     })
     .then(res=>{
+      console.log("response is received")
+      API.login({
+        username:loginFormState.usernameSignUp,
+        password:loginFormState.passwordSignUp
+      })
       console.log(res.data)
+      setUserState({
+        username:res.data.username,
+        id:res.data.id
+      })
+      setToken(res.data.token)
+      localStorage.setItem("token",res.data.token)
     }).catch(err=>{
       console.log(err);
     })
@@ -142,29 +154,28 @@ function App() {
 
   return (
     <>      
-  <h1>==========SearchBar==========</h1>
+  {/* <h1>==========SearchBar==========</h1> */}
     <SearchBar
         searchState={searchFormState}
         change={handleSearchChange}
         />
-        
-  <h1>==========Login==========</h1>
+  
+  {!userState.username?
+  // <h1>==========Login==========</h1>
       <SignupForm 
         submitSignup={handleSignupSubmit} 
         submitSignin={handleSigninSubmit} 
         change={handleLoginChange} 
-        loginState={loginFormState}/>
+        loginState={loginFormState}/>:<Profile/>}
 
-  <h1>==========Discover==========</h1>
-      <Discover/>
+  {/* // <h1>==========Discover==========</h1> */}
+  {/* //     <Discover/> */}
 
-  <h1>==========Profile==========</h1>
+  {/* // :<h1>==========Profile==========</h1> */}
  
-      <Profile/>
-
-  <h1>==========Edit Profile==========</h1>
 
 
+  {/* // <h1>==========Edit Profile==========</h1> */}
     </>
   );
 }
