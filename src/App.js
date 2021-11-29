@@ -1,13 +1,14 @@
+import React, { useEffect, useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import ReactDOM from "react-dom";
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
 import Discover from "./pages/Discover/index.js";
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import API from "./utils/api";
 import Profile from "./pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
-require('dotenv').config()
-import { Routes, Route, Link } from "react-router-dom";
+import Results from "./components/Results/index";
+require('dotenv').config();
 const axios = require("axios");
 
 
@@ -194,7 +195,9 @@ function App() {
         searchState={searchFormState}
         change={handleSearchChange}
         estSearch={apiFetch}
-        />
+      />
+      
+      <Results />
   
   {!userState.username?
   // <h1>==========Login==========</h1>
@@ -210,7 +213,6 @@ function App() {
   {/* // :<h1>==========Profile==========</h1> */}
  
   {/* // <h1>==========Edit Profile==========</h1> */}
-    
       <Routes>
         {console.log(LoginPage)}
         <Route exact path={"/"} element={<LoginPage/>}/>
