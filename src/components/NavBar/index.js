@@ -7,7 +7,7 @@ function NavBar(props) {
     return (
         <>
             <div>
-                <nav className="uk-navbar-container" uk-navbar>
+                <nav className="uk-navbar-container" uk-navbar="true">
 
                     <div className="uk-navbar-right">
                         <a className="uk-navbar-item uk-logo" href="/discover">PETIT | LOGO</a>

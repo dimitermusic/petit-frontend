@@ -8,7 +8,6 @@ import API from "./utils/api";
 import Profile from "./pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
 import Results from "./components/Results/index";
-require('dotenv').config();
 const axios = require("axios");
 
 
@@ -71,10 +70,12 @@ function App() {
 
   const apiFetch = (e)=>{
     e.preventDefault();
-    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${searchFormState.search}%20in%20${searchFormState.city}&key=${process.env.REACT_APP_API_KEY}`)
+    API.apiFetch({
+      name:searchFormState.search, city:searchFormState.city,
+      type:searchFormState.type
+    })
       .then(res=>{
-        console.log(res.results);
-        
+        console.log(res.data);
       })
   }
 

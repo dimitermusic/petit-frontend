@@ -91,6 +91,13 @@ const API = {
                 "Authorization":`Bearer: ${tkn}`
             }
         })
+    },
+    apiFetch:(fetchData,tkn)=>{
+        return axios.get(`${URL_PREFIX}/api/google`,fetchData,{
+            headers:{
+                "Authorization":`Bearer: ${tkn}`
+            }
+        })
     }
 };
 
