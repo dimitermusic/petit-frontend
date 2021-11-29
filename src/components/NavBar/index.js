@@ -15,12 +15,12 @@ function NavBar(props) {
                     <div class="uk-navbar-right">
                         <ul class="uk-navbar-nav">
                             <li class="uk-active">
-                                <a href="#">Parent</a>
+                                <a href="/discover">Discover</a>
                             </li>
                             <li>
-                                <a href="#">Discover</a>
+                                <a href="/profile">Profile</a>
                             </li>
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="/login">Logout</a></li>
                         </ul>
                     </div>
                  </div>
