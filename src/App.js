@@ -67,10 +67,11 @@ function App() {
     }
   }
 
-  const logOut = () => {
+  const Logout = () => {
     setUserState({ username: "", id: 0 })
     setToken("")
     localStorage.removeItem("token")
+    window.location="http://localhost:3000/login"
   }
 
   function LoginPage() {
@@ -78,7 +79,6 @@ function App() {
       <SignupForm 
         setUserState={setUserState}
         setToken={setToken}/> : <Profile />)
-    
   }
 
   return (
@@ -91,8 +91,9 @@ function App() {
       />
       <Routes>
         {console.log(LoginPage)}
+        <Route exact path={"/login"} element={<LoginPage/>}/>
         <Route exact path={"/"} element={<LoginPage/>}/>
-        <Route exact path={"/logout"} element={<LoginPage/>}/>
+        <Route exact path={"/logout"} element={<Logout/>}/>
       </Routes>
     </>
   );
