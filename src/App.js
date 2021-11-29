@@ -12,17 +12,6 @@ const axios = require("axios");
 
 function App() {
 
-  const checkLogin = () => {
-    {
-      !userState.username ?
-        <SignupForm
-          submitSignup={handleSignupSubmit}
-          submitSignin={handleSigninSubmit}
-          change={handleLoginChange}
-          loginState={loginFormState} /> : <Profile />
-    }
-  }
-
   const [userState, setUserState] = useState({
     username: "",
     id: 0
@@ -35,14 +24,6 @@ function App() {
     city: "",
     type: ""
   })
-
-  const [loginFormState, setLoginFormState] = useState({
-    usernameSignIn: "",
-    passwordSignIn: "",
-    emailSignUp: "",
-    usernameSignUp: "",
-    passwordSignUp: ""
-  });
 
   useEffect(() => {
     const myToken = localStorage.getItem("token")
@@ -86,80 +67,6 @@ function App() {
     }
   }
 
-  const handleLoginChange = event => {
-    if (event.target.name === "usernameSignIn") {
-      setLoginFormState({
-        ...loginFormState,
-        usernameSignIn: event.target.value
-      });
-    } else if (event.target.name === "passwordSignIn") {
-      setLoginFormState({
-        ...loginFormState,
-        passwordSignIn: event.target.value
-      });
-    } else if (event.target.name === "emailSignUp") {
-      setLoginFormState({
-        ...loginFormState,
-        emailSignUp: event.target.value
-      });
-    } else if (event.target.name === "usernameSignUp") {
-      setLoginFormState({
-        ...loginFormState,
-        usernameSignUp: event.target.value
-      });
-    } else {
-      setLoginFormState({
-        ...loginFormState,
-        passwordSignUp: event.target.value
-      });
-    }
-  }
-
-  const handleSigninSubmit = event => {
-    event.preventDefault();
-    API.login({
-      username: loginFormState.usernameSignIn,
-      password: loginFormState.passwordSignIn
-    })
-      .then(res => {
-        console.log(res.data)
-        setUserState({
-          username: res.data.username,
-          id: res.data.id
-        })
-        setToken(res.data.token)
-        localStorage.setItem("token", res.data.token)
-      }).catch(err => {
-        console.log(err);
-      })
-  }
-
-  const handleSignupSubmit = event => {
-    // event.preventDefault();
-    console.log("event is triggered")
-    API.signup({
-      email: loginFormState.emailSignUp,
-      username: loginFormState.usernameSignUp,
-      password: loginFormState.passwordSignUp
-    })
-      .then(res => {
-        console.log("response is received")
-        API.login({
-          username: loginFormState.usernameSignUp,
-          password: loginFormState.passwordSignUp
-        })
-        console.log(res.data)
-        setUserState({
-          username: res.data.username,
-          id: res.data.id
-        })
-        setToken(res.data.token)
-        localStorage.setItem("token", res.data.token)
-      }).catch(err => {
-        console.log(err);
-      })
-  }
-
   const logOut = () => {
     setUserState({ username: "", id: 0 })
     setToken("")
@@ -168,11 +75,9 @@ function App() {
 
   function LoginPage() {
      return (!userState.username ?
-      <SignupForm
-        submitSignup={handleSignupSubmit}
-        submitSignin={handleSigninSubmit}
-        change={handleLoginChange}
-        loginState={loginFormState} /> : <Profile />)
+      <SignupForm 
+        setUserState={setUserState}
+        setToken={setToken}/> : <Profile />)
     
   }
 
