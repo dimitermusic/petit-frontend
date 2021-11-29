@@ -78,7 +78,7 @@ function App() {
      return (!userState.username ?
       <SignupForm 
         setUserState={setUserState}
-        setToken={setToken}/> : <Profile />)
+        setToken={setToken}/> : <Profile username={userState.username}/>)
   }
 
   return (
