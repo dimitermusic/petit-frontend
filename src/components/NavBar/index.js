@@ -7,20 +7,20 @@ function NavBar(props) {
     return (
         <>
             <div>
-                <nav class="uk-navbar-container" uk-navbar>
+                <nav className="uk-navbar-container" uk-navbar>
 
-                    <div class="uk-navbar-right">
-                        <a class="uk-navbar-item uk-logo" href="#">PETIT | LOGO</a>
+                    <div className="uk-navbar-right">
+                        <a className="uk-navbar-item uk-logo" href="/discover">PETIT | LOGO</a>
                 
-                    <div class="uk-navbar-right">
-                        <ul class="uk-navbar-nav">
-                            <li class="uk-active">
+                    <div className="uk-navbar-right">
+                        <ul className="uk-navbar-nav">
+                            <li className="uk-active">
                                 <a href="/discover">Discover</a>
                             </li>
                             <li>
                                 <a href="/profile">Profile</a>
                             </li>
-                            <li><a href="/login">Logout</a></li>
+                            <li><a href="/logout">Logout</a></li>
                         </ul>
                     </div>
                  </div>
