@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import API from "./utils/api";
 import Profile from "./pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
+require('dotenv').config()
 const axios = require("axios");
 
 function App() {
@@ -73,6 +74,15 @@ function App() {
   }
 }
 
+  const apiFetch = (e)=>{
+    e.preventDefault();
+    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${searchFormState.search}%20in%20${searchFormState.city}&key=${process.env.REACT_APP_API_KEY}`)
+      .then(res=>{
+        console.log(res.results);
+        
+      })
+  }
+
   const handleLoginChange = event=>{
     if(event.target.name==="usernameSignIn"){
       setLoginFormState({
@@ -102,6 +112,7 @@ function App() {
     }
   }
 
+  
   const handleSigninSubmit = event=>{
     event.preventDefault();
     API.login({
@@ -153,6 +164,7 @@ function App() {
     localStorage.removeItem("token")
   }
 
+
   return (
     <> 
   {/* // :<h1>==========NavBar==========</h1> */}
@@ -162,6 +174,7 @@ function App() {
     <SearchBar
         searchState={searchFormState}
         change={handleSearchChange}
+        estSearch={apiFetch}
         />
   
   {!userState.username?
