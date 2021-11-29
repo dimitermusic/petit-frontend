@@ -154,7 +154,10 @@ function App() {
   }
 
   return (
-    <>      
+    <> 
+  {/* // :<h1>==========NavBar==========</h1> */}
+  <NavBar/>
+       
   {/* <h1>==========SearchBar==========</h1> */}
     <SearchBar
         searchState={searchFormState}
@@ -174,8 +177,6 @@ function App() {
 
   {/* // :<h1>==========Profile==========</h1> */}
  
-
-
   {/* // <h1>==========Edit Profile==========</h1> */}
     </>
   );
