@@ -14,17 +14,6 @@ const axios = require("axios");
 
 function App() {
 
-  const checkLogin = () => {
-    {
-      !userState.username ?
-        <SignupForm
-          submitSignup={handleSignupSubmit}
-          submitSignin={handleSigninSubmit}
-          change={handleLoginChange}
-          loginState={loginFormState} /> : <Profile />
-    }
-  }
-
   const [userState, setUserState] = useState({
     username: "",
     id: 0
@@ -37,14 +26,6 @@ function App() {
     city: "",
     type: ""
   })
-
-  const [loginFormState, setLoginFormState] = useState({
-    usernameSignIn: "",
-    passwordSignIn: "",
-    emailSignUp: "",
-    usernameSignUp: "",
-    passwordSignUp: ""
-  });
 
   useEffect(() => {
     const myToken = localStorage.getItem("token")
@@ -179,11 +160,9 @@ function App() {
 
   function LoginPage() {
      return (!userState.username ?
-      <SignupForm
-        submitSignup={handleSignupSubmit}
-        submitSignin={handleSigninSubmit}
-        change={handleLoginChange}
-        loginState={loginFormState} /> : <Profile />)
+      <SignupForm 
+        setUserState={setUserState}
+        setToken={setToken}/> : <Profile />)
     
   }
 
