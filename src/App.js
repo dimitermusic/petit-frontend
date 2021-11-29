@@ -82,6 +82,7 @@ function App() {
     setUserState({ username: "", id: 0 })
     setToken("")
     localStorage.removeItem("token")
+    window.location="http://localhost:3000/login"
   }
 
   function LoginPage() {
@@ -89,7 +90,6 @@ function App() {
       <SignupForm 
         setUserState={setUserState}
         setToken={setToken}/> : <Profile />)
-    
   }
 
   return (
