@@ -90,7 +90,7 @@ function App() {
      return (!userState.username ?
       <SignupForm 
         setUserState={setUserState}
-        setToken={setToken}/> : <Profile />)
+        setToken={setToken}/> : <Profile username={userState.username}/>)
   }
 
   return (
@@ -111,6 +111,9 @@ function App() {
         <Route exact path={"/"} element={<LoginPage/>}/>
         <Route exact path={"/logout"} element={<Logout/>}/>
       </Routes>
+
+  
+
     </>
   );
 }

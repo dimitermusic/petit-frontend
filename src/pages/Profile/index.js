@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import style from "./style.css"
-
+import avatarImg from "../../images/avatar.jpg"
 
 function Profile(props) {
 
@@ -9,31 +9,36 @@ function Profile(props) {
          <div>
             <h1 className="uk-flex uk-flex-center">My Profile</h1>
 
-        <p class="uk-text-bold uk-text-small uk-flex uk-flex-center ">@username</p>
+        <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">@{props.username}</p>
 
-        <img data-src="images/avatar.jpg" width="1800" height="1200" alt="" uk-img></img>
+        <img src={avatarImg} width="200" alt="I feel pretty, oh so pretty. I feel pretty and witty and GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY" className="uk-img uk-placeholder uk-align-center"></img>
 
-        {/* Recieves badge if user submits more than 10 reviews */}
-        <span class="uk-badge  uk-margin-auto uk-margin-auto">PetIt Pro</span>
+                <p uk-margin>
+            <button className="uk-button uk-button-default uk-button-small uk-align-center"><span uk-icon="upload"></span>
+            Upload</button>
+            </p>
 
-        {/* Profile nav */}
-         <ul class="uk-subnav uk-subnav-divider" uk-margin>
-                <li class="uk-active"><a href="#"><span uk-icon="file-text"></span> Reviews</a></li>
-                <li><a href="#"><span uk-icon="image"></span> Pet Gallery</a></li>
-                <li><a href="#"><span uk-icon="comment"></span> Comments</a></li>
-        </ul>
-        {/* Populate user reviews */}
-        <div   class="uk-child-width-expand@s uk-text-center" uk-grid>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Review Here</div>
-        </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Review Here</div>
-        </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Review Here</div>
+            {/* Recieves badge if user submits more than 10 reviews */}
+            <span className="uk-badge uk-flex uk-flex-center">PetIt Pro</span>
+
+            {/* Profile nav */}
+            <ul className="uk-subnav uk-subnav-divider uk-margin">
+                    <li className="uk-active"><a href="#"><span uk-icon="file-text"></span> Reviews</a></li>
+                    <li><a href="#"><span uk-icon="image"></span> Pet Gallery</a></li>
+                    <li><a href="#"><span uk-icon="comment"></span> Comments</a></li>
+            </ul>
+            {/* Populate user reviews */}
+            <div   className="uk-child-width-expand@s uk-text-center uk-grid">
+            <div>
+                <div className="uk-card uk-card-default uk-card-body">Review Here</div>
             </div>
-        </div>
+            <div>
+                <div className="uk-card uk-card-default uk-card-body">Review Here</div>
+            </div>
+            <div>
+                <div className="uk-card uk-card-default uk-card-body">Review Here</div>
+                </div>
+            </div>
     </div>
     )
 }
