@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import API from "./utils/api";
 import Profile from "./pages/Profile/index.js";
+import NavBar from "./components/NavBar/index.js";
 const axios = require("axios");
 
 function App() {
@@ -153,7 +154,10 @@ function App() {
   }
 
   return (
-    <>      
+    <> 
+  {/* // :<h1>==========NavBar==========</h1> */}
+  <NavBar/>
+       
   {/* <h1>==========SearchBar==========</h1> */}
     <SearchBar
         searchState={searchFormState}
@@ -173,8 +177,6 @@ function App() {
 
   {/* // :<h1>==========Profile==========</h1> */}
  
-
-
   {/* // <h1>==========Edit Profile==========</h1> */}
     </>
   );
