@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import API from "./utils/api";
 import Profile from "./pages/Profile/index.js";
+import NavBar from "./components/NavBar/index.js";
 const axios = require("axios");
 
 function App() {
@@ -117,11 +118,10 @@ function App() {
       <Discover/>
 
   <h1>==========Profile==========</h1>
- 
       <Profile/>
 
-  <h1>==========Edit Profile==========</h1>
-
+  <h1>==========Nav==========</h1>
+      <NavBar/>
 
     </>
   );
