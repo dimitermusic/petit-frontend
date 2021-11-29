@@ -1,12 +1,14 @@
+import React, { useEffect, useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import ReactDOM from "react-dom";
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
 import Discover from "./pages/Discover/index.js";
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import API from "./utils/api";
 import Profile from "./pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
-import { Routes, Route, Link } from "react-router-dom";
+import Results from "./components/Results/index";
+require('dotenv').config();
 const axios = require("axios");
 
 
@@ -67,18 +69,27 @@ function App() {
     }
   }
 
-  const logOut = () => {
+  const apiFetch = (e)=>{
+    e.preventDefault();
+    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${searchFormState.search}%20in%20${searchFormState.city}&key=${process.env.REACT_APP_API_KEY}`)
+      .then(res=>{
+        console.log(res.results);
+        
+      })
+  }
+
+  const Logout = () => {
     setUserState({ username: "", id: 0 })
     setToken("")
     localStorage.removeItem("token")
+    window.location="http://localhost:3000/login"
   }
 
   function LoginPage() {
      return (!userState.username ?
       <SignupForm 
         setUserState={setUserState}
-        setToken={setToken}/> : <Profile />)
-    
+        setToken={setToken}/> : <Profile username={userState.username}/>)
   }
 
   return (
@@ -88,10 +99,16 @@ function App() {
       <SearchBar
         searchState={searchFormState}
         change={handleSearchChange}
+        estSearch={apiFetch}
       />
+      
+      <Results />
+  
       <Routes>
         {console.log(LoginPage)}
+        <Route exact path={"/login"} element={<LoginPage/>}/>
         <Route exact path={"/"} element={<LoginPage/>}/>
+        <Route exact path={"/logout"} element={<Logout/>}/>
       </Routes>
 
   
