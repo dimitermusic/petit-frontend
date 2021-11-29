@@ -1,7 +1,7 @@
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
 import Discover from "./pages/Discover/index.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import API from "./utils/api";
 import Profile from "./pages/Profile/index.js";
@@ -9,6 +9,13 @@ import NavBar from "./components/NavBar/index.js";
 const axios = require("axios");
 
 function App() {
+
+  const [userState,setUserState]= useState({
+    username:"",
+    id:0
+  })
+  
+  const [token, setToken] = useState("")
 
   const [searchFormState, setSearchFormState] = useState({
     search: "",
@@ -23,6 +30,28 @@ function App() {
     usernameSignUp:"",
     passwordSignUp:""
   });
+
+  useEffect(()=>{
+    const myToken = localStorage.getItem("token")
+    console.log("successfully used")
+    console.log(myToken)
+
+    if(myToken){
+      API.getProfile(myToken)
+      .then(res=>{
+        console.log("successfully obtained token!")
+        setToken(myToken)
+        setUserState({
+          username: res.data.username,
+          id: res.data.id
+        })
+      }).catch(err=>{
+        console.log("whoops")
+        console.log(err)
+        localStorage.removeItem("token")
+      })
+    }
+  },[])
 
   const handleSearchChange= event =>{
     console.log(event.target.value)
@@ -75,54 +104,79 @@ function App() {
 
   const handleSigninSubmit = event=>{
     event.preventDefault();
-    axios.post("https://localhost:3001/signin", {
+    API.login({
       username: loginFormState.usernameSignIn,
-      password: loginFormState.passwordSignIn})
+      password: loginFormState.passwordSignIn
+    })
     .then(res=>{
       console.log(res.data)
+      setUserState({
+        username: res.data.username,
+        id: res.data.id
+      })
+      setToken(res.data.token)
+      localStorage.setItem("token", res.data.token)
     }).catch(err=>{
       console.log(err);
     })
   }
 
   const handleSignupSubmit = event=>{
-    event.preventDefault();
-    axios.post("https://localhost:3001/signup", {
+    // event.preventDefault();
+    console.log("event is triggered")
+    API.signup({
       email: loginFormState.emailSignUp,
       username: loginFormState.usernameSignUp,
       password: loginFormState.passwordSignUp
     })
     .then(res=>{
+      console.log("response is received")
+      API.login({
+        username:loginFormState.usernameSignUp,
+        password:loginFormState.passwordSignUp
+      })
       console.log(res.data)
+      setUserState({
+        username:res.data.username,
+        id:res.data.id
+      })
+      setToken(res.data.token)
+      localStorage.setItem("token",res.data.token)
     }).catch(err=>{
       console.log(err);
     })
   }
 
+  const logOut=()=>{
+    setUserState({username:"", id:0})
+    setToken("")
+    localStorage.removeItem("token")
+  }
+
   return (
     <>      
-  <h1>==========SearchBar==========</h1>
+  {/* <h1>==========SearchBar==========</h1> */}
     <SearchBar
         searchState={searchFormState}
         change={handleSearchChange}
         />
-        
-  <h1>==========Login==========</h1>
+  
+  {!userState.username?
+  // <h1>==========Login==========</h1>
       <SignupForm 
         submitSignup={handleSignupSubmit} 
         submitSignin={handleSigninSubmit} 
         change={handleLoginChange} 
-        loginState={loginFormState}/>
+        loginState={loginFormState}/>:<Profile/>}
 
-  <h1>==========Discover==========</h1>
-      <Discover/>
+  {/* // <h1>==========Discover==========</h1> */}
+  {/* //     <Discover/> */}
 
-  <h1>==========Profile==========</h1>
-      <Profile/>
+  {/* // :<h1>==========Profile==========</h1> */}
+ 
 
-  <h1>==========Nav==========</h1>
-      <NavBar/>
 
+  {/* // <h1>==========Edit Profile==========</h1> */}
     </>
   );
 }
