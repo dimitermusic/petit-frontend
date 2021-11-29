@@ -78,81 +78,7 @@ function App() {
       })
   }
 
-  const handleLoginChange = event=>{
-    if(event.target.name==="usernameSignIn"){
-      setLoginFormState({
-        ...loginFormState,
-        usernameSignIn: event.target.value
-      });
-    } else if (event.target.name === "passwordSignIn") {
-      setLoginFormState({
-        ...loginFormState,
-        passwordSignIn: event.target.value
-      });
-    } else if (event.target.name === "emailSignUp") {
-      setLoginFormState({
-        ...loginFormState,
-        emailSignUp: event.target.value
-      });
-    } else if (event.target.name === "usernameSignUp") {
-      setLoginFormState({
-        ...loginFormState,
-        usernameSignUp: event.target.value
-      });
-    } else {
-      setLoginFormState({
-        ...loginFormState,
-        passwordSignUp: event.target.value
-      });
-    }
-  }
-
-  const handleSigninSubmit = event => {
-    event.preventDefault();
-    API.login({
-      username: loginFormState.usernameSignIn,
-      password: loginFormState.passwordSignIn
-    })
-      .then(res => {
-        console.log(res.data)
-        setUserState({
-          username: res.data.username,
-          id: res.data.id
-        })
-        setToken(res.data.token)
-        localStorage.setItem("token", res.data.token)
-      }).catch(err => {
-        console.log(err);
-      })
-  }
-
-  const handleSignupSubmit = event => {
-    // event.preventDefault();
-    console.log("event is triggered")
-    API.signup({
-      email: loginFormState.emailSignUp,
-      username: loginFormState.usernameSignUp,
-      password: loginFormState.passwordSignUp
-    })
-      .then(res => {
-        console.log("response is received")
-        API.login({
-          username: loginFormState.usernameSignUp,
-          password: loginFormState.passwordSignUp
-        })
-        console.log(res.data)
-        setUserState({
-          username: res.data.username,
-          id: res.data.id
-        })
-        setToken(res.data.token)
-        localStorage.setItem("token", res.data.token)
-      }).catch(err => {
-        console.log(err);
-      })
-  }
-
-  const logOut = () => {
+  const Logout = () => {
     setUserState({ username: "", id: 0 })
     setToken("")
     localStorage.removeItem("token")
@@ -178,24 +104,11 @@ function App() {
       
       <Results />
   
-  {!userState.username?
-  // <h1>==========Login==========</h1>
-      <SignupForm 
-        submitSignup={handleSignupSubmit} 
-        submitSignin={handleSigninSubmit} 
-        change={handleLoginChange} 
-        loginState={loginFormState}/>:<Profile/>}
-
-  {/* // <h1>==========Discover==========</h1> */}
-  {/* //     <Discover/> */}
-
-  {/* // :<h1>==========Profile==========</h1> */}
- 
-  {/* // <h1>==========Edit Profile==========</h1> */}
       <Routes>
         {console.log(LoginPage)}
+        <Route exact path={"/login"} element={<LoginPage/>}/>
         <Route exact path={"/"} element={<LoginPage/>}/>
-        <Route exact path={"/logout"} element={<LoginPage/>}/>
+        <Route exact path={"/logout"} element={<Logout/>}/>
       </Routes>
     </>
   );
