@@ -93,6 +93,9 @@ function App() {
         {console.log(LoginPage)}
         <Route exact path={"/"} element={<LoginPage/>}/>
       </Routes>
+
+  
+
     </>
   );
 }
