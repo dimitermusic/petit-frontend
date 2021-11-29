@@ -18,7 +18,7 @@ function NavBar(props) {
                                 <a href="/discover">Discover</a>
                             </li>
                             <li>
-                                <a href="/profile">Profile</a>
+                                <a href={`/profile`}>Profile</a>
                             </li>
                             <li><a href="/logout">Logout</a></li>
                         </ul>

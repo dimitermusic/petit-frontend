@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import style from "./style.css";
 import App from "../../App"
 import API from "../../utils/api";
+import { useNavigate } from "react-router-dom"
 
 
 function SignupForm(props) {
+
+  const navigate = useNavigate();
 
     const [loginFormState, setLoginFormState] = useState({
         usernameSignIn: "",
@@ -60,6 +63,7 @@ function SignupForm(props) {
             })
             props.setToken(res.data.token)
             localStorage.setItem("token", res.data.token)
+            navigate("/profile")
           }).catch(err => {
             console.log(err);
           })

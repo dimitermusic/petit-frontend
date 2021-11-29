@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import style from "./style.css"
 import avatarImg from "../../images/avatar.jpg"
+import App from "../../App"
 
 function Profile(props) {
+
+if(!props.username){
+    return <App/>
+}
 
     return (
          <div>
