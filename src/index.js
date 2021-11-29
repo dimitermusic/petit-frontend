@@ -9,9 +9,6 @@ import Avatar from "./images/avatar.jpg"
 const { BrowserRouter } = require("react-router-dom")
 
 
-
-
-
 UIkit.use(Icons);
 
 ReactDOM.render(
@@ -22,3 +19,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+
