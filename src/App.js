@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
@@ -10,7 +10,6 @@ import NavBar from "./components/NavBar/index.js";
 import Results from "./components/Results/index";
 const axios = require("axios");
 
-
 function App() {
 
   const [userState, setUserState] = useState({
@@ -18,7 +17,7 @@ function App() {
     id: 0
   })
 
-  const [token, setToken] = useState("")
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     const myToken = localStorage.getItem("token")
@@ -26,6 +25,7 @@ function App() {
     console.log(myToken)
 
     if (myToken) {
+      console.log("oh hi there")
       API.getProfile(myToken)
         .then(res => {
           console.log("successfully obtained token!")
@@ -50,15 +50,16 @@ function App() {
   }
 
   function LoginPage() {
-     return (!userState.username ?
-      <SignupForm 
+     return (userState.username ?
+      <Navigate to="/profile"/>:<SignupForm 
         setUserState={setUserState}
-        setToken={setToken}/> : <Profile username={userState.username}/>)
+        setToken={setToken}/>)
   }
 
   return (
     <>
-      <NavBar />
+      <NavBar 
+        id={userState.id}/>
 
       <SearchBar />
       
@@ -66,13 +67,15 @@ function App() {
   
       <Routes>
         {console.log(LoginPage)}
+
+        <Route exact path={"/search"} element={<Search/>}/>
+        <Route exact path={"/discover"} element={<Discover/>}/>
         <Route exact path={"/login"} element={<LoginPage/>}/>
+        <Route exact path={`/profile`} element={<Profile 
+          username={userState.username}/>}/>
         <Route exact path={"/"} element={<LoginPage/>}/>
         <Route exact path={"/logout"} element={<Logout/>}/>
       </Routes>
-
-  
-
     </>
   );
 }
