@@ -71,7 +71,7 @@ function App() {
         <Route exact path={`/profile`} element={<Profile 
           username={userState.username}/>}/>
         <Route exact path={"/"} element={<LoginPage/>}/>
-        <Route exact path={`/review`} element={<ReviewForm id={id}/>}/>
+        <Route exact path={`/review`} element={<ReviewForm/>}/>
         <Route exact path={"/logout"} element={<Logout/>}/>
       </Routes>
     </>
