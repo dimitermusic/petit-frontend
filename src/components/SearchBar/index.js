@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
 import API from '../../utils/api'
 import Results from "../Results";
 
@@ -57,6 +56,7 @@ function SearchBar(props) {
                 </form>
                     <button className="uk-button uk-button-default" onClick={apiFetch}>Button</button>
             </div>
+            <Results places={result}/>
         </>
     )
 }

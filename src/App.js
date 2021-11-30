@@ -8,7 +8,7 @@ import API from "./utils/api";
 import Profile from "./pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
 import Results from "./components/Results/index";
-const axios = require("axios");
+import ReviewForm from "./components/ReviewForm/index.js";
 
 function App() {
 
@@ -62,9 +62,7 @@ function App() {
         id={userState.id}/>
 
       <SearchBar />
-      
-      <Results />
-  
+    
       <Routes>
         
         <Route exact path={"/search"} element={<Results/>}/>
@@ -73,6 +71,7 @@ function App() {
         <Route exact path={`/profile`} element={<Profile 
           username={userState.username}/>}/>
         <Route exact path={"/"} element={<LoginPage/>}/>
+        <Route exact path={`/review`} element={<ReviewForm/>}/>
         <Route exact path={"/logout"} element={<Logout/>}/>
       </Routes>
     </>
