@@ -81,23 +81,20 @@ const API = {
     delReact:(tkn, id)=>{
         return axios.delete(`${URL_PREFIX}/api/reactions/${id}`,{
             headers:{
-                "Authorization":`Bearer: ${tkn}`
+                "Authorization":`Bearer ${tkn}`
             }
         })
     },
     vote:(voteData, tkn, id)=>{
         return axios.put(`${URL_PREFIX}/api/votes/${id}`,voteData,{
             headers:{
-                "Authorization":`Bearer: ${tkn}`
+                "Authorization":`Bearer ${tkn}`
             }
         })
     },
-    apiFetch:(fetchData,tkn)=>{
-        return axios.get(`${URL_PREFIX}/api/google`,fetchData,{
-            headers:{
-                "Authorization":`Bearer: ${tkn}`
-            }
-        })
+    apiFetch:(fetchData)=>{
+        console.log(fetchData);
+        return axios.get(`${URL_PREFIX}/api/google`,{params:fetchData})
     }
 };
 

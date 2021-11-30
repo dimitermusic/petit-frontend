@@ -71,11 +71,14 @@ function App() {
   const apiFetch = (e)=>{
     e.preventDefault();
     API.apiFetch({
-      name:searchFormState.search, city:searchFormState.city,
-      type:searchFormState.type
+      name:searchFormState.search, 
+      city:searchFormState.city
     })
       .then(res=>{
-        console.log(res.data);
+        console.log(res);
+      })
+      .catch(err=>{
+        console.log(err);
       })
   }
 
