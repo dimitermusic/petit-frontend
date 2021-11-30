@@ -5,7 +5,7 @@ const URL_PREFIX = "http://localhost:3001"
 
 const API = {
     getProfile: (tkn)=>{
-        return axios.get(`${URL_PREFIX}/profile`,{headers:{"Authorization":`Bearer ${tkn}`}})
+        return axios.get(`${URL_PREFIX}/api/users/profile`,{headers:{"Authorization":`Bearer ${tkn}`}})
     },
     login:(usrData)=>{
         return axios.post(`${URL_PREFIX}/api/users/login`,usrData)
@@ -81,16 +81,20 @@ const API = {
     delReact:(tkn, id)=>{
         return axios.delete(`${URL_PREFIX}/api/reactions/${id}`,{
             headers:{
-                "Authorization":`Bearer: ${tkn}`
+                "Authorization":`Bearer ${tkn}`
             }
         })
     },
     vote:(voteData, tkn, id)=>{
         return axios.put(`${URL_PREFIX}/api/votes/${id}`,voteData,{
             headers:{
-                "Authorization":`Bearer: ${tkn}`
+                "Authorization":`Bearer ${tkn}`
             }
         })
+    },
+    apiFetch:(fetchData)=>{
+        console.log(fetchData);
+        return axios.get(`${URL_PREFIX}/api/google`,{params:fetchData})
     }
 };
 

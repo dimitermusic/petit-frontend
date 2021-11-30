@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import style from "./style.css"
 import avatarImg from "../../images/avatar.jpg"
+import App from "../../App"
+import { Routes, Route, Link, Navigate } from "react-router-dom";
+
 
 function Profile(props) {
+
+if(!props.username){
+    <Navigate to="/logout"/>
+}
 
     return (
          <div>

@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import style from "./style.css";
 import App from "../../App"
 import API from "../../utils/api";
+import { useNavigate } from "react-router-dom"
 
 
 function SignupForm(props) {
+
+  const navigate = useNavigate();
 
     const [loginFormState, setLoginFormState] = useState({
         usernameSignIn: "",
@@ -45,8 +48,6 @@ function SignupForm(props) {
       }
     
       const handleSigninSubmit = event => {
-          console.log(`username: ${loginFormState.usernameSignIn}`)
-          console.log(`password: ${loginFormState.passwordSignIn}`)
         event.preventDefault();
         API.login({
           username: loginFormState.usernameSignIn,
@@ -60,13 +61,14 @@ function SignupForm(props) {
             })
             props.setToken(res.data.token)
             localStorage.setItem("token", res.data.token)
+            navigate("/profile")
           }).catch(err => {
             console.log(err);
           })
       }
     
       const handleSignupSubmit = event => {
-        // event.preventDefault();
+        event.preventDefault();
         console.log("event is triggered")
         API.signup({
           email: loginFormState.emailSignUp,
@@ -79,13 +81,16 @@ function SignupForm(props) {
               username: loginFormState.usernameSignUp,
               password: loginFormState.passwordSignUp
             })
-            console.log(res.data)
-            props.setUserState({
-              username: res.data.username,
-              id: res.data.id
+            .then(response=>{
+              console.log(response.data)
+              props.setUserState({
+                username: response.data.user.username,
+                id: response.data.user.id
+              })
+              props.setToken(response.data.token)
+              localStorage.setItem("token", response.data.token)
+              navigate("/profile")
             })
-            props.setToken(res.data.token)
-            localStorage.setItem("token", res.data.token)
           }).catch(err => {
             console.log(err);
           })

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
@@ -8,9 +8,7 @@ import API from "./utils/api";
 import Profile from "./pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
 import Results from "./components/Results/index";
-require('dotenv').config();
-const axios = require("axios");
-
+import ReviewForm from "./components/ReviewForm/index.js";
 
 function App() {
 
@@ -19,13 +17,7 @@ function App() {
     id: 0
   })
 
-  const [token, setToken] = useState("")
-
-  const [searchFormState, setSearchFormState] = useState({
-    search: "",
-    city: "",
-    type: ""
-  })
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     const myToken = localStorage.getItem("token")
@@ -33,6 +25,7 @@ function App() {
     console.log(myToken)
 
     if (myToken) {
+      console.log("oh hi there")
       API.getProfile(myToken)
         .then(res => {
           console.log("successfully obtained token!")
@@ -49,35 +42,6 @@ function App() {
     }
   }, [])
 
-  const handleSearchChange = event => {
-    console.log(event.target.value)
-    if (event.target.name === "search") {
-      setSearchFormState({
-        ...searchFormState,
-        search: event.target.value
-      })
-    } else if (event.target.name === "city") {
-      setSearchFormState({
-        ...searchFormState,
-        city: event.target.value
-      })
-    } else {
-      setSearchFormState({
-        ...searchFormState,
-        type: event.target.value
-      })
-    }
-  }
-
-  const apiFetch = (e)=>{
-    e.preventDefault();
-    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${searchFormState.search}%20in%20${searchFormState.city}&key=${process.env.REACT_APP_API_KEY}`)
-      .then(res=>{
-        console.log(res.results);
-        
-      })
-  }
-
   const Logout = () => {
     setUserState({ username: "", id: 0 })
     setToken("")
@@ -86,33 +50,30 @@ function App() {
   }
 
   function LoginPage() {
-     return (!userState.username ?
-      <SignupForm 
+     return (userState.username ?
+      <Navigate to="/profile"/>:<SignupForm 
         setUserState={setUserState}
-        setToken={setToken}/> : <Profile username={userState.username}/>)
+        setToken={setToken}/>)
   }
 
   return (
     <>
-      <NavBar />
+      <NavBar 
+        id={userState.id}/>
 
-      <SearchBar
-        searchState={searchFormState}
-        change={handleSearchChange}
-        estSearch={apiFetch}
-      />
-      
-      <Results />
-  
+      <SearchBar />
+    
       <Routes>
-        {console.log(LoginPage)}
+        
+        <Route exact path={"/search"} element={<Results/>}/>
+        <Route exact path={"/discover"} element={<Discover/>}/>
         <Route exact path={"/login"} element={<LoginPage/>}/>
+        <Route exact path={`/profile`} element={<Profile 
+          username={userState.username}/>}/>
         <Route exact path={"/"} element={<LoginPage/>}/>
+        <Route exact path={`/review`} element={<ReviewForm/>}/>
         <Route exact path={"/logout"} element={<Logout/>}/>
       </Routes>
-
-  
-
     </>
   );
 }
