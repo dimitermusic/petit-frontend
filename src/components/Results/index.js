@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 
 function Results(props){
-    console.log(props.places);
     return(
         <>
             <div className="uk-container uk-width-4-5">
