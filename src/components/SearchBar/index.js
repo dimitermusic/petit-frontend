@@ -59,11 +59,7 @@ function SearchBar(props) {
                 </form>
                 <button className="uk-button uk-button-default" onClick={apiFetch}>Button</button>
             </div>
-<<<<<<< HEAD
-            <Results places={result} type={searchFormState.type}/>
-=======
             <Results places={result} type={searchFormState.type} />
->>>>>>> dev
         </>
     )
 }
