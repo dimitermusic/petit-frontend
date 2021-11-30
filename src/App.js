@@ -62,13 +62,11 @@ function App() {
         id={userState.id}/>
 
       <SearchBar />
-      
-      <Results />
-  
+    
       <Routes>
         {console.log(LoginPage)}
 
-        <Route exact path={"/search"} element={<Search/>}/>
+        <Route exact path={"/search"} element={<Results/>}/>
         <Route exact path={"/discover"} element={<Discover/>}/>
         <Route exact path={"/login"} element={<LoginPage/>}/>
         <Route exact path={`/profile`} element={<Profile 
