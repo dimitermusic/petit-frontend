@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import API from '../../utils/api'
 import Results from "../Results";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
+
 
 function SearchBar(props) {
     const [searchFormState, setSearchFormState] = useState({
