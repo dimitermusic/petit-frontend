@@ -64,8 +64,7 @@ function App() {
       <SearchBar />
     
       <Routes>
-        {console.log(LoginPage)}
-
+        
         <Route exact path={"/search"} element={<Results/>}/>
         <Route exact path={"/discover"} element={<Discover/>}/>
         <Route exact path={"/login"} element={<LoginPage/>}/>
