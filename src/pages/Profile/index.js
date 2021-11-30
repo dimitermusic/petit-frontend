@@ -11,7 +11,7 @@ function Profile(props) {
 
         <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">@{props.username}</p>
 
-        <img src={avatarImg} width="200" alt="I feel pretty, oh so pretty. I feel pretty and witty and GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY" className="uk-img uk-placeholder uk-align-center"></img>
+        <img src={avatarImg} width="200" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
 
                 <p uk-margin>
             <button className="uk-button uk-button-default uk-button-small uk-align-center"><span uk-icon="upload"></span>
