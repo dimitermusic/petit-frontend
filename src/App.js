@@ -46,33 +46,33 @@ function App() {
     setUserState({ username: "", id: 0 });
     setToken("");
     localStorage.removeItem("token");
-    <Navigate to="/login"/>;
+    <Navigate to="/login" />;
   }
 
   function LoginPage() {
-     return (userState.username ?
-      <Navigate to="/profile"/>:<SignupForm 
+    return (userState.username ?
+      <Navigate to="/profile" /> : <SignupForm
         setUserState={setUserState}
-        setToken={setToken}/>)
+        setToken={setToken} />)
   }
 
   return (
     <>
-      <NavBar 
-        id={userState.id}/>
+      <NavBar
+        id={userState.id} />
 
       <SearchBar />
-    
+
       <Routes>
-        
-        <Route exact path={"/results"} element={<Results/>}/>
-        <Route exact path={"/discover"} element={<Discover/>}/>
-        <Route exact path={"/login"} element={<LoginPage/>}/>
-        <Route exact path={`/profile`} element={<Profile 
-          username={userState.username}/>}/>
-        <Route exact path={"/"} element={<LoginPage/>}/>
-        <Route exact path={"/logout"} element={<Logout/>}/>
-        <Route exact path={"/listingest"} element={<ListingEst/>}/>
+
+        <Route exact path={"/results"} element={<Results />} />
+        <Route exact path={"/discover"} element={<Discover />} />
+        <Route exact path={"/login"} element={<LoginPage />} />
+        <Route exact path={`/profile`} element={<Profile
+          username={userState.username} />} />
+        <Route exact path={"/"} element={<LoginPage />} />
+        <Route exact path={"/logout"} element={<Logout />} />
+        <Route exact path={"/listingest"} element={<ListingEst />} />
       </Routes>
     </>
   );
