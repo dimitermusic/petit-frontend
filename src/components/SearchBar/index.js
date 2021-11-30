@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import API from '../../utils/api'
 import Results from "../Results";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
+
 
 function SearchBar(props) {
     const [searchFormState, setSearchFormState] = useState({
@@ -13,37 +15,37 @@ function SearchBar(props) {
     const handleSearchChange = event => {
         if (event.target.name === "search") {
             setSearchFormState({
-            ...searchFormState,
-            search: event.target.value
+                ...searchFormState,
+                search: event.target.value
             })
         } else if (event.target.name === "city") {
             setSearchFormState({
-            ...searchFormState,
-            city: event.target.value
+                ...searchFormState,
+                city: event.target.value
             })
         } else {
             setSearchFormState({
-            ...searchFormState,
-            type: event.target.value
+                ...searchFormState,
+                type: event.target.value
             });
         }
         console.log(event.target);
     }
 
-    const apiFetch = (e)=>{
+    const apiFetch = (e) => {
         e.preventDefault();
         API.apiFetch({
-          name:searchFormState.search, 
-          city:searchFormState.city
+            name: searchFormState.search,
+            city: searchFormState.city
         })
-          .then(res=>{
-            setResult(res.data);
-          })
-          .catch(err=>{
-            console.log(err);
-          })
+            .then(res => {
+                setResult(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
-    
+
     return (
         <>
             <div className="uk-flex uk-flex-center uk-margin">
@@ -55,9 +57,9 @@ function SearchBar(props) {
                         <option value='job'>Job</option>
                     </select>
                 </form>
-                    <button className="uk-button uk-button-default" onClick={apiFetch}>Button</button>
+                <button className="uk-button uk-button-default" onClick={apiFetch}>Button</button>
             </div>
-            <Results places={result} type={searchFormState.type}/>
+            <Results places={result} type={searchFormState.type} />
         </>
     )
 }
