@@ -48,8 +48,6 @@ function SignupForm(props) {
       }
     
       const handleSigninSubmit = event => {
-          console.log(`username: ${loginFormState.usernameSignIn}`)
-          console.log(`password: ${loginFormState.passwordSignIn}`)
         event.preventDefault();
         API.login({
           username: loginFormState.usernameSignIn,
