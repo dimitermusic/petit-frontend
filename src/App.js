@@ -104,15 +104,15 @@ function App() {
         
       <Routes>
         {console.log(LoginPage)}
+
+        <Route exact path={"/search"} element={<Search/>}/>
+        <Route exact path={"/discover"} element={<Discover/>}/>
         <Route exact path={"/login"} element={<LoginPage/>}/>
         <Route exact path={`/profile`} element={<Profile 
           username={userState.username}/>}/>
         <Route exact path={"/"} element={<LoginPage/>}/>
         <Route exact path={"/logout"} element={<Logout/>}/>
       </Routes>
-
-  
-
     </>
   );
 }
