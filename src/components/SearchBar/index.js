@@ -6,7 +6,7 @@ function SearchBar(props) {
     const [searchFormState, setSearchFormState] = useState({
         search: "",
         city: "",
-        type: ""
+        type: "establishment"
     })
     const [result, setResult] = useState([]);
 
@@ -25,8 +25,9 @@ function SearchBar(props) {
             setSearchFormState({
             ...searchFormState,
             type: event.target.value
-            })
+            });
         }
+        console.log(event.target);
     }
 
     const apiFetch = (e)=>{
@@ -49,14 +50,14 @@ function SearchBar(props) {
                 <form className="uk-flex-inline uk-search">
                     <input name="search" id="estName" className="uk-search-input" type="search" value={searchFormState.search} onChange={handleSearchChange} placeholder="Name" />
                     <input name="city" id="city" className="uk-search-input" type="search" value={searchFormState.city} onChange={handleSearchChange} placeholder="City" />
-                    <select className="uk-select" id="form-stacked-select" value={searchFormState.type} onChange={handleSearchChange}>
-                        <option>Establishment</option>
-                        <option>Job</option>
+                    <select className="uk-select" id="form-stacked-select" name="type" value={searchFormState.type} onChange={handleSearchChange}>
+                        <option value='establishment'>Establishment</option>
+                        <option value='job'>Job</option>
                     </select>
                 </form>
                     <button className="uk-button uk-button-default" onClick={apiFetch}>Button</button>
             </div>
-            <Results places={result}/>
+            <Results places={result} type={searchFormState.type}/>
         </>
     )
 }
