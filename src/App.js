@@ -3,12 +3,12 @@ import { Routes, Route, Link, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
-import Discover from "./pages/Discover/index.js";
+import Discover from "./components/pages/Discover/index.js";
 import API from "./utils/api";
-import Profile from "./pages/Profile/index.js";
+import Profile from "./components/pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
 import Results from "./components/Results/index";
-import ReviewForm from "./components/ReviewForm/index.js";
+import ListingEst from "./components/pages/Place/index.js";
 
 function App() {
 
@@ -43,11 +43,10 @@ function App() {
   }, [])
 
   const Logout = () => {
-    setUserState({ username: "", id: 0 })
-    setToken("")
-    localStorage.removeItem("token")
-    // TODO: change url upon deployment
-    window.location="http://localhost:3000/login"
+    setUserState({ username: "", id: 0 });
+    setToken("");
+    localStorage.removeItem("token");
+    <Navigate to="/login"/>;
   }
 
   function LoginPage() {
@@ -66,14 +65,14 @@ function App() {
     
       <Routes>
         
-        <Route exact path={"/search"} element={<Results/>}/>
+        <Route exact path={"/results"} element={<Results/>}/>
         <Route exact path={"/discover"} element={<Discover/>}/>
         <Route exact path={"/login"} element={<LoginPage/>}/>
         <Route exact path={`/profile`} element={<Profile 
           username={userState.username}/>}/>
         <Route exact path={"/"} element={<LoginPage/>}/>
-        <Route exact path={`/place`} element={<ReviewForm/>}/>
         <Route exact path={"/logout"} element={<Logout/>}/>
+        <Route exact path={"/listingest"} element={<ListingEst/>}/>
       </Routes>
     </>
   );
