@@ -43,10 +43,10 @@ function App() {
   }, [])
 
   const Logout = () => {
-    setUserState({ username: "", id: 0 })
-    setToken("")
-    localStorage.removeItem("token")
-    window.location="http://localhost:3000/login"
+    setUserState({ username: "", id: 0 });
+    setToken("");
+    localStorage.removeItem("token");
+    <Navigate to="/login"/>;
   }
 
   function LoginPage() {
@@ -65,7 +65,7 @@ function App() {
     
       <Routes>
         
-        <Route exact path={"/search"} element={<Results/>}/>
+        <Route exact path={"/results"} element={<Results/>}/>
         <Route exact path={"/discover"} element={<Discover/>}/>
         <Route exact path={"/login"} element={<LoginPage/>}/>
         <Route exact path={`/profile`} element={<Profile 
