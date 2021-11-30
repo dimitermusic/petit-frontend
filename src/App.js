@@ -19,12 +19,6 @@ function App() {
 
   const [token, setToken] = useState("");
 
-  const [searchFormState, setSearchFormState] = useState({
-    search: "",
-    city: "",
-    type: ""
-  })
-
   useEffect(() => {
     const myToken = localStorage.getItem("token")
     console.log("successfully used")
@@ -48,37 +42,6 @@ function App() {
     }
   }, [])
 
-  const handleSearchChange = event => {
-    console.log(event.target.value)
-    if (event.target.name === "search") {
-      setSearchFormState({
-        ...searchFormState,
-        search: event.target.value
-      })
-    } else if (event.target.name === "city") {
-      setSearchFormState({
-        ...searchFormState,
-        city: event.target.value
-      })
-    } else {
-      setSearchFormState({
-        ...searchFormState,
-        type: event.target.value
-      })
-    }
-  }
-
-  const apiFetch = (e)=>{
-    e.preventDefault();
-    API.apiFetch({
-      name:searchFormState.search, 
-      city:searchFormState.city
-    })
-      .then(res=>{
-        console.log(res.results);
-      })
-  }
-
   const Logout = () => {
     setUserState({ username: "", id: 0 })
     setToken("")
@@ -98,12 +61,10 @@ function App() {
       <NavBar 
         id={userState.id}/>
 
-      <SearchBar
-        searchState={searchFormState}
-        change={handleSearchChange}
-        estSearch={apiFetch}
-      />
-        
+      <SearchBar />
+      
+      <Results />
+  
       <Routes>
         {console.log(LoginPage)}
 
