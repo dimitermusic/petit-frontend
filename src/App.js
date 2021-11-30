@@ -46,6 +46,7 @@ function App() {
     setUserState({ username: "", id: 0 })
     setToken("")
     localStorage.removeItem("token")
+    // TODO: change url upon deployment
     window.location="http://localhost:3000/login"
   }
 
