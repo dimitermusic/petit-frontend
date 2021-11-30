@@ -20,7 +20,7 @@ if(!props.username){
 
         <img src={avatarImg} width="200" alt="I feel pretty, oh so pretty. I feel pretty and witty and GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY" className="uk-img uk-placeholder uk-align-center"></img>
 
-                <p uk-margin>
+                <p uk-margin="true">
             <button className="uk-button uk-button-default uk-button-small uk-align-center"><span uk-icon="upload"></span>
             Upload</button>
             </p>
