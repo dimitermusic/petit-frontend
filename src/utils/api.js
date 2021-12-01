@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL_PREFIX = "https://petit-backend.herokuapp.com/"
+const URL_PREFIX = "https://petit-backend.herokuapp.com"
 
 const API = {
     getProfile: (tkn)=>{
