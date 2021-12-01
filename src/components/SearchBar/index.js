@@ -29,7 +29,6 @@ function SearchBar(props) {
                 type: event.target.value
             });
         }
-        console.log(event.target);
     }
 
     const apiFetch = (e) => {
