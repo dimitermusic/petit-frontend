@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import style from "./style.css"
-import avatarImg from "../../images/avatar.jpg"
-import App from "../../App"
+import avatarImg from "./../../../images/avatar.jpg"
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 
 
@@ -20,7 +19,7 @@ if(!props.username){
 
         <img src={avatarImg} width="200" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
 
-                <p uk-margin>
+                <p uk-margin="true">
             <button className="uk-button uk-button-default uk-button-small uk-align-center"><span uk-icon="upload"></span>
             Upload</button>
             </p>
