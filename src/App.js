@@ -46,7 +46,7 @@ function App() {
     setUserState({ username: "", id: 0 });
     setToken("");
     localStorage.removeItem("token");
-    <Navigate to="/login" />;
+    return <Navigate to="/login" />;
   }
 
   function LoginPage() {

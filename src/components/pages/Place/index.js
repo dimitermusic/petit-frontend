@@ -4,6 +4,23 @@ import style from "./style.css"
 import API from "../../../utils/api";
 
 function Place(props) {
+
+    // const tkn = localStorage.getItem("token")
+    // const testPlaceRef= "ChIJN-AX2olqkFQR2-zBAMus6gM"
+    // const placeData = 3
+
+    // API.getOnePlace(placeData, tkn, testPlaceRef).then(function(response){
+    //     console.log(response)
+    // }).catch(err=>{
+    //     console.log(err)
+    // })
+
+    // const petFriendly = ()=>{
+    //     if (a > b){
+    //         return "Yes"
+    //     } else return "No"
+    // }
+
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
             <div className="uk-flex">
