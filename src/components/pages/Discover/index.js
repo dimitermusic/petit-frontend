@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.css"
 import API from "../../../utils/api";
 
-function Discover(props) {
+function Discover() {
     const [places, setPlaces] = useState([])
 
-    const randomPlaces = (e) =>{
-        e.preventDefault();
+    useEffect(()=>{
         API.getAllPlaces()
-        .then(data=>{
-            setPlaces(data)
+        .then(res=>{
+            setPlaces(res.data)
+            console.log(res.data);
         })
         .catch(err=>{
             console.log(err);
         })
-    }
+    },[])
 
     return (
         <div>
-            
+            <div className="uk-container uk-width-4-5">
+                <h1 className="uk-heading-divider uk-text-center">Discover</h1>
+                <ul className="uk-list uk-list-large uk-list-divider uk-list-striped" id='search-results'>
+                {places.map(place=>{
+                    return (<li key={place.ref_id} id={place.ref_id}><a href={`/review`}>{place.name} at {place.address}</a> <span>{place.isJob}</span></li>)
+                })}
+                </ul>
+            </div>
         </div>
     )
 }
