@@ -1,9 +1,10 @@
 import React, {useReducer, useState} from "react";
 import { SET_SEARCH } from "../../utils/actions";
 import { useSelector,useDispatch } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SearchBar(props) {
+    const navigate = useNavigate();
     const [searchFormState, setSearchFormState] = useState({
         search: "",
         city: "",
@@ -37,8 +38,7 @@ function SearchBar(props) {
             type:SET_SEARCH,
             payload:searchFormState
         });
-        localStorage.setItem("search",JSON.stringify(searchFormState));
-        window.location.reload();
+        navigate('/results');
     }
 
 

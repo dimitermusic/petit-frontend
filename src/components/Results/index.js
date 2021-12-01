@@ -5,14 +5,13 @@ import API from "../../utils/api";
 
 function Results(props){
     const dispatch = useDispatch();
+    const searchForm = useSelector(state => state.searchFormState);
     const googleResults = useSelector(state => state.googleResults);
 
     useEffect(()=>{
-        const mySearch = localStorage.getItem("search")
-        const apiSearch = JSON.parse(mySearch);
         API.apiFetch({
-            name:apiSearch.search,
-            city:apiSearch.city
+            name:searchForm.search,
+            city:searchForm.city
         })
         .then(res=>{
             dispatch(({
