@@ -4,10 +4,6 @@ import style from "./style.css"
 import API from "../../../utils/api";
 
 function Place(props) {
-    // useEffect(()=>{
-    //     API.getOnePlace
-    // })
-
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
             <div className="uk-flex">
