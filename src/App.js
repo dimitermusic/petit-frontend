@@ -8,6 +8,8 @@ import API from "./utils/api";
 import Profile from "./components/pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
 import Results from "./components/Results/index";
+import PetGallery from "./pages/PetGallery/index.js";
+import UploadPets from "./pages/UploadPets/index.js";
 import Place from "./components/pages/Place/index.js";
 import { ApiProvider } from "./utils/ApiContext.js";
 
@@ -47,7 +49,7 @@ function App() {
     setUserState({ username: "", id: 0 });
     setToken("");
     localStorage.removeItem("token");
-    <Navigate to="/login" />;
+    return <Navigate to="/login" />;
   }
 
   function LoginPage() {
@@ -73,9 +75,10 @@ function App() {
           <Route exact path={"/"} element={<LoginPage />} />
           <Route exact path={"/logout"} element={<Logout />} />
           <Route exact path={"/place"} element={<Place />} />
+        <Route exact path={"/petgallery"} element={<PetGallery />} />
+        <Route exact path={"/uploadpets"} element={<UploadPets />} />
         </Routes>
       </ApiProvider>
-
     </>
   );
 }

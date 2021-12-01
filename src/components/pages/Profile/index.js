@@ -17,7 +17,7 @@ if(!props.username){
 
         <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">@{props.username}</p>
 
-        <img src={avatarImg} width="200" alt="I feel pretty, oh so pretty. I feel pretty and witty and GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY" className="uk-img uk-placeholder uk-align-center"></img>
+        <img src={avatarImg} width="200" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
 
                 <p uk-margin="true">
             <button className="uk-button uk-button-default uk-button-small uk-align-center"><span uk-icon="upload"></span>
@@ -29,9 +29,9 @@ if(!props.username){
 
             {/* Profile nav */}
             <ul className="uk-subnav uk-subnav-divider uk-margin">
-                    <li className="uk-active"><a href="#"><span uk-icon="file-text"></span> Reviews</a></li>
+                    <li className="uk-active"><a href="#"><span uk-icon="file-text"></span> Comments</a></li>
                     <li><a href="#"><span uk-icon="image"></span> Pet Gallery</a></li>
-                    <li><a href="#"><span uk-icon="comment"></span> Comments</a></li>
+                    <li><a href="#"><span uk-icon="comment"></span> Reviews</a></li>
             </ul>
             {/* Populate user reviews */}
             <div   className="uk-child-width-expand@s uk-text-center uk-grid">
