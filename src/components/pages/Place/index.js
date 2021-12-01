@@ -7,7 +7,9 @@ function Place(props) {
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
             <div className="uk-flex">
-                <div className="uk-margin-large-right">Wendys in Orem, UT</div>
+                <div className="uk-margin-large-right">Wendys</div>
+                <div className="uk-margin-large-right">at</div>
+                <div className="uk-margin-large-right">500 N 1000 W</div>
                 <span class="uk-badge">Establishment</span>
             </div>
 
@@ -38,13 +40,19 @@ function Place(props) {
                 <div>👎</div>
                 <div>12</div>
             </div>
-            <a class="uk-button uk-button-default" href="#">Google</a>
+            <a class="uk-button uk-button-default" href="#">See on Google</a>
 
             <hr />
 
             <div>
                 <p>Comments:</p>
             </div>
+            
+            <form>
+                <textarea className="uk-textarea"></textarea>
+                <a class="uk-button uk-button-default">Comment</a>
+            </form>
+
         </div>
     )
 }
