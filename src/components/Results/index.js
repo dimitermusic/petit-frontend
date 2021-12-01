@@ -5,7 +5,7 @@ import API from "../../utils/api";
 
 function Results(props){
     const dispatch = useDispatch();
-    const searchForm = useSelector(state => state.searchFormState);
+    const searchForm = useSelector(state => state.searchForm);
     const googleResults = useSelector(state => state.googleResults);
 
     useEffect(()=>{
@@ -22,7 +22,7 @@ function Results(props){
         .catch(err => {
             console.log(err);
         })
-    },[])
+    },[searchForm])
 
     return(
         <>

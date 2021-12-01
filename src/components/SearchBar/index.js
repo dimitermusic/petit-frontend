@@ -11,7 +11,7 @@ function SearchBar(props) {
         type: "establishment"
     })
     const dispatch = useDispatch();
-    const searchForm = useSelector(state => state.searchFormState);
+    const searchForm = useSelector(state => state.searchForm);
 
     const handleSearchChange = event => {
         if (event.target.name === "search") {

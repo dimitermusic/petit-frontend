@@ -27,6 +27,7 @@ export default function reducer(state=initialState,action){
             }
         
         case SET_SEARCH:
+            console.log(action.payload);
             return{
                 ...state,
                 searchForm:action.payload
