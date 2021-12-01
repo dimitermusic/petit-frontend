@@ -21,8 +21,6 @@ function Place(props) {
     //     } else return "No"
     // }
 
-    
-
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
             <div className="uk-flex">

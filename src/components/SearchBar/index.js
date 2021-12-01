@@ -41,7 +41,6 @@ function SearchBar(props) {
         navigate('/results');
     }
 
-
     return (
         <>
             <div className="uk-flex uk-flex-center uk-margin">
