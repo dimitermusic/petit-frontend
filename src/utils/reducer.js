@@ -1,6 +1,6 @@
 // state for google { reference, name, formatted_address }
 // state for db { ref_id, name, address, id, isJob }
-import { GOOGLE_FETCH, DB_FETCH } from "./actions";
+import { GOOGLE_FETCH, DB_FETCH, SET_SEARCH } from "./actions";
 const initialState=
 {
     searchForm:[
@@ -20,10 +20,17 @@ export default function reducer(state=initialState,action){
             return{
 
             }
+
         case DB_FETCH:
             return{
 
             }
+        
+        case SET_SEARCH:
+            return{
+
+            }
+            
         default:
             return state;
     }
