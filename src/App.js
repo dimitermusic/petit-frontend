@@ -70,7 +70,7 @@ function App() {
         <Route exact path={"/discover"} element={<Discover />} />
         <Route exact path={"/login"} element={<LoginPage />} />
         <Route exact path={`/profile`} element={<Profile
-          username={userState.username} />} />
+          username={userState.username}/>} />
         <Route exact path={"/"} element={<LoginPage />} />
         <Route exact path={"/logout"} element={<Logout />} />
         <Route exact path={"/place"} element={<Place />} />

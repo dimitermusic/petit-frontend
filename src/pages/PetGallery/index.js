@@ -8,9 +8,9 @@ import { Routes, Route, Link, Navigate } from "react-router-dom";
 export default function PetGallery(props) {
     
     const [imageIds, setImageIds] = useState();
-    const uploadPetsButton = () => {
-        <Navigate to="/uploadpets"/>
-    }
+    // const uploadPetsButton = () => {
+    //     <Navigate to="/uploadpets"/>
+    // }
     const loadImages = async () => {
         try {
             const res = await fetch('/api/uploadpets');
@@ -28,7 +28,8 @@ export default function PetGallery(props) {
     return (
         <div>
             <h1 className="title">Pet Gallery</h1>
-            <button className="btn" type="button" onClick={uploadPetsButton}>Add Photos</button>
+            <a href="/uploadpets">
+            <button className="btn" type="button">Add Photos</button></a>
             <div className="gallery">
                 {imageIds &&
                     imageIds.map((imageId, index) => (
