@@ -8,7 +8,6 @@ import API from "./utils/api";
 import Profile from "./components/pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
 import Results from "./components/Results/index";
-import ReviewForm from "./components/ReviewForm/index.js";
 import PetGallery from "./pages/PetGallery/index.js";
 import UploadPets from "./pages/UploadPets/index.js";
 import Place from "./components/pages/Place/index.js";
@@ -75,6 +74,8 @@ function App() {
         <Route exact path={"/"} element={<LoginPage />} />
         <Route exact path={"/logout"} element={<Logout />} />
         <Route exact path={"/place"} element={<Place />} />
+        <Route exact path={"/petgallery"} element={<PetGallery />} />
+        <Route exact path={"/uploadpets"} element={<UploadPets />} />
       </Routes>
     </>
   );

@@ -29,9 +29,9 @@ if(!props.username){
 
             {/* Profile nav */}
             <ul className="uk-subnav uk-subnav-divider uk-margin">
-                    <li className="uk-active"><a href="#"><span uk-icon="file-text"></span> Reviews</a></li>
+                    <li className="uk-active"><a href="#"><span uk-icon="file-text"></span> Comments</a></li>
                     <li><a href="#"><span uk-icon="image"></span> Pet Gallery</a></li>
-                    <li><a href="#"><span uk-icon="comment"></span> Comments</a></li>
+                    <li><a href="#"><span uk-icon="comment"></span> Reviews</a></li>
             </ul>
             {/* Populate user reviews */}
             <div   className="uk-child-width-expand@s uk-text-center uk-grid">
