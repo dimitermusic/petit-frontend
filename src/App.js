@@ -11,6 +11,7 @@ import Results from "./components/Results/index";
 import PetGallery from "./pages/PetGallery/index.js";
 import UploadPets from "./pages/UploadPets/index.js";
 import Place from "./components/pages/Place/index.js";
+import { ApiProvider } from "./utils/ApiContext.js";
 
 function App() {
 
@@ -60,23 +61,24 @@ function App() {
 
   return (
     <>
-      <NavBar
-        id={userState.id} />
+      <ApiProvider>
+        <NavBar
+          id={userState.id} />
 
-      <SearchBar />
-
-      <Routes>
-        <Route exact path={"/results"} element={<Results />} />
-        <Route exact path={"/discover"} element={<Discover />} />
-        <Route exact path={"/login"} element={<LoginPage />} />
-        <Route exact path={`/profile`} element={<Profile
-          username={userState.username}/>} />
-        <Route exact path={"/"} element={<LoginPage />} />
-        <Route exact path={"/logout"} element={<Logout />} />
-        <Route exact path={"/place"} element={<Place />} />
+        <SearchBar />
+        <Routes>
+          <Route exact path={"/results"} element={<Results />} />
+          <Route exact path={"/discover"} element={<Discover />} />
+          <Route exact path={"/login"} element={<LoginPage />} />
+          <Route exact path={`/profile`} element={<Profile
+            username={userState.username} />} />
+          <Route exact path={"/"} element={<LoginPage />} />
+          <Route exact path={"/logout"} element={<Logout />} />
+          <Route exact path={"/place"} element={<Place />} />
         <Route exact path={"/petgallery"} element={<PetGallery />} />
         <Route exact path={"/uploadpets"} element={<UploadPets />} />
-      </Routes>
+        </Routes>
+      </ApiProvider>
     </>
   );
 }
