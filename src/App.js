@@ -9,6 +9,8 @@ import Profile from "./pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
 import Results from "./components/Results/index";
 import ReviewForm from "./components/ReviewForm/index.js";
+import PetGallery from "./pages/PetGallery/index.js";
+import UploadPets from "./pages/UploadPets/index.js";
 
 function App() {
 
@@ -73,6 +75,8 @@ function App() {
         <Route exact path={"/"} element={<LoginPage/>}/>
         <Route exact path={`/review`} element={<ReviewForm/>}/>
         <Route exact path={"/logout"} element={<Logout/>}/>
+        <Route exact path={"/petgallery"} element={<PetGallery/>}/>
+        <Route exact path={"/uploadpets"} element={<UploadPets/>}/>
       </Routes>
     </>
   );
