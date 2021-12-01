@@ -36,7 +36,7 @@ const API = {
     getAllPlaces:()=>{
         return axios.get(`${URL_PREFIX}/api/places`)
     },
-    getOnePlace:(placeData,tkn, ref_id)=>{
+    getOnePlace:(placeData, tkn, ref_id)=>{
         return axios.get(`${URL_PREFIX}/api/places/${ref_id}`,placeData,{
             headers:{
                 "Authorization": `Bearer ${tkn}`
@@ -93,7 +93,6 @@ const API = {
         })
     },
     apiFetch:(fetchData)=>{
-        console.log(fetchData);
         return axios.get(`${URL_PREFIX}/api/google`,{params:fetchData})
     }
 };
