@@ -1,6 +1,16 @@
-import React from "react";
+import React, {useState, useReducer, useEffect} from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { GOOGLE_FETCH } from "../../utils/actions";
 
 function Results(props){
+    const [result, setResult] = useState([]);
+    const googleResults = useSelector(state => state.googleResults);
+    const searchForm = useSelector(state => state.searchFormState);
+
+    useEffect(()=>{
+        
+    },[])
+
     return(
         <>
             <div className="uk-container uk-width-4-5">
@@ -14,7 +24,5 @@ function Results(props){
         </>
     )
 }
-
-
 
 export default Results;
