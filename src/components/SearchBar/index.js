@@ -29,6 +29,7 @@ function SearchBar(props) {
                 type: event.target.value
             });
         }
+        console.log(event.target);
     }
 
     const searchDispatch = (e) => {

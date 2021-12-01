@@ -1,7 +1,5 @@
 import axios from "axios";
-const URL_PREFIX = "http://localhost:3001"
-// TODO: upon deployment
-// const URL_PREFIX = "HEROKU BACK END URL"
+const URL_PREFIX = "https://petit-backend.herokuapp.com/"
 
 const API = {
     getProfile: (tkn)=>{
