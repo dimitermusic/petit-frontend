@@ -1,7 +1,7 @@
 import React, {useReducer, useState} from "react";
-import API from '../../utils/api'
 import { SET_SEARCH } from "../../utils/actions";
 import { useSelector,useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 function SearchBar(props) {
     const [searchFormState, setSearchFormState] = useState({
@@ -25,19 +25,21 @@ function SearchBar(props) {
             })
         } else {
             setSearchFormState({
-                ...searchForm,
+                ...searchFormState,
                 type: event.target.value
             });
         }
     }
 
     const searchDispatch = (e) => {
-        e.preventDefault();
         dispatch({
             type:SET_SEARCH,
             payload:searchFormState
-        })
+        });
+        localStorage.setItem("search",JSON.stringify(searchFormState));
+        window.location.reload();
     }
+
 
     return (
         <>

@@ -16,19 +16,10 @@ const initialState=
 export default function reducer(state=initialState,action){
     switch (action.type) {
         case GOOGLE_FETCH:
-            API.apiFetch({
-                name:state.searchForm.search,
-                city:state.searchForm.city
-            })
-            .then(res=>{
-                return{
-                    ...state,
-                    googleResults:res.data
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            return{
+                ...state,
+                googleResults:action.payload
+            }
 
         case DB_FETCH:
             return{
@@ -36,13 +27,10 @@ export default function reducer(state=initialState,action){
             }
         
         case SET_SEARCH:
-            console.log(state.searchForm);
-            console.log('hi');
             return{
                 ...state,
                 searchForm:action.payload
             }
-            
         default:
             return state;
     }

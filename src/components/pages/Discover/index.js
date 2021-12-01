@@ -4,6 +4,7 @@ import API from "../../../utils/api";
 
 function Discover() {
     const [places, setPlaces] = useState([])
+    
 
     useEffect(()=>{
         API.getAllPlaces()
