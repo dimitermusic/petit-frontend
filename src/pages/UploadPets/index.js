@@ -69,6 +69,9 @@ export default function Upload() {
     return (
         <div>
             <h1 className="title">Upload an Image</h1>
+            <a href="/petgallery"><button className="btn" type="submit">
+                View Pet Gallery
+                </button></a>
             <UploadComp msg={errMsg} type="danger" />
             <UploadComp msg={successMsg} type="success" />
             <form onSubmit={handleSubmitFile} className="form">
