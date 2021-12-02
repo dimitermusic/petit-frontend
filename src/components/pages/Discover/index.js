@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import style from "./style.css"
 import API from "../../../utils/api";
+import { MY_DISCOVER } from "../../../utils/actions";
 
 function Discover() {
     const navigate = useNavigate();
-    const [places, setPlaces] = useState([])
-    
+    const dispatch = useDispatch();
+    const [places, setPlaces] = useState([]);
+
     useEffect(()=>{
         API.getAllPlaces()
         .then(res=>{
             setPlaces(res.data)
-            console.log(res.data);
+            dispatch({
+                type:MY_DISCOVER,
+                payload:res.data
+            })
         })
         .catch(err=>{
             console.log(err);
@@ -29,7 +35,7 @@ function Discover() {
                             key={place.ref_id} 
                             id={place.ref_id}>
                                 {place.name} at {place.location} {place.isJob==='establishment'?<span className="uk-icon-button">E</span>:<span className="uk-icon-button">J</span>}
-                                <button id={place.reference} onClick={()=>navigate(`/place/${place.reference}`)}>Leave a review</button>
+                                <button id={place.ref_id} onClick={()=>navigate(`/discover/${place.ref_id}`)}>Leave a review</button>
                         </li>
                     )
                 })}
