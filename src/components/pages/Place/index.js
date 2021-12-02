@@ -40,9 +40,20 @@ function Place() {
             </div>
 
             <hr />
-            <div className="uk-flex">
+            {/* <div className="uk-flex">
                 <p className="uk-margin-large-right">Pet Friendly:</p>
                 <div>Yes</div>
+            </div> */}
+
+            <div className="uk-flex">
+                <p className="uk-margin-large-right">Ok to Bring In:</p>
+                <div className="uk-margin-small-right">Yes</div>
+                <div>👍</div>
+                <div className="uk-margin-large-right">500</div>
+                
+                <div className="uk-margin-small-right">No</div>
+                <div>👎</div>
+                <div>12</div>
             </div>
 
             <div className="uk-flex">
@@ -57,7 +68,18 @@ function Place() {
             </div>
 
             <div className="uk-flex">
-                <p className="uk-margin-large-right">Ok to Bring In:</p>
+                <p className="uk-margin-large-right">Pet Stipend:</p>
+                <div className="uk-margin-small-right">Yes</div>
+                <div>👍</div>
+                <div className="uk-margin-large-right">500</div>
+                
+                <div className="uk-margin-small-right">No</div>
+                <div>👎</div>
+                <div>12</div>
+            </div>
+
+            <div className="uk-flex">
+                <p className="uk-margin-large-right">Pet Time Off:</p>
                 <div className="uk-margin-small-right">Yes</div>
                 <div>👍</div>
                 <div className="uk-margin-large-right">500</div>
