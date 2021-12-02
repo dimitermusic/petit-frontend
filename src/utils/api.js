@@ -25,12 +25,6 @@ const API = {
             }
         })
     },
-    userProf:(tkn)=>{
-        return axios.get(`${URL_PREFIX}/users/profile`,{
-            headers:{
-            "Authorization": `Bearer ${tkn}`
-        }})
-    },
     getAllPlaces:()=>{
         return axios.get(`${URL_PREFIX}/api/places`)
     },
@@ -83,8 +77,8 @@ const API = {
             }
         })
     },
-    vote:(voteData, tkn, id)=>{
-        return axios.put(`${URL_PREFIX}/api/votes/${id}`,voteData,{
+    vote:(voteData, tkn)=>{
+        return axios.post(`${URL_PREFIX}/api/votes/`,voteData,{
             headers:{
                 "Authorization":`Bearer ${tkn}`
             }

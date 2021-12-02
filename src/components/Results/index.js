@@ -17,10 +17,10 @@ function Results(){
                 city:searchForm.city
             })
             .then(res=>{
-                dispatch(({
+                dispatch({
                     type:GOOGLE_FETCH,
                     payload:res.data
-                }));
+                });
             })
             .catch(err => {
                 console.log(err);
