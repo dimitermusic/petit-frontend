@@ -1,9 +1,9 @@
-import React, {useReducer, useState} from "react";
+import React, { useState} from "react";
 import { SET_SEARCH } from "../../utils/actions";
-import { useSelector,useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function SearchBar(props) {
+function SearchBar() {
     const navigate = useNavigate();
     const [searchFormState, setSearchFormState] = useState({
         search: "",
@@ -32,6 +32,7 @@ function SearchBar(props) {
     }
 
     const searchDispatch = (e) => {
+        e.stopPropagation();
         dispatch({
             type:SET_SEARCH,
             payload:searchFormState

@@ -1,4 +1,4 @@
-import { GOOGLE_FETCH, SET_SEARCH } from "./actions";
+import { GOOGLE_FETCH, SET_SEARCH, MY_PLACE } from "./actions";
 const initialState=
 {
     searchForm:[{
@@ -7,6 +7,7 @@ const initialState=
         type:"establishment"
     }],
     googleResults:[],
+    myPlace:{}
 };
 
 export default function reducer(state=initialState,action){
@@ -15,6 +16,11 @@ export default function reducer(state=initialState,action){
             return{
                 ...state,
                 googleResults:action.payload
+            }
+        case MY_PLACE:
+            return{
+                ...state,
+                myPlace:action.payload
             }
         case SET_SEARCH:
             return{

@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import API from '../../../utils/api.js'
 import style from "./style.css"
 import avatarImg from "./../../../images/avatar.jpg"
 import { Routes, Route, Link, Navigate } from "react-router-dom";
-import App from "../../../App.js"
-
 
 function Profile(props) {
 

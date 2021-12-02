@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import style from "./style.css"
 import API from "../../../utils/api";
 
-function Place(props) {
-    const dispatch = useDispatch();
+function Place() {
     const { ref_id } = useParams();
-    const type = JSON.parse(localStorage.getItem(("type")))
-    console.log(type);
-    // const tkn = localStorage.getItem("token")
+    const searchForm = useSelector(state => state.searchForm);
+    const googleResults = useSelector(state => state.googleResults);
+    const tkn = localStorage.getItem("token");
+    const [review, setReview] = useState({})
 
-    
+    useEffect(()=>{
+        const myResult = googleResults.filter(result => result.reference===ref_id);
+        API.getOnePlace({
+            name:myResult[0].name,
+            isJob:searchForm.type,
+            location:myResult[0].formatted_address
+        },tkn,ref_id)
+        .then(res=>{
+            console.log(res.data);
+            setReview(res.data);
+        })
+    },[])
 
     // const petFriendly = ()=>{
     //     if (a > b){
@@ -22,10 +33,10 @@ function Place(props) {
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
             <div className="uk-flex">
-                <div className="uk-margin-large-right">Wendys</div>
+                <div className="uk-margin-large-right">{review.name}</div>
                 <div className="uk-margin-large-right">at</div>
-                <div className="uk-margin-large-right">500 N 1000 W</div>
-                <span className="uk-badge">{type}</span>
+                <div className="uk-margin-large-right">{review.location}</div>
+                <span className="uk-badge">{searchForm.type}</span>
             </div>
 
             <hr />

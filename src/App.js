@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux"
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
@@ -14,7 +13,6 @@ import UploadPets from "./pages/UploadPets/index.js";
 import Place from "./components/pages/Place/index.js";
 
 function App() {
-  const googleResults = useSelector(state => state.googleResults);
   const [userState, setUserState] = useState({
     username: "",
     id: 0
@@ -73,7 +71,7 @@ function App() {
             username={userState.username} />} />
           <Route exact path={"/"} element={<LoginPage />} />
           <Route exact path={"/logout"} element={<Logout />} />
-          <Route path={`/results/:ref_id`} element={<Place />} />
+          <Route exact path={`/place/:ref_id`} element={<Place />} />
         <Route exact path={"/petgallery"} element={<PetGallery />} />
         <Route exact path={"/uploadpets"} element={<UploadPets />} />
         </Routes>

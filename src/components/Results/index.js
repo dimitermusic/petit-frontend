@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { GOOGLE_FETCH, TYPE_FETCH } from "../../utils/actions";
+import { GOOGLE_FETCH } from "../../utils/actions";
 import API from "../../utils/api";
 
-function Results(props){
+function Results(){
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const searchForm = useSelector(state => state.searchForm);
     const googleResults = useSelector(state => state.googleResults);
@@ -38,12 +39,11 @@ function Results(props){
                             <li 
                                 key={place.reference} 
                                 id={place.reference}>
-                                <a href={`/results/${place.reference}`}>
                                    {place.name} at {place.formatted_address} 
-                                </a>
                                 <span>
                                     {searchForm.type}
                                 </span>
+                                <button id={place.reference} onClick={()=>navigate(`/place/${place.reference}`)}>Leave a review</button>
                             </li>
                         )
                     })}
