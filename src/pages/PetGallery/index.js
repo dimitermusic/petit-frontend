@@ -28,6 +28,9 @@ export default function PetGallery(props) {
     return (
         <div>
             <h1 className="title">Pet Gallery</h1>
+            <a href="/p">
+            <button className="btn" type="button">Return to Profile</button></a>
+            <br/>
             <a href="/uploadpets">
             <button className="btn" type="button">Add Photos</button></a>
             <div className="gallery">
