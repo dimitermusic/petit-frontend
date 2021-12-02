@@ -9,7 +9,7 @@ function Place() {
     const searchForm = useSelector(state => state.searchForm);
     const googleResults = useSelector(state => state.googleResults);
     const tkn = localStorage.getItem("token");
-    const [review, setReview] = useState({})
+    const [review, setReview] = useState({});
 
     useEffect(()=>{
         const myResult = googleResults.filter(result => result.reference===ref_id);
@@ -19,7 +19,6 @@ function Place() {
             location:myResult[0].formatted_address
         },tkn,ref_id)
         .then(res=>{
-            console.log(res.data);
             setReview(res.data);
         })
     },[])
