@@ -11,7 +11,6 @@ function SearchBar(props) {
         type: "establishment"
     })
     const dispatch = useDispatch();
-    const searchForm = useSelector(state => state.searchForm);
 
     const handleSearchChange = event => {
         if (event.target.name === "search") {
@@ -30,7 +29,6 @@ function SearchBar(props) {
                 type: event.target.value
             });
         }
-        console.log(event.target);
     }
 
     const searchDispatch = (e) => {

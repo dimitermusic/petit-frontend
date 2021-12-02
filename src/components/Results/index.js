@@ -1,6 +1,7 @@
-import React, {useState, useReducer, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { GOOGLE_FETCH } from "../../utils/actions";
+import { useNavigate } from "react-router-dom";
+import { GOOGLE_FETCH, TYPE_FETCH } from "../../utils/actions";
 import API from "../../utils/api";
 
 function Results(props){
@@ -9,19 +10,22 @@ function Results(props){
     const googleResults = useSelector(state => state.googleResults);
 
     useEffect(()=>{
-        API.apiFetch({
-            name:searchForm.search,
-            city:searchForm.city
-        })
-        .then(res=>{
-            dispatch(({
-                type:GOOGLE_FETCH,
-                payload:res.data
-            }))
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        localStorage.setItem('type',JSON.stringify(searchForm.type))
+        if(searchForm.search!==undefined){
+            API.apiFetch({
+                name:searchForm.search,
+                city:searchForm.city
+            })
+            .then(res=>{
+                dispatch(({
+                    type:GOOGLE_FETCH,
+                    payload:res.data
+                }));
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
     },[searchForm])
 
     return(
@@ -30,7 +34,18 @@ function Results(props){
                 <h1 className="uk-heading-divider uk-text-center">Search Results</h1>
                 <ul className="uk-list uk-list-large uk-list-divider uk-list-striped" id='search-results'>
                     {googleResults.map(place=>{
-                        return (<li key={place.reference} id={place.reference}><a href={`/place`}>{place.name} at {place.formatted_address}</a> <span>{props.type}</span></li>)
+                        return (
+                            <li 
+                                key={place.reference} 
+                                id={place.reference}>
+                                <a href={`/results/${place.reference}`}>
+                                   {place.name} at {place.formatted_address} 
+                                </a>
+                                <span>
+                                    {searchForm.type}
+                                </span>
+                            </li>
+                        )
                     })}
                 </ul>
             </div>

@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from 'prop-types';
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux"
 import style from "./style.css"
 import API from "../../../utils/api";
 
 function Place(props) {
-
+    const dispatch = useDispatch();
+    const { ref_id } = useParams();
+    const type = JSON.parse(localStorage.getItem(("type")))
+    console.log(type);
     // const tkn = localStorage.getItem("token")
-    // const testPlaceRef= "ChIJN-AX2olqkFQR2-zBAMus6gM"
-    // const placeData = 3
 
-    // API.getOnePlace(placeData, tkn, testPlaceRef).then(function(response){
-    //     console.log(response)
-    // }).catch(err=>{
-    //     console.log(err)
-    // })
+    
 
     // const petFriendly = ()=>{
     //     if (a > b){
@@ -27,7 +25,7 @@ function Place(props) {
                 <div className="uk-margin-large-right">Wendys</div>
                 <div className="uk-margin-large-right">at</div>
                 <div className="uk-margin-large-right">500 N 1000 W</div>
-                <span class="uk-badge">Establishment</span>
+                <span className="uk-badge">{type}</span>
             </div>
 
             <hr />
@@ -57,7 +55,7 @@ function Place(props) {
                 <div>👎</div>
                 <div>12</div>
             </div>
-            <a class="uk-button uk-button-default" href="#">See on Google</a>
+            <a className="uk-button uk-button-default" href="#">See on Google</a>
 
             <hr />
 
@@ -67,7 +65,7 @@ function Place(props) {
             
             <form>
                 <textarea className="uk-textarea"></textarea>
-                <a class="uk-button uk-button-default">Comment</a>
+                <a className="uk-button uk-button-default">Comment</a>
             </form>
 
         </div>
