@@ -11,7 +11,6 @@ function Results(){
     const googleResults = useSelector(state => state.googleResults);
 
     useEffect(()=>{
-        localStorage.setItem('type',JSON.stringify(searchForm.type))
         if(searchForm.search!==undefined){
             API.apiFetch({
                 name:searchForm.search,
