@@ -11,13 +11,13 @@ import Results from "./components/Results/index";
 import PetGallery from "./pages/PetGallery/index.js";
 import UploadPets from "./pages/UploadPets/index.js";
 import Place from "./components/pages/Place/index.js";
+import DiscoverPlace from "./components/DiscoverPlace/index.js"
 
 function App() {
   const [userState, setUserState] = useState({
     username: "",
     id: 0
   })
-
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -66,6 +66,7 @@ function App() {
         <Routes>
           <Route exact path={"/results"} element={<Results />} />
           <Route exact path={"/discover"} element={<Discover />} />
+          <Route exact path={"/discover/:ref_id"} element={<DiscoverPlace />} />
           <Route exact path={"/login"} element={<LoginPage />} />
           <Route exact path={`/profile`} element={<Profile
             username={userState.username} />} />

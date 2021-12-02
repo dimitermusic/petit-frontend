@@ -1,0 +1,22 @@
+.uk-icon-button {
+    position: relative;
+}
+
+.helper-text {
+    font-size: x-small;
+    min-width: 75px !important;
+    position: absolute;
+    background-color: rgb(238, 238, 238);
+    padding: 5px;
+    display: none;
+    bottom: 22px;
+}
+
+.helper-text p {
+    font-size: x-small;
+    margin: auto;
+}
+
+.uk-icon-button:hover .helper-text {
+    display: inline;
+}
