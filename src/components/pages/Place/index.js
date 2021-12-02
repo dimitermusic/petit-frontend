@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux"
-import style from "./style.css"
+import { useSelector } from "react-redux";
+import style from "./style.css";
 import API from "../../../utils/api";
 
 function Place() {
@@ -10,16 +10,15 @@ function Place() {
     const googleResults = useSelector(state => state.googleResults);
     const tkn = localStorage.getItem("token");
     const [review, setReview] = useState({});
-
-    const [voteStipendUpState, setVoteStipendUpState] = useState()
-    const [votePetMenuUpState, setVotePetMenuUpState] = useState()
-    const [voteTimeOffUpState, setVoteTimeOffUpState] = useState()
-    
-    const [voteStipendDownState, setVoteStipendDownState] = useState()
-    const [votePetMenuDownState, setVotePetMenuDownState] = useState()
-    const [voteTimeOffDownState, setVoteTimeOffDownState] = useState()
-    const [voteBringUpState, setVoteBringUpState] = useState()
-    const [voteBringDownState, setVoteBringDownState] = useState()
+    const [placeIdState, setPlaceIdState]= useState()
+    const [voteStipendUpState, setVoteStipendUpState] = useState();
+    const [votePetMenuUpState, setVotePetMenuUpState] = useState();
+    const [voteTimeOffUpState, setVoteTimeOffUpState] = useState();
+    const [voteStipendDownState, setVoteStipendDownState] = useState();
+    const [votePetMenuDownState, setVotePetMenuDownState] = useState();
+    const [voteTimeOffDownState, setVoteTimeOffDownState] = useState();
+    const [voteBringUpState, setVoteBringUpState] = useState();
+    const [voteBringDownState, setVoteBringDownState] = useState();
     
     useEffect(()=>{
         const myResult = googleResults.filter(result => result.reference===ref_id);
@@ -30,7 +29,9 @@ function Place() {
             location:myResult[0].formatted_address
         },tkn,ref_id)
         .then(res=>{
+            setPlaceIdState(res.data.id)
             console.log(res.data);
+            console.log(res.data.id);
             setReview(res.data);
             // StipendUp
                 const voteStipendUpCount = res.data.Votes.filter(vote=>
@@ -57,12 +58,18 @@ function Place() {
             // CanBringDown
             const voteBringDownCount = res.data.Votes.filter(vote=>vote.canBringDown===true)
                 setVoteBringDownState(voteBringDownCount.length)
-
         })
     },[])
 
-    const bringInUpvote=()=>{
-        return "hello"
+    const voteStipendUp = ()=>{
+        console.log(placeIdState)
+        console.log("Vote Request Received!")
+        API.vote({
+            hasStipendUp: true,
+            placeId:placeIdState
+        }, tkn).then(res=>{
+            console.log("Vote Successful!")
+        })
     }
 
     return (
@@ -83,7 +90,7 @@ function Place() {
             <div className="uk-flex">
                 <p className="uk-margin-large-right">Ok to Bring In:</p>
                 <div className="uk-margin-small-right">Yes</div>
-                <div onClick={bringInUpvote}>👍</div>
+                <div>👍</div>
                 <div className="uk-margin-large-right">{voteBringUpState}</div>
                 
                 <div className="uk-margin-small-right">No</div>
@@ -105,7 +112,7 @@ function Place() {
             <div className="uk-flex">
                 <p className="uk-margin-large-right">Pet Stipend:</p>
                 <div className="uk-margin-small-right">Yes</div>
-                <div>👍</div>
+                <div onClick={voteStipendUp}>👍</div>
                 <div className="uk-margin-large-right">{voteStipendUpState}</div>
                 
                 <div className="uk-margin-small-right">No</div>
