@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import API from '../../utils/api'
-import Results from "../Results";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import React, { useState} from "react";
+import { SET_SEARCH } from "../../utils/actions";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-
-function SearchBar(props) {
+function SearchBar() {
+    const navigate = useNavigate();
     const [searchFormState, setSearchFormState] = useState({
         search: "",
         city: "",
         type: "establishment"
     })
-    const [result, setResult] = useState([]);
+    const dispatch = useDispatch();
 
     const handleSearchChange = event => {
         if (event.target.name === "search") {
@@ -31,18 +31,13 @@ function SearchBar(props) {
         }
     }
 
-    const apiFetch = (e) => {
-        e.preventDefault();
-        API.apiFetch({
-            name: searchFormState.search,
-            city: searchFormState.city
-        })
-            .then(res => {
-                setResult(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+    const searchDispatch = (e) => {
+        e.stopPropagation();
+        dispatch({
+            type:SET_SEARCH,
+            payload:searchFormState
+        });
+        navigate('/results');
     }
 
     return (
@@ -56,9 +51,8 @@ function SearchBar(props) {
                         <option value='job'>Job</option>
                     </select>
                 </form>
-                <button className="uk-button uk-button-default" onClick={apiFetch}>Button</button>
+                <button className="uk-button uk-button-default" onClick={searchDispatch}>Button</button>
             </div>
-            <Results places={result} type={searchFormState.type} />
         </>
     )
 }

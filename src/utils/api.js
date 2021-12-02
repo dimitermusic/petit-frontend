@@ -1,7 +1,5 @@
 import axios from "axios";
 const URL_PREFIX = "http://localhost:3001"
-// TODO: upon deployment
-// const URL_PREFIX = "HEROKU BACK END URL"
 
 const API = {
     getProfile: (tkn)=>{
@@ -37,7 +35,7 @@ const API = {
         return axios.get(`${URL_PREFIX}/api/places`)
     },
     getOnePlace:(placeData, tkn, ref_id)=>{
-        return axios.get(`${URL_PREFIX}/api/places/${ref_id}`,placeData,{
+        return axios.post(`${URL_PREFIX}/api/places/${ref_id}`,placeData,{
             headers:{
                 "Authorization": `Bearer ${tkn}`
             }
@@ -93,7 +91,7 @@ const API = {
         })
     },
     apiFetch:(fetchData)=>{
-        return axios.get(`${URL_PREFIX}/api/google`,{params:fetchData})
+        return axios.post(`${URL_PREFIX}/api/google`,fetchData)
     }
 };
 
