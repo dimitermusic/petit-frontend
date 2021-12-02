@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
@@ -11,10 +11,8 @@ import Results from "./components/Results/index";
 import PetGallery from "./pages/PetGallery/index.js";
 import UploadPets from "./pages/UploadPets/index.js";
 import Place from "./components/pages/Place/index.js";
-import { ApiProvider } from "./utils/ApiContext.js";
 
 function App() {
-
   const [userState, setUserState] = useState({
     username: "",
     id: 0
@@ -25,8 +23,6 @@ function App() {
   useEffect(() => {
     const myToken = localStorage.getItem("token")
     console.log("successfully used")
-    console.log(myToken)
-
     if (myToken) {
       console.log("oh hi there")
       API.getProfile(myToken)
@@ -54,14 +50,15 @@ function App() {
 
   function LoginPage() {
     return (userState.username ?
-      <Navigate to="/profile" /> : <SignupForm
+      <Navigate to="/profile" /> : 
+      <SignupForm
         setUserState={setUserState}
-        setToken={setToken} />)
+        setToken={setToken} />
+    )
   }
 
   return (
     <>
-      <ApiProvider>
         <NavBar
           id={userState.id} />
 
@@ -74,11 +71,10 @@ function App() {
             username={userState.username} />} />
           <Route exact path={"/"} element={<LoginPage />} />
           <Route exact path={"/logout"} element={<Logout />} />
-          <Route exact path={"/place"} element={<Place />} />
+          <Route exact path={`/place/:ref_id`} element={<Place />} />
         <Route exact path={"/petgallery"} element={<PetGallery />} />
         <Route exact path={"/uploadpets"} element={<UploadPets />} />
         </Routes>
-      </ApiProvider>
     </>
   );
 }

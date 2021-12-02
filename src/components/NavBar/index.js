@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
-import { getThemeProps } from "@mui/system"
 import './style.css'
 
 function NavBar(props) {
