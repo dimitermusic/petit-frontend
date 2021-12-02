@@ -78,7 +78,7 @@ const API = {
         })
     },
     vote:(voteData, tkn)=>{
-        return axios.post(`${URL_PREFIX}/api/votes/${id}`,voteData,{
+        return axios.post(`${URL_PREFIX}/api/votes/`,voteData,{
             headers:{
                 "Authorization":`Bearer ${tkn}`
             }
