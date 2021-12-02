@@ -11,6 +11,7 @@ import Results from "./components/Results/index";
 import PetGallery from "./pages/PetGallery/index.js";
 import UploadPets from "./pages/UploadPets/index.js";
 import Place from "./components/pages/Place/index.js";
+import UploadProf from "./components/UploadProf/index.js";
 
 function App() {
 
@@ -76,6 +77,7 @@ function App() {
         <Route exact path={"/place"} element={<Place />} />
         <Route exact path={"/petgallery"} element={<PetGallery />} />
         <Route exact path={"/uploadpets"} element={<UploadPets />} />
+        <Route exact path={"/uploadprof"} element={<UploadProf />} />
       </Routes>
     </>
   );
