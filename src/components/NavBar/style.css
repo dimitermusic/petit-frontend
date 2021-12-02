@@ -1,0 +1,21 @@
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(74, 155, 74) !important;
+    justify-content: flex-end !important;
+    justify-content: space-between !important;
+}
+
+.nav-logo {
+    margin-right: auto;
+}
+
+.navbar a {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.nav-items a:hover {
+    color: rgb(217, 228, 228) !important;
+    text-decoration: none !important;
+}
