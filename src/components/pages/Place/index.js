@@ -213,9 +213,10 @@ function Place() {
             console.log("Comment Successfully sent to db!")
             API.getAllComments(tkn, placeIdState)
                 .then(data => {
-                    console.log(data);
-                    setAllCommentsState(data);
+                    console.log(data.data);
+                    setAllCommentsState(data.data);
                     console.log(allCommentsState);
+                    alert("comment posted successfully!")
                 }).catch(err => {
                     console.log(err);
                 })
