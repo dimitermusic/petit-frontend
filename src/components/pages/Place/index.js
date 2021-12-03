@@ -144,7 +144,7 @@ function Place() {
     }
 
     const handleInputChange = (e) => setCommentTextState(e.target.value);
-    
+
     const postComment = () => {
         console.log(placeIdState);
         API.postComment({
@@ -153,17 +153,12 @@ function Place() {
         }, tkn).then(res => {
             console.log(res);
             console.log("Comment Successfully sent to db!")
-        })
-    }
-    
-    const getComments = () => {
-        API.getAllComments({
-            placeId: placeIdState
-        }, tkn).then(res => {
-            console.log(res.data);
-            setAllCommentsState(res.data);
-        }).catch(err => {
-            console.log(err);
+            API.getAllComments(tkn, placeIdState)
+                .then(allComments => {
+                    console.log(allComments);
+                }).catch(err => {
+                    console.log(err);
+                })
         })
     }
 
@@ -243,13 +238,13 @@ function Place() {
                     onClick={postComment}
                 >Comment</a>
             </form>
-            <hr/>
+            <hr />
             <div>
                 <article class="uk-comment">
                     <header class="uk-comment-header">
                         <div class="uk-grid-medium uk-flex-middle" uk-grid>
                             <div class="uk-width-auto">
-                                <img class="uk-comment-avatar" src={pandagirl} width="80" height="80" alt=""/>
+                                <img class="uk-comment-avatar" src={pandagirl} width="80" height="80" alt="" />
                             </div>
                             <div class="uk-width-expand">
                                 <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">@username</a></h4>
@@ -264,10 +259,10 @@ function Place() {
                     </div>
                 </article>
             </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
     )
 }
