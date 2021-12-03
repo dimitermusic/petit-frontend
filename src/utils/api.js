@@ -11,15 +11,15 @@ const API = {
     signup: (usrData) => {
         return axios.post(`${URL_PREFIX}/api/users/signup`, usrData)
     },
-    userSettings: (usrData, id, tkn) => {
-        return axios.put(`${URL_PREFIX}/api/users/${id}`, usrData, {
+    userSettings: (usrData, tkn) => {
+        return axios.put(`${URL_PREFIX}/api/users`, usrData, {
             headers: {
                 "Authorization": `Bearer ${tkn}`
             }
         })
     },
-    userDelete: (id, tkn) => {
-        return axios.delete(`${URL_PREFIX}/api/users/${id}`, {
+    userDelete: (tkn) => {
+        return axios.delete(`${URL_PREFIX}/api/users`, {
             headers: {
                 "Authorization": `Bearer ${tkn}`
             }
