@@ -10,7 +10,28 @@ import generateSignature from '../../../utils/generateSignature'
 
 function Profile(props) {
 
-  const [imageURL, setImageURL] = useState("")
+
+//Submit profile picture
+  const [fileInputState, setFileInputState] = useState(''); 
+  const handleSubmitFile = (e) => {
+    e.preventDefault();
+    if (!selectedFile) return;
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onloadend = () => {
+        uploadImage(reader.result);
+    };
+    reader.onerror = () => {
+        console.error('AHHHHHHHH!!');
+        setErrMsg('something went wrong!');
+    };
+};
+
+
+
+
+
+  const [profilePic, setProfilePic] = useState("")
 
   if (!props.username) {
     <Navigate to="/logout" />
@@ -19,7 +40,7 @@ function Profile(props) {
   function onSuccess(taco) {
     console.log("Success!", taco)
     console.log(taco.info.url)
-    setImageURL(taco.info.url)
+    setProfilePic(taco.info.url)
 
   }
   const myWidget = (
@@ -85,7 +106,8 @@ function Profile(props) {
         },
         (error, result) => {
           if (!error && result && result.event === 'success') {
-            logging && console.log('Done! Here is the image info: ', result.info)
+            logging && console.log('Done! Here is the image info: ', result.info);
+    
             logging && console.log(result)
             !!onSuccess && onSuccess(result)
             console.log(result)
@@ -95,23 +117,26 @@ function Profile(props) {
               : logging && console.log({ error: error, result: result })
           } else if (!!resourceType && result.info === 'shown') {
             console.log('setting resourceType')
+
             // document.querySelector(
-            //   '.cloudinary_fileupload'
-            // ).accept = `${resourceType}/*`
+            // '.cloudinary_fileupload'
+            // ).accept = `${resourceType}`
+
           } else {
             logging && console.log(result)
           }
         }
       )
     widget.open()
-  }
+
+    }
 
   return (
     <div>
       <h3 className="uk-text-bold uk-flex uk-flex-center welcome">Welcome @{props.username}!</h3>
       {/* Recieves badge if user submits more than 10 reviews */}
       <span className="uk-badge uk-flex uk-flex-center badge">PetIt Puppy</span>
-      <img src={imageURL} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
+      <img src={profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
       <p uk-margin="true">
         <div className="uk-flex uk-flex-center">
           <WidgetLoader />
@@ -149,6 +174,25 @@ function Profile(props) {
           />
         </div>
       </p>
+    
+{/* Submit profile picture */}
+      <form onSubmit={handleSubmitFile} className="form">
+                <input
+                    id="fileInput"
+                    type="file"
+                    name="image"
+                    onChange={handleFileInputChange}
+                    value={fileInputState}
+                    className="form-input"
+                />
+                <button className="btn" type="submit">
+                    Submit
+                </button>
+            </form>
+
+
+
+
       <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes:{props.votes}</p>
     </div>
   )
