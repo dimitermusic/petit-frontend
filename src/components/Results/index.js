@@ -34,12 +34,12 @@ function Results() {
                 <h1 className="uk-heading-divider uk-text-center">Search Results</h1>
                 <ul className="uk-list uk-list-large uk-list-divider uk-list-striped" id='search-results'>
                     {googleResults.map(place => {
-                        const newArray = place.formatted_address.split(",").slice(0,-2).join(",");
+                        const newLocation = place.formatted_address.split(",").slice(0,-2).join(",");
                         return (
                             <li
                                 key={place.reference}
                                 id={place.reference}>
-                                {place.name} at {newArray}
+                                {place.name} at {newLocation}
                                 <span className="uk-margin-small-left uk-margin-small-right">
                                     {searchForm.type==="establishment"?<span className="uk-icon-button">E</span>:<span className="uk-icon-button">J</span>}
                                 </span>
