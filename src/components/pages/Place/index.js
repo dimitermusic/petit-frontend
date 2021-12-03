@@ -20,10 +20,10 @@ function Place() {
     const [voteBringUpState, setVoteBringUpState] = useState(0);
     const [voteBringDownState, setVoteBringDownState] = useState(0);
     const [commentTextState, setCommentTextState] = useState();
+    const [allCommentsState, setAllCommentsState] = useState();
 
     useEffect(() => {
         const myResult = googleResults.filter(result => result.reference === ref_id);
-
         API.getOnePlace({
             name: myResult[0].name,
             isJob: searchForm.type,
@@ -33,8 +33,7 @@ function Place() {
                 setPlaceIdState(res.data.id)
                 setReview(res.data);
                 // StipendUp
-                const voteStipendUpCount = res.data.Votes.filter(vote =>
-                    vote.hasStipendUp === true)
+                const voteStipendUpCount = res.data.Votes.filter(vote =>vote.hasStipendUp === true)
                 setVoteStipendUpState(voteStipendUpCount.length)
                 // StipendDown
                 const voteStipendDownCount = res.data.Votes.filter(vote => vote.hasStipendDown === true)
@@ -78,6 +77,7 @@ function Place() {
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
             setVoteStipendUpState(voteNumber.length)
+            console.log(voteNumber);
             console.log("Vote Successful!")
         })
     }
@@ -89,6 +89,7 @@ function Place() {
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
             setVoteStipendUpState(voteNumber.length)
+            console.log(voteNumber);
             console.log("Vote Successful!")
         })
     }
@@ -100,6 +101,7 @@ function Place() {
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.canBringUp===true)
             setVoteBringUpState(voteNumber.length)
+            console.log(voteNumber);
             console.log("Vote Successful!")
         })
     }
