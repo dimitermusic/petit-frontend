@@ -35,8 +35,8 @@ const API = {
             }
         })
     },
-    getAllComments: (commentData, tkn,) => {
-        return axios.post(`${URL_PREFIX}/api/comments/`, commentData, {
+    getAllComments: (tkn, placeId) => {
+        return axios.get(`${URL_PREFIX}/api/comments/${placeId}`, {
             headers: {
                 "Authorization": `Bearer ${tkn}`
             }
