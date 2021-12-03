@@ -10,15 +10,17 @@ function Place() {
     const googleResults = useSelector(state => state.googleResults);
     const tkn = localStorage.getItem("token");
     const [review, setReview] = useState({});
-    const [placeIdState, setPlaceIdState] = useState()
-    const [voteStipendUpState, setVoteStipendUpState] = useState(0);
-    const [voteStipendDownState, setVoteStipendDownState] = useState(0);
-    const [votePetMenuUpState, setVotePetMenuUpState] = useState(0);
-    const [votePetMenuDownState, setVotePetMenuDownState] = useState(0);
-    const [voteTimeOffUpState, setVoteTimeOffUpState] = useState(0);
-    const [voteTimeOffDownState, setVoteTimeOffDownState] = useState(0);
-    const [voteBringUpState, setVoteBringUpState] = useState(0);
-    const [voteBringDownState, setVoteBringDownState] = useState(0);
+    const [placeIdState, setPlaceIdState] = useState();
+    const [voteState, setVoteState] = useState({
+        stipendUp:0,
+        stipendDown:0,
+        menuUp:0,
+        menuDown:0,
+        timeOffUp:0,
+        timeOffDown:0,
+        bringUp:0,
+        bringDown:0
+    })
     const [commentTextState, setCommentTextState] = useState();
     const [allCommentsState, setAllCommentsState] = useState();
 
@@ -34,28 +36,24 @@ function Place() {
                 setReview(res.data);
                 // StipendUp
                 const voteStipendUpCount = res.data.Votes.filter(vote =>vote.hasStipendUp === true)
-                setVoteStipendUpState(voteStipendUpCount.length)
-                // StipendDown
                 const voteStipendDownCount = res.data.Votes.filter(vote => vote.hasStipendDown === true)
-                setVoteStipendDownState(voteStipendDownCount.length)
-                // PetMenuUp
                 const votePetMenuUpCount = res.data.Votes.filter(vote => vote.hasMenuUp === true)
-                setVotePetMenuUpState(votePetMenuUpCount.length)
-                // PetMenuDown
                 const votePetMenuDownCount = res.data.Votes.filter(vote => vote.hasMenuDown === true)
-                setVotePetMenuDownState(votePetMenuDownCount.length)
-                // TimeOffUp
                 const voteTimeOffUpCount = res.data.Votes.filter(vote => vote.petTimeOffUp === true)
-                setVoteTimeOffUpState(voteTimeOffUpCount.length)
-                // TimeOffDown
                 const voteTimeOffDownCount = res.data.Votes.filter(vote => vote.petTimeOffDown === true)
-                setVoteTimeOffDownState(voteTimeOffDownCount.length)
-                // CanBringUp
                 const voteBringUpCount = res.data.Votes.filter(vote => vote.canBringUp === true)
-                setVoteBringUpState(voteBringUpCount.length)
-                // CanBringDown
                 const voteBringDownCount = res.data.Votes.filter(vote => vote.canBringDown === true)
-                setVoteBringDownState(voteBringDownCount.length)
+                setVoteState({
+                    ...voteState,
+                    stipendUp:voteStipendUpCount.length,
+                    stipendDown:voteStipendDownCount.length,
+                    menuUp:votePetMenuUpCount.length,
+                    menuDown:votePetMenuDownCount.length,
+                    timeOffUp:voteTimeOffUpCount.length,
+                    timeOffDown:voteTimeOffDownCount.length,
+                    bringUp:voteBringUpCount.length,
+                    bringDown:voteBringDownCount.length
+                })
                 
                 console.log(res.data.id);
 
@@ -73,11 +71,20 @@ function Place() {
     const voteStipendUp = () => {
         API.vote({
             hasStipendUp: true,
+            hasStipendDown:false,
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
-            setVoteStipendUpState(voteNumber.length)
+            setVoteState({
+                ...voteState,
+                stipendUp:voteNumber.length
+            })
             console.log(voteNumber);
+            const newNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
+            setVoteState({
+                ...voteState,
+                stipendDown:newNumber.length
+            })
             console.log("Vote Successful!")
         })
     }
@@ -85,10 +92,14 @@ function Place() {
     const voteStipendDown = () => {
         API.vote({
             hasStipendDown: true,
+            hasStipendUp:false,
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
-            setVoteStipendDownState(voteNumber.length)
+            setVoteState({
+                ...voteState,
+                stipendDown:voteNumber.length
+            })            
             console.log("Vote Successful!")
         })
     }
@@ -99,9 +110,10 @@ function Place() {
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.canBringUp===true)
-            setVoteBringUpState(voteNumber.length)
-            console.log(voteNumber);
-            console.log("Vote Successful!")
+            setVoteState({
+                ...voteState,
+                bringUp:voteNumber.length
+            })
         })
     }
 
@@ -111,7 +123,10 @@ function Place() {
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.canBringDown===true)
-            setVoteBringDownState(voteNumber.length)
+            setVoteState({
+                ...voteState,
+                bringDown:voteNumber.length
+            })
             console.log("Vote Successful!")
         })
     }
@@ -122,7 +137,10 @@ function Place() {
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuUp===true)
-            setVotePetMenuUpState(voteNumber.length)
+            setVoteState({
+                ...voteState,
+                menuUp:voteNumber.length
+            })
             console.log("Vote Successful!")
         })
     }
@@ -133,7 +151,10 @@ function Place() {
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuDown===true)
-            setVotePetMenuDownState(voteNumber.length)
+            setVoteState({
+                ...voteState,
+                menuDown:voteNumber.length
+            })
             console.log("Vote Successful!")
         })
     }
@@ -144,7 +165,10 @@ function Place() {
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffUp===true)
-            setVoteTimeOffUpState(voteNumber.length)
+            setVoteState({
+                ...voteState,
+                timeOffUp:voteNumber.length
+            })
             console.log("Vote Successful!")
         })
     }
@@ -155,7 +179,10 @@ function Place() {
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffDown===true)
-            setVoteTimeOffDownState(voteNumber.length)            
+            setVoteState({
+                ...voteState,
+                timeOffDown:voteNumber.length
+            })           
             console.log("Vote Successful!")
         })
     }
@@ -199,44 +226,44 @@ function Place() {
                 <p className="uk-margin-large-right">Ok to Bring In:</p>
                 <div className="uk-margin-small-right">Yes</div>
                 <div style={{ "cursor": "pointer" }} onClick={voteBringUp}>👍</div>
-                <div className="uk-margin-large-right">{voteBringUpState}</div>
+                <div className="uk-margin-large-right">{voteState.bringUp}</div>
 
                 <div className="uk-margin-small-right">No</div>
                 <div style={{ "cursor": "pointer" }} onClick={voteBringDown}>👎</div>
-                <div>{voteBringDownState}</div>
+                <div>{voteState.bringDown}</div>
             </div>
 
             <div className="uk-flex">
                 <p className="uk-margin-large-right">Pet Menu:</p>
                 <div className="uk-margin-small-right">Yes</div>
                 <div style={{ "cursor": "pointer" }} onClick={voteMenuUp}>👍</div>
-                <div className="uk-margin-large-right">{votePetMenuUpState}</div>
+                <div className="uk-margin-large-right">{voteState.menuUp}</div>
 
                 <div className="uk-margin-small-right">No</div>
                 <div style={{ "cursor": "pointer" }} onClick={voteMenuDown}>👎</div>
-                <div>{votePetMenuDownState}</div>
+                <div>{voteState.menuDown}</div>
             </div>
 
             <div className="uk-flex">
                 <p className="uk-margin-large-right">Pet Stipend:</p>
                 <div className="uk-margin-small-right">Yes</div>
                 <div style={{ "cursor": "pointer" }} onClick={voteStipendUp}>👍</div>
-                <div className="uk-margin-large-right">{voteStipendUpState}</div>
+                <div className="uk-margin-large-right">{voteState.stipendUp}</div>
 
                 <div className="uk-margin-small-right">No</div>
                 <div style={{ "cursor": "pointer" }} onClick={voteStipendDown}>👎</div>
-                <div>{voteStipendDownState}</div>
+                <div>{voteState.stipendDown}</div>
             </div>
 
             <div className="uk-flex">
                 <p className="uk-margin-large-right">Pet Time Off:</p>
                 <div className="uk-margin-small-right">Yes</div>
                 <div style={{ "cursor": "pointer" }} onClick={voteTimeOffUp}>👍</div>
-                <div className="uk-margin-large-right">{voteTimeOffUpState}</div>
+                <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
 
                 <div className="uk-margin-small-right">No</div>
                 <div style={{ "cursor": "pointer" }} onClick={voteTimeOffDown}>👎</div>
-                <div>{voteTimeOffDownState}</div>
+                <div>{voteState.timeOffDown}</div>
             </div>
             <a className="uk-button uk-button-default" href="#">See on Google</a>
             <hr />
