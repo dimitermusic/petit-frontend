@@ -60,13 +60,13 @@ function Place() {
                 
                 console.log(res.data.id);
 
-                API.getAllComments(tkn, res.data.id)
-                    .then(data => {
-                        console.log(data);
-                        setAllCommentsState(data);
-                    }).catch(err => {
-                        console.log(err);
-                    })
+                // API.getAllComments(tkn, res.data.id)
+                //     .then(data => {
+                //         console.log(data);
+                //         setAllCommentsState(data);
+                //     }).catch(err => {
+                //         console.log(err);
+                //     })
             })
 
     }, [])
@@ -88,7 +88,7 @@ function Place() {
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
-            setVoteStipendUpState(voteNumber.length)
+            setVoteStipendDownState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
@@ -161,23 +161,23 @@ function Place() {
 
     const handleInputChange = (e) => setCommentTextState(e.target.value);
 
-    const postComment = () => {;
-        API.postComment({
-            placeId: placeIdState,
-            comment: commentTextState,
-        }, tkn).then(res => {
-            console.log(res);
-            console.log("Comment Successfully sent to db!")
-            API.getAllComments(tkn, placeIdState)
-                .then(data => {
-                    console.log(data);
-                    setAllCommentsState(data);
-                    console.log(allCommentsState);
-                }).catch(err => {
-                    console.log(err);
-                })
-        })
-    }
+    // const postComment = () => {;
+    //     API.postComment({
+    //         placeId: placeIdState,
+    //         comment: commentTextState,
+    //     }, tkn).then(res => {
+    //         console.log(res);
+    //         console.log("Comment Successfully sent to db!")
+    //         API.getAllComments(tkn, placeIdState)
+    //             .then(data => {
+    //                 console.log(data);
+    //                 setAllCommentsState(data);
+    //                 console.log(allCommentsState);
+    //             }).catch(err => {
+    //                 console.log(err);
+    //             })
+    //     })
+    // }
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
@@ -252,7 +252,7 @@ function Place() {
                 </textarea>
                 <a
                     className="uk-button uk-button-default"
-                    onClick={postComment}
+                    // onClick={postComment}
                 >Comment</a>
             </form>
             <hr />
