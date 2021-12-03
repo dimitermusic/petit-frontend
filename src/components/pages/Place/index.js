@@ -12,10 +12,10 @@ function Place() {
     const [review, setReview] = useState({});
     const [placeIdState, setPlaceIdState] = useState()
     const [voteStipendUpState, setVoteStipendUpState] = useState(0);
-    const [votePetMenuUpState, setVotePetMenuUpState] = useState(0);
-    const [voteTimeOffUpState, setVoteTimeOffUpState] = useState(0);
     const [voteStipendDownState, setVoteStipendDownState] = useState(0);
+    const [votePetMenuUpState, setVotePetMenuUpState] = useState(0);
     const [votePetMenuDownState, setVotePetMenuDownState] = useState(0);
+    const [voteTimeOffUpState, setVoteTimeOffUpState] = useState(0);
     const [voteTimeOffDownState, setVoteTimeOffDownState] = useState(0);
     const [voteBringUpState, setVoteBringUpState] = useState(0);
     const [voteBringDownState, setVoteBringDownState] = useState(0);
@@ -45,10 +45,10 @@ function Place() {
                 const votePetMenuDownCount = res.data.Votes.filter(vote => vote.hasMenuDown === true)
                 setVotePetMenuDownState(votePetMenuDownCount.length)
                 // TimeOffUp
-                const voteTimeOffUpCount = res.data.Votes.filter(vote => vote.PetTimeOffUp === true)
+                const voteTimeOffUpCount = res.data.Votes.filter(vote => vote.petTimeOffUp === true)
                 setVoteTimeOffUpState(voteTimeOffUpCount.length)
                 // TimeOffDown
-                const voteTimeOffDownCount = res.data.Votes.filter(vote => vote.PetTimeOffDown === true)
+                const voteTimeOffDownCount = res.data.Votes.filter(vote => vote.petTimeOffDown === true)
                 setVoteTimeOffDownState(voteTimeOffDownCount.length)
                 // CanBringUp
                 const voteBringUpCount = res.data.Votes.filter(vote => vote.canBringUp === true)
@@ -88,8 +88,7 @@ function Place() {
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
-            setVoteStipendUpState(voteNumber.length)
-            console.log(voteNumber);
+            setVoteStipendDownState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
@@ -254,7 +253,7 @@ function Place() {
                 </textarea>
                 <a
                     className="uk-button uk-button-default"
-                    onClick={postComment}
+                    // onClick={postComment}
                 >Comment</a>
             </form>
             <hr />
