@@ -35,7 +35,8 @@ function Discover() {
                             key={place.ref_id} 
                             id={place.ref_id}>
                                 {place.name} at {place.location} {place.isJob==='establishment'?<span className="uk-icon-button">E</span>:<span className="uk-icon-button">J</span>}
-                                <button id={place.ref_id} onClick={()=>navigate(`/discover/${place.ref_id}`)}>Leave a review</button>
+                                <button id={place.ref_id} onClick={()=>
+                                    localStorage.token?navigate(`/discover/${place.ref_id}`):alert("Please Log In or Create an Account First!")}>View Place</button>
                         </li>
                     )
                 })}
