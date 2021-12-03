@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from "./style.css";
 import API from "../../../utils/api";
+import avatar from "../../../images/avatar.jpg"
 
 function Place() {
     const { ref_id } = useParams();
@@ -22,7 +23,7 @@ function Place() {
         bringDown:0
     })
     const [commentTextState, setCommentTextState] = useState();
-    const [allCommentsState, setAllCommentsState] = useState();
+    const [allCommentsState, setAllCommentsState] = useState([]);
 
     useEffect(() => {
         const myResult = googleResults.filter(result => result.reference === ref_id);
@@ -59,8 +60,8 @@ function Place() {
 
                 API.getAllComments(tkn, res.data.id)
                     .then(data => {
-                        console.log(data);
-                        setAllCommentsState(data);
+                        console.log(data.data);
+                        setAllCommentsState(data.data);
                     }).catch(err => {
                         console.log(err);
                     })
@@ -189,7 +190,8 @@ function Place() {
 
     const handleInputChange = (e) => setCommentTextState(e.target.value);
 
-    const postComment = () => {;
+    const postComment = (e) => {
+        e.preventDefault()
         API.postComment({
             placeId: placeIdState,
             comment: commentTextState,
@@ -278,39 +280,39 @@ function Place() {
                 >
 
                 </textarea>
-                <a
+                <button
                     className="uk-button uk-button-default"
-                    // onClick={postComment}
-                >Comment</a>
+                    onClick={postComment}
+                >Comment</button>
             </form>
             <hr />
             <div>
-                {/* <ul className="uk-list uk-list-large uk-list-divider">
-                    {setTimeout(allCommentsState.map(comment => {
-                        return (
-                            <li>
-                                <article class="uk-comment">
-                                    <header class="uk-comment-header">
-                                        <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                                            <div class="uk-width-auto">
-                                                <img class="uk-comment-avatar" src={comment.data.User.profilePic} width="80" height="80" alt="" />
-                                            </div>
-                                            <div class="uk-width-expand">
-                                                <h4 class="uk-comment-title uk-margin-remove">{comment.data.User.username}</h4>
-                                                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                                    <li>{comment.data.createdAt}</li>
-                                                </ul>
-                                            </div>
+                <ul className="uk-list uk-list-large uk-list-divider">
+                    {allCommentsState.map(comment => (
+                        <li>
+                            <article class="uk-comment">
+                                <header class="uk-comment-header">
+                                    <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                                        <div class="uk-width-auto">
+                                            {comment.User.profilePic ?
+                                            (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="" />) :
+                                            (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="" />)}
                                         </div>
-                                    </header>
-                                    <div class="uk-comment-body">
-                                        <p>{comment.data.comment}</p>
+                                        <div class="uk-width-expand">
+                                            <h4 class="uk-comment-title uk-margin-remove">{comment.User.username}</h4>
+                                            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                                <li>{comment.createdAt}</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </article>
-                            </li>
-                        )
-                    })), 5000}
-                </ul> */}
+                                </header>
+                                <div class="uk-comment-body">
+                                    <p>{comment.comment}</p>
+                                </div>
+                            </article>
+                        </li>
+                    ))}
+                </ul>
             </div>
             <br />
             <br />
