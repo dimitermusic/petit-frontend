@@ -35,7 +35,6 @@ function Place() {
             .then(res => {
                 setPlaceIdState(res.data.id)
                 setReview(res.data);
-                // StipendUp
                 const voteStipendUpCount = res.data.Votes.filter(vote =>vote.hasStipendUp === true)
                 const voteStipendDownCount = res.data.Votes.filter(vote => vote.hasStipendDown === true)
                 const votePetMenuUpCount = res.data.Votes.filter(vote => vote.hasMenuUp === true)
@@ -55,9 +54,6 @@ function Place() {
                     bringUp:voteBringUpCount.length,
                     bringDown:voteBringDownCount.length
                 })
-                
-                console.log(res.data.id);
-
                 API.getAllComments(tkn, res.data.id)
                     .then(data => {
                         console.log(data.data);
@@ -74,16 +70,13 @@ function Place() {
             hasStipendUp: true,
             hasStipendDown:false,
             placeId: placeIdState
-        }, tkn).then(res => {
+        }, tkn)
+        .then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
-            setVoteState({
-                ...voteState,
-                stipendUp:voteNumber.length
-            })
-            console.log(voteNumber);
             const newNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
             setVoteState({
                 ...voteState,
+                stipendUp:voteNumber.length,
                 stipendDown:newNumber.length
             })
             console.log("Vote Successful!")
@@ -97,9 +90,11 @@ function Place() {
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
+            const newNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
             setVoteState({
                 ...voteState,
-                stipendDown:voteNumber.length
+                stipendDown:voteNumber.length,
+                stipendUp:newNumber.length
             })            
             console.log("Vote Successful!")
         })
@@ -108,11 +103,14 @@ function Place() {
     const voteBringUp = () => {
         API.vote({
             canBringUp: true,
+            canBringDown:false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote=>vote.canBringUp===true)
+            const voteNumber = res.data.Votes.filter(vote=>vote.canBringUp===true);
+            const another = res.data.Votes.filter(vote=>vote.canBringDown===true)
             setVoteState({
                 ...voteState,
+                bringDown:another.length,
                 bringUp:voteNumber.length
             })
         })
@@ -121,11 +119,14 @@ function Place() {
     const voteBringDown = () => {
         API.vote({
             canBringDown: true,
+            canBringUp:false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote=>vote.canBringDown===true)
+            const voteNumber = res.data.Votes.filter(vote=>vote.canBringDown===true);
+            const another = res.data.Votes.filter(vote=>vote.canBringUp===true);
             setVoteState({
                 ...voteState,
+                bringUp:another.length,
                 bringDown:voteNumber.length
             })
             console.log("Vote Successful!")
@@ -135,12 +136,15 @@ function Place() {
     const voteMenuUp = () => {
         API.vote({
             hasMenuUp: true,
+            hasMenuDown:false,
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuUp===true)
+            const another = res.data.Votes.filter(vote=>vote.hasMenuDown===true);
             setVoteState({
                 ...voteState,
-                menuUp:voteNumber.length
+                menuUp:voteNumber.length,
+                menuDown:another.length
             })
             console.log("Vote Successful!")
         })
@@ -149,11 +153,14 @@ function Place() {
     const voteMenuDown = () => {
         API.vote({
             hasMenuDown: true,
+            hasMenuUp:false,
             placeId: placeIdState
         }, tkn).then(res => {
+            const another = res.data.Votes.filter(vote=>vote.canMenuUp===true);
             const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuDown===true)
             setVoteState({
                 ...voteState,
+                menuUp:another.length,
                 menuDown:voteNumber.length
             })
             console.log("Vote Successful!")
@@ -163,11 +170,14 @@ function Place() {
     const voteTimeOffUp = () => {
         API.vote({
             petTimeOffUp: true,
+            petTimeOffDown:false,
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffUp===true)
+            const another = res.data.Votes.filter(vote=>vote.petTimeOffDown===true);
             setVoteState({
                 ...voteState,
+                timeOffDown:another.length,
                 timeOffUp:voteNumber.length
             })
             console.log("Vote Successful!")
@@ -177,11 +187,14 @@ function Place() {
     const voteTimeOffDown = () => {
         API.vote({
             petTimeOffDown: true,
+            petTimeOffUp:false,
             placeId: placeIdState
         }, tkn).then(res => {
+            const another = res.data.Votes.filter(vote=>vote.petTimeOffUp===true);
             const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffDown===true)
             setVoteState({
                 ...voteState,
+                timeOffUp:another.length,
                 timeOffDown:voteNumber.length
             })           
             console.log("Vote Successful!")
