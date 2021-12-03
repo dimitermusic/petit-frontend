@@ -55,8 +55,7 @@ function App() {
 
   return (
     <>
-        <NavBar
-          id={userState.id} />
+        <NavBar />
 
         <SearchBar />
         <Routes>

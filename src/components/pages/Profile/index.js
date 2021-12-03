@@ -16,6 +16,7 @@ function Profile(props) {
   
   const handleProPicSubmit = taco => {
       console.log("event is triggered")
+      console.log(props.token)
       API.userSettings({
           profilePic: taco.info.secure_url
       }, props.token)
