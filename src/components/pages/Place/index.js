@@ -3,10 +3,8 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from "./style.css";
 import API from "../../../utils/api";
-import pandagirl from "../../../images/panda.jpg"
 
 function Place() {
-
     const { ref_id } = useParams();
     const searchForm = useSelector(state => state.searchForm);
     const googleResults = useSelector(state => state.googleResults);
@@ -14,10 +12,10 @@ function Place() {
     const [review, setReview] = useState({});
     const [placeIdState, setPlaceIdState] = useState()
     const [voteStipendUpState, setVoteStipendUpState] = useState(0);
-    const [votePetMenuUpState, setVotePetMenuUpState] = useState(0);
-    const [voteTimeOffUpState, setVoteTimeOffUpState] = useState(0);
     const [voteStipendDownState, setVoteStipendDownState] = useState(0);
+    const [votePetMenuUpState, setVotePetMenuUpState] = useState(0);
     const [votePetMenuDownState, setVotePetMenuDownState] = useState(0);
+    const [voteTimeOffUpState, setVoteTimeOffUpState] = useState(0);
     const [voteTimeOffDownState, setVoteTimeOffDownState] = useState(0);
     const [voteBringUpState, setVoteBringUpState] = useState(0);
     const [voteBringDownState, setVoteBringDownState] = useState(0);
@@ -26,7 +24,6 @@ function Place() {
 
     useEffect(() => {
         const myResult = googleResults.filter(result => result.reference === ref_id);
-
         API.getOnePlace({
             name: myResult[0].name,
             isJob: searchForm.type,
@@ -36,8 +33,7 @@ function Place() {
                 setPlaceIdState(res.data.id)
                 setReview(res.data);
                 // StipendUp
-                const voteStipendUpCount = res.data.Votes.filter(vote =>
-                    vote.hasStipendUp === true)
+                const voteStipendUpCount = res.data.Votes.filter(vote =>vote.hasStipendUp === true)
                 setVoteStipendUpState(voteStipendUpCount.length)
                 // StipendDown
                 const voteStipendDownCount = res.data.Votes.filter(vote => vote.hasStipendDown === true)
@@ -49,10 +45,10 @@ function Place() {
                 const votePetMenuDownCount = res.data.Votes.filter(vote => vote.hasMenuDown === true)
                 setVotePetMenuDownState(votePetMenuDownCount.length)
                 // TimeOffUp
-                const voteTimeOffUpCount = res.data.Votes.filter(vote => vote.PetTimeOffUp === true)
+                const voteTimeOffUpCount = res.data.Votes.filter(vote => vote.petTimeOffUp === true)
                 setVoteTimeOffUpState(voteTimeOffUpCount.length)
                 // TimeOffDown
-                const voteTimeOffDownCount = res.data.Votes.filter(vote => vote.PetTimeOffDown === true)
+                const voteTimeOffDownCount = res.data.Votes.filter(vote => vote.petTimeOffDown === true)
                 setVoteTimeOffDownState(voteTimeOffDownCount.length)
                 // CanBringUp
                 const voteBringUpCount = res.data.Votes.filter(vote => vote.canBringUp === true)
@@ -60,110 +56,127 @@ function Place() {
                 // CanBringDown
                 const voteBringDownCount = res.data.Votes.filter(vote => vote.canBringDown === true)
                 setVoteBringDownState(voteBringDownCount.length)
+                
+                console.log(res.data.id);
+
+                API.getAllComments(tkn, res.data.id)
+                    .then(data => {
+                        console.log(data);
+                        setAllCommentsState(data);
+                    }).catch(err => {
+                        console.log(err);
+                    })
             })
+
     }, [])
 
     const voteStipendUp = () => {
-        console.log(placeIdState)
         API.vote({
             hasStipendUp: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
+            setVoteStipendUpState(voteNumber.length)
+            console.log(voteNumber);
             console.log("Vote Successful!")
         })
     }
 
     const voteStipendDown = () => {
-        console.log(placeIdState)
         API.vote({
             hasStipendDown: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
+            setVoteStipendDownState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteBringUp = () => {
-        console.log(placeIdState)
         API.vote({
             canBringUp: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.canBringUp===true)
+            setVoteBringUpState(voteNumber.length)
+            console.log(voteNumber);
             console.log("Vote Successful!")
         })
     }
 
     const voteBringDown = () => {
-        console.log(placeIdState)
         API.vote({
             canBringDown: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.canBringDown===true)
+            setVoteBringDownState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteMenuUp = () => {
-        console.log(placeIdState)
         API.vote({
             hasMenuUp: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuUp===true)
+            setVotePetMenuUpState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteMenuDown = () => {
-        console.log(placeIdState)
         API.vote({
             hasMenuDown: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuDown===true)
+            setVotePetMenuDownState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteTimeOffUp = () => {
-        console.log(placeIdState)
         API.vote({
             petTimeOffUp: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffUp===true)
+            setVoteTimeOffUpState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteTimeOffDown = () => {
-        console.log(placeIdState)
         API.vote({
             petTimeOffDown: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffDown===true)
+            setVoteTimeOffDownState(voteNumber.length)            
             console.log("Vote Successful!")
         })
     }
 
     const handleInputChange = (e) => setCommentTextState(e.target.value);
-    
-    const postComment = () => {
-        console.log(placeIdState);
+
+    const postComment = () => {;
         API.postComment({
             placeId: placeIdState,
             comment: commentTextState,
         }, tkn).then(res => {
             console.log(res);
             console.log("Comment Successfully sent to db!")
-        })
-    }
-    
-    const getComments = () => {
-        API.getAllComments({
-            placeId: placeIdState
-        }, tkn).then(res => {
-            console.log(res.data);
-            setAllCommentsState(res.data);
-        }).catch(err => {
-            console.log(err);
+            API.getAllComments(tkn, placeIdState)
+                .then(data => {
+                    console.log(data);
+                    setAllCommentsState(data);
+                    console.log(allCommentsState);
+                }).catch(err => {
+                    console.log(err);
+                })
         })
     }
 
@@ -240,34 +253,42 @@ function Place() {
                 </textarea>
                 <a
                     className="uk-button uk-button-default"
-                    onClick={postComment}
+                    // onClick={postComment}
                 >Comment</a>
             </form>
-            <hr/>
+            <hr />
             <div>
-                <article class="uk-comment">
-                    <header class="uk-comment-header">
-                        <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                            <div class="uk-width-auto">
-                                <img class="uk-comment-avatar" src={pandagirl} width="80" height="80" alt=""/>
-                            </div>
-                            <div class="uk-width-expand">
-                                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">@username</a></h4>
-                                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                    <li><a href="#">createdAt</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </header>
-                    <div class="uk-comment-body">
-                        <p>comment text</p>
-                    </div>
-                </article>
+                {/* <ul className="uk-list uk-list-large uk-list-divider">
+                    {setTimeout(allCommentsState.map(comment => {
+                        return (
+                            <li>
+                                <article class="uk-comment">
+                                    <header class="uk-comment-header">
+                                        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                                            <div class="uk-width-auto">
+                                                <img class="uk-comment-avatar" src={comment.data.User.profilePic} width="80" height="80" alt="" />
+                                            </div>
+                                            <div class="uk-width-expand">
+                                                <h4 class="uk-comment-title uk-margin-remove">{comment.data.User.username}</h4>
+                                                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                                    <li>{comment.data.createdAt}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <div class="uk-comment-body">
+                                        <p>{comment.data.comment}</p>
+                                    </div>
+                                </article>
+                            </li>
+                        )
+                    })), 5000}
+                </ul> */}
             </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
     )
 }
