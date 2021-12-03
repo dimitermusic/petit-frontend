@@ -21,7 +21,6 @@ function Place() {
     const [voteBringUpState, setVoteBringUpState] = useState(0);
     const [voteBringDownState, setVoteBringDownState] = useState(0);
     const [commentTextState, setCommentTextState] = useState();
-    const [allCommentsState, setAllCommentsState] = useState();
 
     useEffect(() => {
         const myResult = googleResults.filter(result => result.reference === ref_id);
@@ -63,89 +62,96 @@ function Place() {
     }, [])
 
     const voteStipendUp = () => {
-        console.log(placeIdState)
         API.vote({
             hasStipendUp: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
+            setVoteStipendUpState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteStipendDown = () => {
-        console.log(placeIdState)
         API.vote({
             hasStipendDown: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
+            setVoteStipendUpState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteBringUp = () => {
-        console.log(placeIdState)
         API.vote({
             canBringUp: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.canBringUp===true)
+            setVoteBringUpState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteBringDown = () => {
-        console.log(placeIdState)
         API.vote({
             canBringDown: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.canBringDown===true)
+            setVoteBringDownState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteMenuUp = () => {
-        console.log(placeIdState)
         API.vote({
             hasMenuUp: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuUp===true)
+            setVotePetMenuUpState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteMenuDown = () => {
-        console.log(placeIdState)
         API.vote({
             hasMenuDown: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuDown===true)
+            setVotePetMenuDownState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteTimeOffUp = () => {
-        console.log(placeIdState)
         API.vote({
             petTimeOffUp: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffUp===true)
+            setVoteTimeOffUpState(voteNumber.length)
             console.log("Vote Successful!")
         })
     }
 
     const voteTimeOffDown = () => {
-        console.log(placeIdState)
         API.vote({
             petTimeOffDown: true,
             placeId: placeIdState
         }, tkn).then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffDown===true)
+            setVoteTimeOffDownState(voteNumber.length)            
             console.log("Vote Successful!")
         })
     }
 
     const handleInputChange = (e) => setCommentTextState(e.target.value);
 
-    const postComment = () => {
-        console.log(placeIdState);
+    const postComment = () => {;
         API.postComment({
             placeId: placeIdState,
             comment: commentTextState,
