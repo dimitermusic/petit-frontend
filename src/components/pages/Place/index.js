@@ -5,7 +5,6 @@ import style from "./style.css";
 import API from "../../../utils/api";
 
 function Place() {
-
     const { ref_id } = useParams();
     const searchForm = useSelector(state => state.searchForm);
     const googleResults = useSelector(state => state.googleResults);
@@ -33,30 +32,29 @@ function Place() {
             setPlaceIdState(res.data.id)
             setReview(res.data);
             // StipendUp
-                const voteStipendUpCount = res.data.Votes.filter(vote=>
-                    vote.hasStipendUp===true)
-                    setVoteStipendUpState(voteStipendUpCount.length)
+            const voteStipendUpCount = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
+            setVoteStipendUpState(voteStipendUpCount.length)
             // StipendDown
-                const voteStipendDownCount = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
-                    setVoteStipendDownState(voteStipendDownCount.length)
+            const voteStipendDownCount = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
+            setVoteStipendDownState(voteStipendDownCount.length)
             // PetMenuUp
-                const votePetMenuUpCount = res.data.Votes.filter(vote=>vote.hasMenuUp===true)
-                    setVotePetMenuUpState(votePetMenuUpCount.length)
+            const votePetMenuUpCount = res.data.Votes.filter(vote=>vote.hasMenuUp===true)
+            setVotePetMenuUpState(votePetMenuUpCount.length)
             // PetMenuDown
-                const votePetMenuDownCount = res.data.Votes.filter(vote=>vote.hasMenuDown===true)
-                    setVotePetMenuDownState(votePetMenuDownCount.length)
+            const votePetMenuDownCount = res.data.Votes.filter(vote=>vote.hasMenuDown===true)
+            setVotePetMenuDownState(votePetMenuDownCount.length)
             // TimeOffUp
-                const voteTimeOffUpCount = res.data.Votes.filter(vote=>vote.PetTimeOffUp===true)
-                    setVoteTimeOffUpState(voteTimeOffUpCount.length)
+            const voteTimeOffUpCount = res.data.Votes.filter(vote=>vote.PetTimeOffUp===true)
+            setVoteTimeOffUpState(voteTimeOffUpCount.length)
             // TimeOffDown
             const voteTimeOffDownCount = res.data.Votes.filter(vote=>vote.PetTimeOffDown===true)
-                setVoteTimeOffDownState(voteTimeOffDownCount.length)
+            setVoteTimeOffDownState(voteTimeOffDownCount.length)
             // CanBringUp
             const voteBringUpCount = res.data.Votes.filter(vote=>vote.canBringUp===true)
-                setVoteBringUpState(voteBringUpCount.length)
+            setVoteBringUpState(voteBringUpCount.length)
             // CanBringDown
             const voteBringDownCount = res.data.Votes.filter(vote=>vote.canBringDown===true)
-                setVoteBringDownState(voteBringDownCount.length)
+            setVoteBringDownState(voteBringDownCount.length)
         })
     },[])
 
@@ -66,7 +64,7 @@ function Place() {
             hasStipendUp: true,
             placeId:placeIdState
         }, tkn).then(res=>{
-            console.log(res);
+            console.log(res.data);
             console.log("Vote Successful!")
         })
     }
