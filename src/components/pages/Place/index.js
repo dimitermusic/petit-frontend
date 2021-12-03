@@ -75,14 +75,10 @@ function Place() {
             placeId: placeIdState
         }, tkn).then(res => {
             const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
-            setVoteState({
-                ...voteState,
-                stipendUp:voteNumber.length
-            })
-            console.log(voteNumber);
             const newNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
             setVoteState({
                 ...voteState,
+                stipendUp:voteNumber.length,
                 stipendDown:newNumber.length
             })
             console.log("Vote Successful!")
