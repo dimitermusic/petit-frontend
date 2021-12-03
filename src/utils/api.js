@@ -35,7 +35,6 @@ const API = {
             }
         })
     },
-
     getAllComments: (commentData, tkn) => {
         return axios.post(`${URL_PREFIX}/api/comments/`, commentData, {
             headers: {
@@ -43,7 +42,6 @@ const API = {
             }
         })
     },
-
     postComment: (commentData, tkn,) => {
         return axios.post(`${URL_PREFIX}/api/comments/`, commentData, {
             headers: {
