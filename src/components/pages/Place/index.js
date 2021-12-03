@@ -66,6 +66,7 @@ function Place() {
             hasStipendUp: true,
             placeId:placeIdState
         }, tkn).then(res=>{
+            console.log(res);
             console.log("Vote Successful!")
         })
     }
