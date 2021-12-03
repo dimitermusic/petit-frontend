@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from "./style.css";
 import API from "../../../utils/api";
-import pandagirl from "../../../images/panda.jpg"
 
 function Place() {
     const { ref_id } = useParams();
@@ -58,7 +57,18 @@ function Place() {
                 // CanBringDown
                 const voteBringDownCount = res.data.Votes.filter(vote => vote.canBringDown === true)
                 setVoteBringDownState(voteBringDownCount.length)
+                
+                console.log(res.data.id);
+
+                API.getAllComments(tkn, res.data.id)
+                    .then(data => {
+                        console.log(data);
+                        setAllCommentsState(data);
+                    }).catch(err => {
+                        console.log(err);
+                    })
             })
+
     }, [])
 
     const voteStipendUp = () => {
@@ -159,8 +169,10 @@ function Place() {
             console.log(res);
             console.log("Comment Successfully sent to db!")
             API.getAllComments(tkn, placeIdState)
-                .then(allComments => {
-                    console.log(allComments);
+                .then(data => {
+                    console.log(data);
+                    setAllCommentsState(data);
+                    console.log(allCommentsState);
                 }).catch(err => {
                     console.log(err);
                 })
@@ -245,24 +257,32 @@ function Place() {
             </form>
             <hr />
             <div>
-                <article class="uk-comment">
-                    <header class="uk-comment-header">
-                        <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                            <div class="uk-width-auto">
-                                <img class="uk-comment-avatar" src={pandagirl} width="80" height="80" alt="" />
-                            </div>
-                            <div class="uk-width-expand">
-                                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">@username</a></h4>
-                                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                    <li><a href="#">createdAt</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </header>
-                    <div class="uk-comment-body">
-                        <p>comment text</p>
-                    </div>
-                </article>
+                {/* <ul className="uk-list uk-list-large uk-list-divider">
+                    {setTimeout(allCommentsState.map(comment => {
+                        return (
+                            <li>
+                                <article class="uk-comment">
+                                    <header class="uk-comment-header">
+                                        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                                            <div class="uk-width-auto">
+                                                <img class="uk-comment-avatar" src={comment.data.User.profilePic} width="80" height="80" alt="" />
+                                            </div>
+                                            <div class="uk-width-expand">
+                                                <h4 class="uk-comment-title uk-margin-remove">{comment.data.User.username}</h4>
+                                                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                                    <li>{comment.data.createdAt}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <div class="uk-comment-body">
+                                        <p>{comment.data.comment}</p>
+                                    </div>
+                                </article>
+                            </li>
+                        )
+                    })), 5000}
+                </ul> */}
             </div>
             <br />
             <br />
