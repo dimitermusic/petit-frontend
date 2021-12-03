@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from "./style.css";
 import API from "../../../utils/api";
+import pandagirl from "../../../images/panda.jpg"
 
 function Place() {
 
@@ -143,8 +144,9 @@ function Place() {
     }
 
     const handleInputChange = (e) => setCommentTextState(e.target.value);
-
+    
     const postComment = () => {
+        console.log(placeIdState);
         API.postComment({
             placeId: placeIdState,
             comment: commentTextState,
@@ -153,7 +155,7 @@ function Place() {
             console.log("Comment Successfully sent to db!")
         })
     }
-
+    
     const getComments = () => {
         API.getAllComments({
             placeId: placeIdState
@@ -241,12 +243,31 @@ function Place() {
                     onClick={postComment}
                 >Comment</a>
             </form>
+            <hr/>
             <div>
-                <p>
-                    Comment cards will go here
-                </p>
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                            <div class="uk-width-auto">
+                                <img class="uk-comment-avatar" src={pandagirl} width="80" height="80" alt=""/>
+                            </div>
+                            <div class="uk-width-expand">
+                                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">@username</a></h4>
+                                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                    <li><a href="#">createdAt</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <p>comment text</p>
+                    </div>
+                </article>
             </div>
-            
+            <br/>
+            <br/>
+            <br/>
+            <br/>
         </div>
     )
 }
