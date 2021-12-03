@@ -31,8 +31,6 @@ function Place() {
         },tkn,ref_id)
         .then(res=>{
             setPlaceIdState(res.data.id)
-            console.log(res.data);
-            console.log(res.data.id);
             setReview(res.data);
             // StipendUp
                 const voteStipendUpCount = res.data.Votes.filter(vote=>
@@ -64,7 +62,6 @@ function Place() {
 
     const voteStipendUp = ()=>{
         console.log(placeIdState)
-        console.log("Vote Request Received!")
         API.vote({
             hasStipendUp: true,
             placeId:placeIdState
@@ -75,7 +72,6 @@ function Place() {
 
     const voteStipendDown = ()=>{
         console.log(placeIdState)
-        console.log("Vote Request Received!")
         API.vote({
             hasStipendDown: true,
             placeId:placeIdState
@@ -86,7 +82,6 @@ function Place() {
 
     const voteBringUp = ()=>{
         console.log(placeIdState)
-        console.log("Vote Request Received!")
         API.vote({
             canBringUp: true,
             placeId:placeIdState
@@ -97,7 +92,6 @@ function Place() {
 
     const voteBringDown = ()=>{
         console.log(placeIdState)
-        console.log("Vote Request Received!")
         API.vote({
             canBringDown: true,
             placeId:placeIdState
@@ -108,7 +102,6 @@ function Place() {
 
     const voteMenuUp = ()=>{
         console.log(placeIdState)
-        console.log("Vote Request Received!")
         API.vote({
             hasMenuUp: true,
             placeId:placeIdState
@@ -119,7 +112,6 @@ function Place() {
 
     const voteMenuDown = ()=>{
         console.log(placeIdState)
-        console.log("Vote Request Received!")
         API.vote({
             hasMenuDown: true,
             placeId:placeIdState
@@ -130,7 +122,6 @@ function Place() {
 
     const voteTimeOffUp = ()=>{
         console.log(placeIdState)
-        console.log("Vote Request Received!")
         API.vote({
             petTimeOffUp: true,
             placeId:placeIdState
@@ -141,7 +132,6 @@ function Place() {
 
     const voteTimeOffDown = ()=>{
         console.log(placeIdState)
-        console.log("Vote Request Received!")
         API.vote({
             petTimeOffDown: true,
             placeId:placeIdState
