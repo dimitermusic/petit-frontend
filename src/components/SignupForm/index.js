@@ -54,10 +54,7 @@ function SignupForm(props) {
         })
           .then(res => {
             console.log(res.data)
-            props.setUserState({
-              username: res.data.user.username,
-              id: res.data.user.id
-            })
+            props.setUserState(res.data.user)
             props.setToken(res.data.token)
             localStorage.setItem("token", res.data.token)
           }).catch(err => {
