@@ -6,20 +6,42 @@ import { Routes, Route, Link, Navigate } from "react-router-dom";
 import './style.css';
 import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget';
 import generateSignature from '../../../utils/generateSignature'
+import { functionTypeParam } from "@babel/types";
 
 
 function Profile(props) {
 
-  const [imageURL, setImageURL] = useState("")
+  const [profilePicState, setProfilePicState] = useState("")
+  
+  
+  const handleProPicSubmit = taco => {
+      console.log("event is triggered")
+      console.log(props.token)
+      API.userSettings({
+          profilePic: taco.info.secure_url
+      }, props.token)
+      .then(res => {
+          console.log("response receieved")
+          console.log(res)
+          API.getProfile(props.token)
+        .then(res=> {
+            console.log(res)
+            props.setUserState(res.data)
+        })
+      }).catch(err => {
+        console.log("whoops")
+      })
+  }
 
-  if (!props.username) {
+  if (!props.user.username) {
     <Navigate to="/logout" />
   };
 
+
   function onSuccess(taco) {
     console.log("Success!", taco)
-    console.log(taco.info.url)
-    setImageURL(taco.info.url)
+    console.log(taco.info.secure_url)
+    // setProfilePicState(taco.info.secure_url)
 
   }
   const myWidget = (
@@ -85,7 +107,8 @@ function Profile(props) {
         },
         (error, result) => {
           if (!error && result && result.event === 'success') {
-            logging && console.log('Done! Here is the image info: ', result.info)
+            logging && console.log('Done! Here is the image info: ', result.info);
+    
             logging && console.log(result)
             !!onSuccess && onSuccess(result)
             console.log(result)
@@ -95,23 +118,27 @@ function Profile(props) {
               : logging && console.log({ error: error, result: result })
           } else if (!!resourceType && result.info === 'shown') {
             console.log('setting resourceType')
+
             // document.querySelector(
-            //   '.cloudinary_fileupload'
-            // ).accept = `${resourceType}/*`
+            // '.cloudinary_fileupload'
+            // ).accept = `${resourceType}`
+
           } else {
             logging && console.log(result)
           }
         }
       )
+      
     widget.open()
-  }
+
+    }
 
   return (
     <div>
-      <h3 className="uk-text-bold uk-flex uk-flex-center welcome">Welcome @{props.username}!</h3>
+      <h3 className="uk-text-bold uk-flex uk-flex-center welcome">Welcome @{props.user.username}!</h3>
       {/* Recieves badge if user submits more than 10 reviews */}
       <span className="uk-badge uk-flex uk-flex-center badge">PetIt Puppy</span>
-      <img src={imageURL} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
+      <img src={props.user.profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
       <p uk-margin="true">
         <div className="uk-flex uk-flex-center">
           <WidgetLoader />
@@ -133,11 +160,11 @@ function Profile(props) {
             }}
             folder={'petit-profile'}
             cropping={true}
-            onSuccess={onSuccess}
+            onSuccess={handleProPicSubmit}
             onFailure={null}
             logging={false}
             customPublicId={null}
-            eager={null}
+            eager={false}
             accepts={null}
             contentType={null}
             withCredentials={null}
@@ -149,7 +176,9 @@ function Profile(props) {
           />
         </div>
       </p>
-      <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes:{props.votes}</p>
+     
+     {/* <button id="upload_widget" type="submit"onClick={handleProPicSubmit}>Submit</button> */}
+      <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes: {props.user.votes}</p>
     </div>
   )
 }
