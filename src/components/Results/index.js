@@ -34,16 +34,16 @@ function Results() {
                 <h1 className="uk-heading-divider uk-text-center">Search Results</h1>
                 <ul className="uk-list uk-list-large uk-list-divider uk-list-striped" id='search-results'>
                     {googleResults.map(place => {
-                        const newLocation = place.formatted_address.split(",").slice(0,-2).join(",");
+                        const newLocation = place.formatted_address.split(",").slice(0, -2).join(",");
                         return (
                             <li
                                 key={place.reference}
-                                id={place.reference}>
+                                id={place.reference}
+                                onClick={() => localStorage.token ? navigate(`/place/${place.reference}`) : alert("Please Login or Create an Account First!")}>
                                 {place.name} at {newLocation}
                                 <span className="uk-margin-small-left uk-margin-small-right">
-                                    {searchForm.type==="establishment"?<span className="uk-icon-button">E</span>:<span className="uk-icon-button">J</span>}
+                                    {searchForm.type === "establishment" ? <span className="uk-icon-button">EST</span> : <span className="uk-icon-button">JOB</span>}
                                 </span>
-                                <button id={place.reference} onClick={() => localStorage.token ? navigate(`/place/${place.reference}`) : alert("Please Login or Create an Account First!")}>View Place</button>
                             </li>
                         )
                     })}
