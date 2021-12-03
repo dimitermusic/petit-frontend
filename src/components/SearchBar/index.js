@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import { SET_SEARCH } from "../../utils/actions";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import './style.css'
 
 function SearchBar() {
     const navigate = useNavigate();
@@ -42,10 +43,10 @@ function SearchBar() {
 
     return (
         <>
-            <div className="uk-flex uk-flex-center uk-margin">
+            <div className="uk-flex uk-flex-center uk-margin search-bar">
                 <form className="uk-flex-inline uk-search">
                     <input name="search" id="estName" className="uk-search-input" type="search" value={searchFormState.search} onChange={handleSearchChange} placeholder="Name" />
-                    <input name="city" id="city" className="uk-search-input" type="search" value={searchFormState.city} onChange={handleSearchChange} placeholder="City" />
+                    <input name="city" id="city" className="uk-search-input" type="search" value={searchFormState.city} onChange={handleSearchChange} placeholder="City"/>
                     <select className="uk-select" id="form-stacked-select" name="type" value={searchFormState.type} onChange={handleSearchChange}>
                         <option value='establishment'>Establishment</option>
                         <option value='job'>Job</option>
