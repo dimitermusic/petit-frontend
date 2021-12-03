@@ -10,21 +10,18 @@ function Place() {
     const googleResults = useSelector(state => state.googleResults);
     const tkn = localStorage.getItem("token");
     const [review, setReview] = useState({});
-    const [placeIdState, setPlaceIdState] = useState()
-    const [voteStipendUpState, setVoteStipendUpState] = useState();
-    const [votePetMenuUpState, setVotePetMenuUpState] = useState();
-    const [voteTimeOffUpState, setVoteTimeOffUpState] = useState();
-    const [voteStipendDownState, setVoteStipendDownState] = useState();
-    const [votePetMenuDownState, setVotePetMenuDownState] = useState();
-    const [voteTimeOffDownState, setVoteTimeOffDownState] = useState();
-    const [voteBringUpState, setVoteBringUpState] = useState();
-    const [voteBringDownState, setVoteBringDownState] = useState();
-    const [commentTextState, setCommentTextState] = useState();
-    const [allCommentsState, setAllCommentsState] = useState();
-
-    useEffect(() => {
-        const myResult = googleResults.filter(result => result.reference === ref_id);
-
+    const [voteStipendUpState, setVoteStipendUpState] = useState(0)
+    const [votePetMenuUpState, setVotePetMenuUpState] = useState(0)
+    const [voteTimeOffUpState, setVoteTimeOffUpState] = useState(0)
+    const [voteStipendDownState, setVoteStipendDownState] = useState(0)
+    const [votePetMenuDownState, setVotePetMenuDownState] = useState(0)
+    const [voteTimeOffDownState, setVoteTimeOffDownState] = useState(0)
+    const [voteBringUpState, setVoteBringUpState] = useState(0)
+    const [voteBringDownState, setVoteBringDownState] = useState(0)
+    
+    useEffect(()=>{
+        const myResult = googleResults.filter(result => result.reference===ref_id);
+        console.log(myResult);
         API.getOnePlace({
             name: myResult[0].name,
             isJob: searchForm.type,

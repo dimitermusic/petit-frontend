@@ -79,17 +79,10 @@ const API = {
             }
         })
     },
-    delReact: (tkn, id) => {
-        return axios.delete(`${URL_PREFIX}/api/reactions/${id}`, {
-            headers: {
-                "Authorization": `Bearer ${tkn}`
-            }
-        })
-    },
-    vote: (voteData, tkn) => {
-        return axios.post(`${URL_PREFIX}/api/votes/`, voteData, {
-            headers: {
-                "Authorization": `Bearer ${tkn}`
+    vote:(voteData, tkn)=>{
+        return axios.put(`${URL_PREFIX}/api/votes`,voteData,{
+            headers:{
+                "Authorization":`Bearer ${tkn}`
             }
         })
     },
