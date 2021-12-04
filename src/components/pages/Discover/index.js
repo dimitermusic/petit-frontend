@@ -28,16 +28,23 @@ function Discover() {
         <div>
             <div className="uk-container uk-width-4-5">
                 <h1 className="uk-heading-divider uk-text-center">Discover</h1>
-                <ul className="uk-list uk-list-large uk-list-divider" id='search-results'>
+                <ul className="uk-list uk-list-large uk-list-divider uk-list-striped" id='search-results'>
                     {places.map(place => {
                         const newLocation = place.location.split(",").slice(0, -2).join(",");
                         return (
                             <li
+                                className="search-result"
                                 key={place.ref_id}
                                 id={place.ref_id}
                                 onClick={() =>
                                     localStorage.token ? navigate(`/discover/${place.ref_id}`) : alert("Please Log In or Create an Account First!")}>
-                                {place.name} at {newLocation} {place.isJob === 'establishment' ? <span className="uk-icon-button">EST</span> : <span className="uk-icon-button">JOB</span>}
+                                {place.name} at {newLocation}
+                                <span className="uk-margin-small-left uk-margin-small-right">
+                                    {place.isJob === "establishment" ?
+                                        <span className="uk-button">Establishment</span>
+                                        :
+                                        <span className="uk-button">Job</span>}
+                                </span>
                             </li>
                         )
                     })}

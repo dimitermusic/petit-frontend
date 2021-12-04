@@ -11,23 +11,41 @@ import { functionTypeParam } from "@babel/types";
 
 function Profile(props) {
   const [profilePicState, setProfilePicState] = useState("")
-  console.log(localStorage.getItem('token'));
-  console.log(props.user);
-  console.log(props.token);
+  const [userState, setUserState] = useState();
+  const [voteState, setVoteState] = useState();
+
+  useEffect(()=>{
+    if(localStorage.getItem('token')){
+      API.getProfile(localStorage.getItem('token'))
+      .then(res=>{
+        setUserState(res.data)
+        console.log(res.data);
+        console.log('from local storage');
+      })
+    }else{
+      API.getProfile(props.token)
+      .then(res=>{
+        setUserState(res.data)
+        console.log(res.data);
+        console.log('from props');
+      })
+    }
+  },[Profile])
+  
   
   const handleProPicSubmit = taco => {
-      console.log("event is triggered")
-      console.log(props.token)
-      API.userSettings({
-          profilePic: taco.info.secure_url
-      }, props.token)
+    console.log("event is triggered")
+    console.log(props.token)
+    API.userSettings({
+      profilePic: taco.info.secure_url
+    }, props.token)
       .then(res => {
-          console.log("response receieved")
-          console.log(res)
-          API.getProfile(props.token)
-          .then(res=> {
-              console.log(res)
-              props.setUserState(res.data)
+        console.log("response receieved")
+        console.log(res)
+        API.getProfile(props.token)
+          .then(res => {
+            console.log(res)
+            props.setUserState(res.data)
           })
       }).catch(err => {
         console.log("whoops")
@@ -103,7 +121,7 @@ function Profile(props) {
         (error, result) => {
           if (!error && result && result.event === 'success') {
             logging && console.log('Done! Here is the image info: ', result.info);
-    
+
             logging && console.log(result)
             !!onSuccess && onSuccess(result)
             console.log(result)
@@ -123,17 +141,17 @@ function Profile(props) {
           }
         }
       )
-      
+
     widget.open()
 
-    }
+  }
 
   return (
     <div>
-      {/* <h3 className="uk-text-bold uk-flex uk-flex-center welcome">Welcome @{props.user.username}!</h3> */}
+      <h3 className="uk-text-bold uk-flex uk-flex-center welcome">Welcome @{props.user.username}!</h3>
       {/* Recieves badge if user submits more than 10 reviews */}
       <span className="uk-badge uk-flex uk-flex-center badge">PetIt Puppy</span>
-      {/* <img src={props.user.profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img> */}
+      <img src={props.user.profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
       <p uk-margin="true">
         <div className="uk-flex uk-flex-center">
           <WidgetLoader />
@@ -171,8 +189,8 @@ function Profile(props) {
           />
         </div>
       </p>
-      {/* <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes: {props.user.Votes.length}</p> */}
-    </div>
+      {/* <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes: {voteState}</p> */}
+    </div >
   )
 }
 
