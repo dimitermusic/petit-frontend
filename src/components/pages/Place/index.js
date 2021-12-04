@@ -178,6 +178,9 @@ function Place() {
     //             })
     //     })
     // }
+    console.log(review.location)
+    // const newLocation= review.location.split(",").slice(0, -2).join(",");
+    // console.log(newLocation);
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
