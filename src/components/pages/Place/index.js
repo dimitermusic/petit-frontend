@@ -62,7 +62,6 @@ function Place() {
                         console.log(err);
                     })
             })
-
     }, [])
 
     const voteStipendUp = () => {
@@ -156,7 +155,7 @@ function Place() {
             hasMenuUp:false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const another = res.data.Votes.filter(vote=>vote.canMenuUp===true);
+            const another = res.data.Votes.filter(vote=>vote.hasMenuUp===true);
             const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuDown===true)
             setVoteState({
                 ...voteState,
