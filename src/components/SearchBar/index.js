@@ -52,7 +52,7 @@ function SearchBar() {
                         <option value='job'>Job</option>
                     </select>
                 </form>
-                <button className="uk-button uk-button-default" onClick={searchDispatch}>Button</button>
+                <button className="uk-button uk-button-default" onClick={searchDispatch}>Search</button>
             </div>
         </>
     )

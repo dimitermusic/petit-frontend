@@ -14,10 +14,7 @@ import Place from "./components/pages/Place/index.js";
 import DiscoverPlace from "./components/DiscoverPlace/index.js"
 
 function App() {
-  const [userState, setUserState] = useState({
-    username: "",
-    id: 0
-  })
+  const [userState, setUserState] = useState({ username: "", id: 0})
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -29,10 +26,9 @@ function App() {
         .then(res => {
           console.log("successfully obtained token!")
           setToken(myToken)
-          setUserState({
-            username: res.data.username,
-            id: res.data.id
-          })
+          setUserState(
+            res.data
+          )
         }).catch(err => {
           console.log("whoops")
           console.log(err)
@@ -59,8 +55,7 @@ function App() {
 
   return (
     <>
-        <NavBar
-          id={userState.id} />
+        <NavBar />
 
         <SearchBar />
         <Routes>
@@ -69,7 +64,7 @@ function App() {
           <Route exact path={"/discover/:ref_id"} element={<DiscoverPlace />} />
           <Route exact path={"/login"} element={<LoginPage />} />
           <Route exact path={`/profile`} element={<Profile
-            username={userState.username} />} />
+            user={userState} token={token} setUserState={setUserState}/>} />
           <Route exact path={"/"} element={<LoginPage />} />
           <Route exact path={"/logout"} element={<Logout />} />
           <Route exact path={`/place/:ref_id`} element={<Place />} />
