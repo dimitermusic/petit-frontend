@@ -10,9 +10,6 @@ import generateSignature from '../../../utils/generateSignature'
 function Profile(props) {
   const myUser = useSelector(state => state.globalUser);
   const myVotes = useSelector(state=>state.globalVotes)
-
-  console.log(myUser);
-  console.log(myVotes);
   
   const handleProPicSubmit = taco => {
     console.log("event is triggered")
