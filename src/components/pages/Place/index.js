@@ -4,23 +4,27 @@ import { useSelector } from "react-redux";
 import style from "./style.css";
 import API from "../../../utils/api";
 import avatar from "../../../images/avatar.jpg"
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 function Place() {
     const { ref_id } = useParams();
     const searchForm = useSelector(state => state.searchForm);
     const googleResults = useSelector(state => state.googleResults);
     const tkn = localStorage.getItem("token");
-    const [review, setReview] = useState({});
+    const [review, setReview] = useState({
+        location: ""
+    });   
     const [placeIdState, setPlaceIdState] = useState();
     const [voteState, setVoteState] = useState({
-        stipendUp:0,
-        stipendDown:0,
-        menuUp:0,
-        menuDown:0,
-        timeOffUp:0,
-        timeOffDown:0,
-        bringUp:0,
-        bringDown:0
+        stipendUp: 0,
+        stipendDown: 0,
+        menuUp: 0,
+        menuDown: 0,
+        timeOffUp: 0,
+        timeOffDown: 0,
+        bringUp: 0,
+        bringDown: 0
     })
     const [commentTextState, setCommentTextState] = useState();
     const [allCommentsState, setAllCommentsState] = useState([]);
@@ -216,18 +220,21 @@ function Place() {
                     setAllCommentsState(data.data);
                     console.log(allCommentsState);
                     alert("comment posted successfully!")
+                    setCommentTextState("")
                 }).catch(err => {
                     console.log(err);
                 })
         })
     }
 
+ const newLocation = review.location.split(",").slice(0,-2).join(",")
+
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
             <div className="uk-flex">
                 <div className="uk-margin-small-right">{review.name}</div>
                 <div className="uk-margin-small-right">at</div>
-                <div className="uk-margin-small-right">{review.location}</div>
+                <div className="uk-margin-small-right">{newLocation}</div>
                 <span className="uk-badge">{searchForm.type}</span>
             </div>
 
