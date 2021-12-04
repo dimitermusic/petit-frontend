@@ -27,7 +27,7 @@ function App() {
           console.log("successfully obtained token!")
           setToken(myToken)
           setUserState(
-            res.data
+            res
           )
         }).catch(err => {
           console.log("whoops")

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from '../../../utils/api.js'
 import "./style.css"
 import { Image } from 'cloudinary-react';
@@ -12,7 +12,8 @@ import { functionTypeParam } from "@babel/types";
 function Profile(props) {
 
   const [profilePicState, setProfilePicState] = useState("")
-
+  const tkn = localStorage.getItem('token');
+  const [userInfo, setUserInfo] = useState()
 
   const handleProPicSubmit = taco => {
     console.log("event is triggered")
@@ -33,9 +34,12 @@ function Profile(props) {
       })
   }
 
-  if (!props.user.username) {
-    <Navigate to="/logout" />
-  };
+  useEffect(() => {
+    API.getProfile(tkn)
+      .then(res => {
+        setUserInfo(res.data)
+      })
+  }, [])
 
 
   function onSuccess(taco) {
@@ -135,10 +139,10 @@ function Profile(props) {
 
   return (
     <div>
-      <h3 className="uk-text-bold uk-flex uk-flex-center welcome">Welcome @{props.user.username}!</h3>
+      <h3 className="uk-text-bold uk-flex uk-flex-center welcome">Welcome @{userInfo.username}!</h3>
       {/* Recieves badge if user submits more than 10 reviews */}
       <span className="uk-badge uk-flex uk-flex-center badge">PetIt Puppy</span>
-      <img src={props.user.profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
+      <img src={userInfo.profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
       <p uk-margin="true">
         <div className="uk-flex uk-flex-center">
           <WidgetLoader />
@@ -176,10 +180,8 @@ function Profile(props) {
           />
         </div>
       </p>
-
-      {/* <button id="upload_widget" type="submit"onClick={handleProPicSubmit}>Submit</button> */}
-      <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes: {props.user.votes}</p>
-    </div>
+      <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes: {userInfo.Votes.length}</p>
+    </div >
   )
 }
 
