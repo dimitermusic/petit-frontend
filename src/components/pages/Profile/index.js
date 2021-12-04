@@ -1,37 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import API from '../../../utils/api.js'
 import "./style.css"
 import { Image } from 'cloudinary-react';
-import { Routes, Route, Link, Navigate } from "react-router-dom";
 import './style.css';
 import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget';
+import { useSelector } from "react-redux";
 import generateSignature from '../../../utils/generateSignature'
-import { functionTypeParam } from "@babel/types";
-
 
 function Profile(props) {
-  const [profilePicState, setProfilePicState] = useState("")
-  const [userState, setUserState] = useState();
-  const [voteState, setVoteState] = useState();
-
-  useEffect(()=>{
-    if(localStorage.getItem('token')){
-      API.getProfile(localStorage.getItem('token'))
-      .then(res=>{
-        setUserState(res.data)
-        console.log(res.data);
-        console.log('from local storage');
-      })
-    }else{
-      API.getProfile(props.token)
-      .then(res=>{
-        setUserState(res.data)
-        console.log(res.data);
-        console.log('from props');
-      })
-    }
-  },[Profile])
-  
+  const myUser = useSelector(state => state.globalUser);
+  const myVotes = useSelector(state=>state.globalVotes)
   
   const handleProPicSubmit = taco => {
     console.log("event is triggered")
@@ -52,11 +30,6 @@ function Profile(props) {
       })
   }
 
-  function onSuccess(taco) {
-    console.log("Success!", taco)
-    console.log(taco.info.secure_url)
-    // setProfilePicState(taco.info.secure_url)
-  }
   const myWidget = (
     sources,
     sourceKeys,
@@ -148,10 +121,10 @@ function Profile(props) {
 
   return (
     <div>
-      <h3 className="uk-text-bold uk-flex uk-flex-center welcome">Welcome @{props.user.username}!</h3>
+      <h3 className="uk-text-bold uk-flex uk-flex-center welcome">Welcome @{myUser.username}!</h3>
       {/* Recieves badge if user submits more than 10 reviews */}
       <span className="uk-badge uk-flex uk-flex-center badge">PetIt Puppy</span>
-      <img src={props.user.profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
+      <img src={myUser.profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
       <p uk-margin="true">
         <div className="uk-flex uk-flex-center">
           <WidgetLoader />
@@ -189,7 +162,7 @@ function Profile(props) {
           />
         </div>
       </p>
-      {/* <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes: {voteState}</p> */}
+      <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes: {myVotes}</p>
     </div >
   )
 }

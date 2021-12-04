@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import './style.css';
-import Profile from "../pages/Profile/index"
 
 function NavBar(props) {
     const [navbarState, setNavbarState] = useState("");
 
     // useEffect(() => localStorage.token ? setNavbarState("Logout") : setNavbarState("Login"), [<Profile/>])
-    console.log(localStorage.getItem('token'));
     return (
         <>
             <div>

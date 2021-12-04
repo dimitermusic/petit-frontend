@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import style from "./style.css";
-import App from "../../App"
 import API from "../../utils/api";
 
 
@@ -51,7 +50,6 @@ function SignupForm(props) {
       password: loginFormState.passwordSignIn
     })
       .then(res => {
-        console.log(res.data.token)
         props.setUserState(res.data.user)
         props.setToken(res.data.token)
         localStorage.setItem("token", res.data.token)
@@ -87,8 +85,6 @@ function SignupForm(props) {
         Email must be valid`)
       })
   }
-
-
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import ReactDOM from "react-dom";
+import { useDispatch } from "react-redux";
 import SignupForm from "./components/SignupForm/index.js";
 import SearchBar from "./components/SearchBar/index.js";
 import Discover from "./components/pages/Discover/index.js";
@@ -12,10 +12,12 @@ import PetGallery from "./pages/PetGallery/index.js";
 import UploadPets from "./pages/UploadPets/index.js";
 import Place from "./components/pages/Place/index.js";
 import DiscoverPlace from "./components/DiscoverPlace/index.js"
+import { USER } from "./utils/actions.js";
 
 function App() {
   const [userState, setUserState] = useState({ username: "", id: 0 })
   const [token, setToken] = useState("");
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const myToken = localStorage.getItem("token")
@@ -27,6 +29,10 @@ function App() {
           console.log("successfully obtained token!")
           setToken(myToken)
           setUserState(res.data)
+          dispatch({
+            type:USER,
+            payload:res.data
+          })
         }).catch(err => {
           console.log("whoops")
           console.log(err)
