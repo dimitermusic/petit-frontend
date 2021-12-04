@@ -45,9 +45,9 @@ function Results() {
                                 {place.name} at {newLocation}
                                 <span className="uk-margin-small-left uk-margin-small-right">
                                     {searchForm.type === "establishment" ?
-                                        <span className="uk-button">Establishment</span>
+                                        <span>as Establishment</span>
                                         :
-                                        <span className="uk-button">Job</span>}
+                                        <span>as Job</span>}
                                 </span>
                             </li>
                         )

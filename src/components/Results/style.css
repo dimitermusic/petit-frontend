@@ -1,5 +1,8 @@
 .search-result {
     border: none !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .search-result:hover {
@@ -10,4 +13,6 @@
 
 .search-result span {
     color: rgb(159, 159, 159);
+    font-size: small;
+    align-self: flex-end;
 }

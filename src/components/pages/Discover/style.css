@@ -1,15 +1,18 @@
-.search-result {
+.discover-result {
     border: none !important;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-.search-result:hover {
+.discover-result:hover {
     cursor: pointer !important;
     background-color: rgb(229, 236, 240) !important;
     border: none !important;
 }
 
-.search-result span {
+.discover-result span {
     color: rgb(159, 159, 159);
+    font-size: small;
+    align-self: flex-end;
 }
