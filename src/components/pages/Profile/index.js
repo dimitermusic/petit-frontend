@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import API from '../../../utils/api.js'
 import "./style.css"
 import { Image } from 'cloudinary-react';
@@ -12,18 +12,18 @@ import { functionTypeParam } from "@babel/types";
 function Profile(props) {
 
   const [profilePicState, setProfilePicState] = useState("")
-  
-  
+
+
   const handleProPicSubmit = taco => {
       console.log("event is triggered")
-      console.log(props.token)
+      console.log(myToken)
       API.userSettings({
           profilePic: taco.info.secure_url
-      }, props.token)
+      }, myToken)
       .then(res => {
           console.log("response receieved")
           console.log(res)
-          API.getProfile(props.token)
+          API.getProfile(myToken)
         .then(res=> {
             console.log(res)
             props.setUserState(res.data)
@@ -33,9 +33,17 @@ function Profile(props) {
       })
   }
 
-  if (!props.user.username) {
-    <Navigate to="/logout" />
-  };
+  const myToken = localStorage.getItem("token");
+
+  useEffect(() => {
+
+  if (myToken){
+      API.getProfile(myToken)
+        .then(res =>{
+        props.setUserState(res.data)
+        })
+    }
+  }, [])
 
 
   function onSuccess(taco) {
@@ -139,7 +147,7 @@ function Profile(props) {
       {/* Recieves badge if user submits more than 10 reviews */}
       <span className="uk-badge uk-flex uk-flex-center badge">PetIt Puppy</span>
       <img src={props.user.profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
-      <p uk-margin="true">
+      <div uk-margin="true">
         <div className="uk-flex uk-flex-center">
           <WidgetLoader />
           <Widget
@@ -175,10 +183,10 @@ function Profile(props) {
             buttonType={'button'}
           />
         </div>
-      </p>
+      </div>
      
      {/* <button id="upload_widget" type="submit"onClick={handleProPicSubmit}>Submit</button> */}
-      <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes: {props.user.votes}</p>
+      <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Contributions: {props.user.Votes}</p>
     </div>
   )
 }
