@@ -1,4 +1,4 @@
-import { GOOGLE_FETCH, SET_SEARCH, MY_PLACE, MY_DISCOVER } from "./actions";
+import { GOOGLE_FETCH, SET_SEARCH, MY_PLACE, MY_DISCOVER, USER } from "./actions";
 const initialState=
 {
     searchForm:[{
@@ -8,7 +8,9 @@ const initialState=
     }],
     googleResults:[],
     myPlace:{},
-    discoverResults:{}
+    discoverResults:{},
+    globalUser:{},
+    globalVotes:0
 };
 
 export default function reducer(state=initialState,action){
@@ -32,6 +34,13 @@ export default function reducer(state=initialState,action){
             return{
                 ...state,
                 discoverResults:action.payload
+            }
+        case USER:
+            const voteNumber = action.payload.Votes.length
+            return{
+                ...state,
+                globalUser:action.payload,
+                globalVotes:voteNumber
             }
         default:
             return state;
