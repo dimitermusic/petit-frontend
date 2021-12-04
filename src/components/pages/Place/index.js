@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import style from "./style.css";
 import API from "../../../utils/api";
 import avatar from "../../../images/avatar.jpg"
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 function Place() {
     const { ref_id } = useParams();
@@ -36,8 +38,7 @@ function Place() {
         }, tkn, ref_id)
             .then(res => {
                 setPlaceIdState(res.data.id)
-                setReview(res.data)
-                console.log(res.data.location.split(",").slice(0, -2).join(","));
+                setReview(res.data);
                 const voteStipendUpCount = res.data.Votes.filter(vote => vote.hasStipendUp === true)
                 const voteStipendDownCount = res.data.Votes.filter(vote => vote.hasStipendDown === true)
                 const votePetMenuUpCount = res.data.Votes.filter(vote => vote.hasMenuUp === true)
@@ -321,7 +322,11 @@ function Place() {
                                         <div class="uk-width-expand">
                                             <h4 class="uk-comment-title uk-margin-remove">{comment.User.username}</h4>
                                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                                <li>{comment.createdAt}</li>
+                                                <li>
+                                                    <Moment format="h:mma | MM/DD/YYYY">
+                                                        {comment.createdAt}
+                                                    </Moment>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
