@@ -30,8 +30,8 @@ function App() {
           setToken(myToken)
           setUserState(res.data)
           dispatch({
-            type:USER,
-            payload:res.data
+            type: USER,
+            payload: res.data
           })
         }).catch(err => {
           console.log("whoops")
