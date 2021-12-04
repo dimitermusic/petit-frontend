@@ -223,12 +223,15 @@ function Place() {
         })
     }
 
+ const newLocation = review.location.split(",").slice(0,-2).join(",")
+console.log(newLocation)
+
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
             <div className="uk-flex">
                 <div className="uk-margin-small-right">{review.name}</div>
                 <div className="uk-margin-small-right">at</div>
-                <div className="uk-margin-small-right">{review.location}</div>
+                <div className="uk-margin-small-right">{newLocation}</div>
                 <span className="uk-badge">{searchForm.type}</span>
             </div>
 
