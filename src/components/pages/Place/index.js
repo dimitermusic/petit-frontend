@@ -12,7 +12,9 @@ function Place() {
     const searchForm = useSelector(state => state.searchForm);
     const googleResults = useSelector(state => state.googleResults);
     const tkn = localStorage.getItem("token");
-    const [review, setReview] = useState({});
+    const [review, setReview] = useState({
+        location: ""
+    });
     const [placeIdState, setPlaceIdState] = useState();
     const [voteState, setVoteState] = useState({
         stipendUp: 0,
@@ -225,8 +227,8 @@ function Place() {
         })
     }
 
- const newLocation = review.location.split(",").slice(0,-2).join(",")
-console.log(newLocation)
+    const newLocation = review.location.split(",").slice(0, -2).join(",")
+    console.log(newLocation)
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
