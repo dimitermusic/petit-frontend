@@ -5,8 +5,8 @@ import Profile from "../pages/Profile/index"
 function NavBar(props) {
     const [navbarState, setNavbarState] = useState("");
 
-    useEffect(() => localStorage.token ? setNavbarState("Logout") : setNavbarState("Login"), [<Profile/>])
-
+    // useEffect(() => localStorage.token ? setNavbarState("Logout") : setNavbarState("Login"), [<Profile/>])
+    console.log(localStorage.getItem('token'));
     return (
         <>
             <div>
@@ -23,7 +23,7 @@ function NavBar(props) {
                                 <a href={`/profile`}>Profile</a>
                             </li>
                             <li>
-                                <a href="/logout">{navbarState}</a>
+                                <a href="/logout">Logout</a>
                             </li>
                         </ul>
                     </div>

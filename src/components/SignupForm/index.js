@@ -45,15 +45,13 @@ function SignupForm(props) {
   }
 
   const handleSigninSubmit = event => {
-    console.log(`username: ${loginFormState.usernameSignIn}`)
-    console.log(`password: ${loginFormState.passwordSignIn}`)
     event.preventDefault();
     API.login({
       username: loginFormState.usernameSignIn,
       password: loginFormState.passwordSignIn
     })
       .then(res => {
-        console.log(res.data)
+        console.log(res.data.token)
         props.setUserState(res.data.user)
         props.setToken(res.data.token)
         localStorage.setItem("token", res.data.token)
@@ -64,7 +62,7 @@ function SignupForm(props) {
   }
 
   const handleSignupSubmit = event => {
-    // event.preventDefault();
+    event.preventDefault();
     console.log("event is triggered")
     API.signup({
       email: loginFormState.emailSignUp,
@@ -77,7 +75,6 @@ function SignupForm(props) {
           username: loginFormState.usernameSignUp,
           password: loginFormState.passwordSignUp
         }).then(taco => {
-          console.log(taco.data)
           props.setUserState(taco.data.user)
           props.setToken(taco.data.token)
           localStorage.setItem("token", taco.data.token)

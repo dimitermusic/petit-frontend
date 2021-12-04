@@ -26,13 +26,10 @@ function App() {
         .then(res => {
           console.log("successfully obtained token!")
           setToken(myToken)
-          setUserState(
-            res
-          )
+          setUserState(res.data)
         }).catch(err => {
           console.log("whoops")
           console.log(err)
-          localStorage.removeItem("token")
         })
     }
   }, [])
