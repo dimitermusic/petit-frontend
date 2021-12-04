@@ -33,7 +33,7 @@ function Discover() {
                         const newLocation = place.location.split(",").slice(0, -2).join(",");
                         return (
                             <li
-                                className="search-result"
+                                className="discover-result"
                                 key={place.ref_id}
                                 id={place.ref_id}
                                 onClick={() =>
@@ -41,9 +41,9 @@ function Discover() {
                                 {place.name} at {newLocation}
                                 <span className="uk-margin-small-left uk-margin-small-right">
                                     {place.isJob === "establishment" ?
-                                        <span className="uk-button">Establishment</span>
+                                        <span>as Establishment</span>
                                         :
-                                        <span className="uk-button">Job</span>}
+                                        <span>as Job</span>}
                                 </span>
                             </li>
                         )
