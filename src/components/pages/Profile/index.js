@@ -14,20 +14,20 @@ function Profile(props) {
   const [profilePicState, setProfilePicState] = useState("")
   const tkn = localStorage.getItem('token');
   const [userInfo, setUserInfo] = useState()
-  
+
   const handleProPicSubmit = taco => {
-      console.log("event is triggered")
-      console.log(props.token)
-      API.userSettings({
-          profilePic: taco.info.secure_url
-      }, props.token)
+    console.log("event is triggered")
+    console.log(props.token)
+    API.userSettings({
+      profilePic: taco.info.secure_url
+    }, props.token)
       .then(res => {
-          console.log("response receieved")
-          console.log(res)
-          API.getProfile(props.token)
-          .then(res=> {
-              console.log(res)
-              props.setUserState(res.data)
+        console.log("response receieved")
+        console.log(res)
+        API.getProfile(props.token)
+          .then(res => {
+            console.log(res)
+            props.setUserState(res.data)
           })
       }).catch(err => {
         console.log("whoops")
@@ -36,9 +36,9 @@ function Profile(props) {
 
   useEffect(() => {
     API.getProfile(tkn)
-    .then(res=>{
-      setUserInfo(res.data)
-    })
+      .then(res => {
+        setUserInfo(res.data)
+      })
   }, [])
 
 
@@ -112,7 +112,7 @@ function Profile(props) {
         (error, result) => {
           if (!error && result && result.event === 'success') {
             logging && console.log('Done! Here is the image info: ', result.info);
-    
+
             logging && console.log(result)
             !!onSuccess && onSuccess(result)
             console.log(result)
@@ -132,10 +132,10 @@ function Profile(props) {
           }
         }
       )
-      
+
     widget.open()
 
-    }
+  }
 
   return (
     <div>
@@ -181,7 +181,7 @@ function Profile(props) {
         </div>
       </p>
       <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes: {userInfo.Votes.length}</p>
-    </div>
+    </div >
   )
 }
 
