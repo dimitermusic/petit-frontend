@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GOOGLE_FETCH } from "../../utils/actions";
 import API from "../../utils/api";
+import './style.css'
 
 function Results() {
     const navigate = useNavigate();
@@ -37,12 +38,16 @@ function Results() {
                         const newLocation = place.formatted_address.split(",").slice(0, -2).join(",");
                         return (
                             <li
+                                className="search-result"
                                 key={place.reference}
                                 id={place.reference}
                                 onClick={() => localStorage.token ? navigate(`/place/${place.reference}`) : alert("Please Login or Create an Account First!")}>
                                 {place.name} at {newLocation}
                                 <span className="uk-margin-small-left uk-margin-small-right">
-                                    {searchForm.type === "establishment" ? <span className="uk-icon-button">EST</span> : <span className="uk-icon-button">JOB</span>}
+                                    {searchForm.type === "establishment" ?
+                                        <span className="uk-button">Establishment</span>
+                                        :
+                                        <span className="uk-button">Job</span>}
                                 </span>
                             </li>
                         )

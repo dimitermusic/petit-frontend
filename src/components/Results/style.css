@@ -1,7 +1,5 @@
 .search-result {
     border: none !important;
-    display: flex;
-    flex-direction: column;
 }
 
 .search-result:hover {

@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import './style.css'
+import React, { useState, useEffect } from "react";
+import './style.css';
+import Profile from "../pages/Profile/index"
 
 function NavBar(props) {
+    const [navbarState, setNavbarState] = useState("");
+
+    useEffect(() => localStorage.token ? setNavbarState("Logout") : setNavbarState("Login"), [<Profile/>])
 
     return (
         <>
@@ -19,7 +23,7 @@ function NavBar(props) {
                                 <a href={`/profile`}>Profile</a>
                             </li>
                             <li>
-                                <a href="/logout">Login/Logout</a>
+                                <a href="/logout">{navbarState}</a>
                             </li>
                         </ul>
                     </div>
