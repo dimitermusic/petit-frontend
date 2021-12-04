@@ -14,7 +14,7 @@ import Place from "./components/pages/Place/index.js";
 import DiscoverPlace from "./components/DiscoverPlace/index.js"
 
 function App() {
-  const [userState, setUserState] = useState({ username: "", id: 0})
+  const [userState, setUserState] = useState({ username: "", id: 0 })
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function App() {
 
   function LoginPage() {
     return (userState.username ?
-      <Navigate to="/profile" /> : 
+      <Navigate to="/profile" /> :
       <SignupForm
         setUserState={setUserState}
         setToken={setToken} />
@@ -55,22 +55,22 @@ function App() {
 
   return (
     <>
-        <NavBar />
+      <NavBar />
 
-        <SearchBar />
-        <Routes>
-          <Route exact path={"/results"} element={<Results />} />
-          <Route exact path={"/discover"} element={<Discover />} />
-          <Route exact path={"/discover/:ref_id"} element={<DiscoverPlace />} />
-          <Route exact path={"/login"} element={<LoginPage />} />
-          <Route exact path={`/profile`} element={<Profile
-            user={userState} token={token} setUserState={setUserState}/>} />
-          <Route exact path={"/"} element={<LoginPage />} />
-          <Route exact path={"/logout"} element={<Logout />} />
-          <Route exact path={`/place/:ref_id`} element={<Place />} />
+      <SearchBar />
+      <Routes>
+        <Route exact path={"/results"} element={<Results />} />
+        <Route exact path={"/discover"} element={<Discover />} />
+        <Route exact path={"/discover/:ref_id"} element={<DiscoverPlace />} />
+        <Route exact path={"/login"} element={<LoginPage />} />
+        <Route exact path={`/profile`} element={<Profile
+          user={userState} token={token} setUserState={setUserState} />} />
+        <Route exact path={"/"} element={<LoginPage />} />
+        <Route exact path={"/logout"} element={<Logout />} />
+        <Route exact path={`/place/:ref_id`} element={<Place />} />
         <Route exact path={"/petgallery"} element={<PetGallery />} />
         <Route exact path={"/uploadpets"} element={<UploadPets />} />
-        </Routes>
+      </Routes>
     </>
   );
 }
