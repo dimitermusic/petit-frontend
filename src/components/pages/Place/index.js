@@ -14,7 +14,7 @@ function Place() {
     const tkn = localStorage.getItem("token");
     const [review, setReview] = useState({
         location: ""
-    });
+    });   
     const [placeIdState, setPlaceIdState] = useState();
     const [voteState, setVoteState] = useState({
         stipendUp: 0,
@@ -39,7 +39,7 @@ function Place() {
             .then(res => {
                 setPlaceIdState(res.data.id)
                 setReview(res.data);
-                const voteStipendUpCount = res.data.Votes.filter(vote => vote.hasStipendUp === true)
+                const voteStipendUpCount = res.data.Votes.filter(vote =>vote.hasStipendUp === true)
                 const voteStipendDownCount = res.data.Votes.filter(vote => vote.hasStipendDown === true)
                 const votePetMenuUpCount = res.data.Votes.filter(vote => vote.hasMenuUp === true)
                 const votePetMenuDownCount = res.data.Votes.filter(vote => vote.hasMenuDown === true)
@@ -49,14 +49,14 @@ function Place() {
                 const voteBringDownCount = res.data.Votes.filter(vote => vote.canBringDown === true)
                 setVoteState({
                     ...voteState,
-                    stipendUp: voteStipendUpCount.length,
-                    stipendDown: voteStipendDownCount.length,
-                    menuUp: votePetMenuUpCount.length,
-                    menuDown: votePetMenuDownCount.length,
-                    timeOffUp: voteTimeOffUpCount.length,
-                    timeOffDown: voteTimeOffDownCount.length,
-                    bringUp: voteBringUpCount.length,
-                    bringDown: voteBringDownCount.length
+                    stipendUp:voteStipendUpCount.length,
+                    stipendDown:voteStipendDownCount.length,
+                    menuUp:votePetMenuUpCount.length,
+                    menuDown:votePetMenuDownCount.length,
+                    timeOffUp:voteTimeOffUpCount.length,
+                    timeOffDown:voteTimeOffDownCount.length,
+                    bringUp:voteBringUpCount.length,
+                    bringDown:voteBringDownCount.length
                 })
                 API.getAllComments(tkn, res.data.id)
                     .then(data => {
@@ -72,34 +72,34 @@ function Place() {
     const voteStipendUp = () => {
         API.vote({
             hasStipendUp: true,
-            hasStipendDown: false,
+            hasStipendDown:false,
             placeId: placeIdState
         }, tkn)
-            .then(res => {
-                const voteNumber = res.data.Votes.filter(vote => vote.hasStipendUp === true)
-                const newNumber = res.data.Votes.filter(vote => vote.hasStipendDown === true)
-                setVoteState({
-                    ...voteState,
-                    stipendUp: voteNumber.length,
-                    stipendDown: newNumber.length
-                })
-                console.log("Vote Successful!")
+        .then(res => {
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
+            const newNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
+            setVoteState({
+                ...voteState,
+                stipendUp:voteNumber.length,
+                stipendDown:newNumber.length
             })
+            console.log("Vote Successful!")
+        })
     }
 
     const voteStipendDown = () => {
         API.vote({
             hasStipendDown: true,
-            hasStipendUp: false,
+            hasStipendUp:false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote => vote.hasStipendDown === true)
-            const newNumber = res.data.Votes.filter(vote => vote.hasStipendUp === true)
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
+            const newNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
             setVoteState({
                 ...voteState,
-                stipendDown: voteNumber.length,
-                stipendUp: newNumber.length
-            })
+                stipendDown:voteNumber.length,
+                stipendUp:newNumber.length
+            })            
             console.log("Vote Successful!")
         })
     }
@@ -107,15 +107,15 @@ function Place() {
     const voteBringUp = () => {
         API.vote({
             canBringUp: true,
-            canBringDown: false,
+            canBringDown:false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote => vote.canBringUp === true);
-            const another = res.data.Votes.filter(vote => vote.canBringDown === true)
+            const voteNumber = res.data.Votes.filter(vote=>vote.canBringUp===true);
+            const another = res.data.Votes.filter(vote=>vote.canBringDown===true)
             setVoteState({
                 ...voteState,
-                bringDown: another.length,
-                bringUp: voteNumber.length
+                bringDown:another.length,
+                bringUp:voteNumber.length
             })
         })
     }
@@ -123,15 +123,15 @@ function Place() {
     const voteBringDown = () => {
         API.vote({
             canBringDown: true,
-            canBringUp: false,
+            canBringUp:false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote => vote.canBringDown === true);
-            const another = res.data.Votes.filter(vote => vote.canBringUp === true);
+            const voteNumber = res.data.Votes.filter(vote=>vote.canBringDown===true);
+            const another = res.data.Votes.filter(vote=>vote.canBringUp===true);
             setVoteState({
                 ...voteState,
-                bringUp: another.length,
-                bringDown: voteNumber.length
+                bringUp:another.length,
+                bringDown:voteNumber.length
             })
             console.log("Vote Successful!")
         })
@@ -140,15 +140,15 @@ function Place() {
     const voteMenuUp = () => {
         API.vote({
             hasMenuUp: true,
-            hasMenuDown: false,
+            hasMenuDown:false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote => vote.hasMenuUp === true)
-            const another = res.data.Votes.filter(vote => vote.hasMenuDown === true);
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuUp===true)
+            const another = res.data.Votes.filter(vote=>vote.hasMenuDown===true);
             setVoteState({
                 ...voteState,
-                menuUp: voteNumber.length,
-                menuDown: another.length
+                menuUp:voteNumber.length,
+                menuDown:another.length
             })
             console.log("Vote Successful!")
         })
@@ -157,15 +157,15 @@ function Place() {
     const voteMenuDown = () => {
         API.vote({
             hasMenuDown: true,
-            hasMenuUp: false,
+            hasMenuUp:false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const another = res.data.Votes.filter(vote => vote.canMenuUp === true);
-            const voteNumber = res.data.Votes.filter(vote => vote.hasMenuDown === true)
+            const another = res.data.Votes.filter(vote=>vote.canMenuUp===true);
+            const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuDown===true)
             setVoteState({
                 ...voteState,
-                menuUp: another.length,
-                menuDown: voteNumber.length
+                menuUp:another.length,
+                menuDown:voteNumber.length
             })
             console.log("Vote Successful!")
         })
@@ -174,15 +174,15 @@ function Place() {
     const voteTimeOffUp = () => {
         API.vote({
             petTimeOffUp: true,
-            petTimeOffDown: false,
+            petTimeOffDown:false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote => vote.petTimeOffUp === true)
-            const another = res.data.Votes.filter(vote => vote.petTimeOffDown === true);
+            const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffUp===true)
+            const another = res.data.Votes.filter(vote=>vote.petTimeOffDown===true);
             setVoteState({
                 ...voteState,
-                timeOffDown: another.length,
-                timeOffUp: voteNumber.length
+                timeOffDown:another.length,
+                timeOffUp:voteNumber.length
             })
             console.log("Vote Successful!")
         })
@@ -191,16 +191,16 @@ function Place() {
     const voteTimeOffDown = () => {
         API.vote({
             petTimeOffDown: true,
-            petTimeOffUp: false,
+            petTimeOffUp:false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const another = res.data.Votes.filter(vote => vote.petTimeOffUp === true);
-            const voteNumber = res.data.Votes.filter(vote => vote.petTimeOffDown === true)
+            const another = res.data.Votes.filter(vote=>vote.petTimeOffUp===true);
+            const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffDown===true)
             setVoteState({
                 ...voteState,
-                timeOffUp: another.length,
-                timeOffDown: voteNumber.length
-            })
+                timeOffUp:another.length,
+                timeOffDown:voteNumber.length
+            })           
             console.log("Vote Successful!")
         })
     }
@@ -221,14 +221,14 @@ function Place() {
                     setAllCommentsState(data.data);
                     console.log(allCommentsState);
                     alert("comment posted successfully!")
+                    setCommentTextState("")
                 }).catch(err => {
                     console.log(err);
                 })
         })
     }
 
-    const newLocation = review.location.split(",").slice(0, -2).join(",")
-    console.log(newLocation)
+ const newLocation = review.location.split(",").slice(0,-2).join(",")
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
@@ -316,17 +316,13 @@ function Place() {
                                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
                                         <div class="uk-width-auto">
                                             {comment.User.profilePic ?
-                                                (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="" />) :
-                                                (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="" />)}
+                                            (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="" />) :
+                                            (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="" />)}
                                         </div>
                                         <div class="uk-width-expand">
                                             <h4 class="uk-comment-title uk-margin-remove">{comment.User.username}</h4>
                                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                                <li>
-                                                    <Moment format="h:mma | MM/DD/YYYY">
-                                                        {comment.createdAt}
-                                                    </Moment>
-                                                </li>
+                                                <li>{comment.createdAt}</li>
                                             </ul>
                                         </div>
                                     </div>
