@@ -59,6 +59,7 @@ function SignupForm(props) {
         localStorage.setItem("token", res.data.token)
       }).catch(err => {
         console.log(err);
+        alert("Incorrect Username or Password")
       })
   }
 
@@ -83,6 +84,10 @@ function SignupForm(props) {
         })
       }).catch(err => {
         console.log(err);
+        alert(`One or more fields do not meet criteria.
+        Username must be Unique
+        Password must be 8-16 characters long. 
+        Email must be valid`)
       })
   }
 
