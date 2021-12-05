@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import style from "./style.css";
+import { useSelector } from "react-redux"
+import Moment from "react-moment";
+import "moment-timezone";
+import "./style.css"
+import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import API from "../../../utils/api";
 import avatar from "../../../images/avatar.jpg"
-import Moment from 'react-moment';
-import 'moment-timezone';
-import { MdThumbUp, MdThumbDown } from "react-icons/md";
 
 function Place() {
     const { ref_id } = useParams();
@@ -334,8 +334,8 @@ function Place() {
                                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
                                         <div class="uk-width-auto">
                                             {comment.User.profilePic ?
-                                                (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="" />) :
-                                                (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="" />)}
+                                                (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="profile-picture" />) :
+                                                (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="profile-picture" />)}
                                         </div>
                                         <div class="uk-width-expand">
                                             <h4 class="uk-comment-title uk-margin-remove">{comment.User.username}</h4>
