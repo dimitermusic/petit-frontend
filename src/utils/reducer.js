@@ -1,7 +1,4 @@
-// state for google { reference, name, formatted_address }
-// state for db { ref_id, name, address, id, isJob }
-import { GOOGLE_FETCH, DB_FETCH, SET_SEARCH } from "./actions";
-import API from "./api";
+import { GOOGLE_FETCH, SET_SEARCH, MY_PLACE, MY_DISCOVER, USER } from "./actions";
 const initialState=
 {
     searchForm:[{
@@ -10,7 +7,10 @@ const initialState=
         type:"establishment"
     }],
     googleResults:[],
-    dbResults:[]
+    myPlace:{},
+    discoverResults:{},
+    globalUser:{},
+    globalVotes:0
 };
 
 export default function reducer(state=initialState,action){
@@ -20,17 +20,27 @@ export default function reducer(state=initialState,action){
                 ...state,
                 googleResults:action.payload
             }
-
-        case DB_FETCH:
+        case MY_PLACE:
             return{
-
+                ...state,
+                myPlace:action.payload
             }
-        
         case SET_SEARCH:
-            console.log(action.payload);
             return{
                 ...state,
                 searchForm:action.payload
+            }
+        case MY_DISCOVER:
+            return{
+                ...state,
+                discoverResults:action.payload
+            }
+        case USER:
+            const voteNumber = action.payload.Votes.length
+            return{
+                ...state,
+                globalUser:action.payload,
+                globalVotes:voteNumber
             }
         default:
             return state;

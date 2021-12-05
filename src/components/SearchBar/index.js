@@ -1,9 +1,10 @@
-import React, {useReducer, useState} from "react";
+import React, { useState } from "react";
 import { SET_SEARCH } from "../../utils/actions";
-import { useSelector,useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import './style.css'
 
-function SearchBar(props) {
+function SearchBar() {
     const navigate = useNavigate();
     const [searchFormState, setSearchFormState] = useState({
         search: "",
@@ -11,7 +12,6 @@ function SearchBar(props) {
         type: "establishment"
     })
     const dispatch = useDispatch();
-    const searchForm = useSelector(state => state.searchForm);
 
     const handleSearchChange = event => {
         if (event.target.name === "search") {
@@ -30,21 +30,20 @@ function SearchBar(props) {
                 type: event.target.value
             });
         }
-        console.log(event.target);
     }
 
     const searchDispatch = (e) => {
+        e.stopPropagation();
         dispatch({
-            type:SET_SEARCH,
-            payload:searchFormState
+            type: SET_SEARCH,
+            payload: searchFormState
         });
         navigate('/results');
     }
 
-
     return (
         <>
-            <div className="uk-flex uk-flex-center uk-margin">
+            <div className="uk-flex uk-flex-center uk-margin search-bar">
                 <form className="uk-flex-inline uk-search">
                     <input name="search" id="estName" className="uk-search-input" type="search" value={searchFormState.search} onChange={handleSearchChange} placeholder="Name" />
                     <input name="city" id="city" className="uk-search-input" type="search" value={searchFormState.city} onChange={handleSearchChange} placeholder="City" />
@@ -53,7 +52,7 @@ function SearchBar(props) {
                         <option value='job'>Job</option>
                     </select>
                 </form>
-                <button className="uk-button uk-button-default" onClick={searchDispatch}>Button</button>
+                <button className="uk-button uk-button-default" onClick={searchDispatch}>Search</button>
             </div>
         </>
     )

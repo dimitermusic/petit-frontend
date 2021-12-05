@@ -1,11 +1,11 @@
-.place-title {
+.disc-title {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
 }
 
-.place-badge {
+.disc-badge {
     padding: 11px !important;
     margin: 11px 11px 11px 0;
     /* width: 100px; */
@@ -16,14 +16,14 @@
     box-shadow: 3px 3px 5px 1px rgb(235, 235, 235);
 }
 
-.icon {
+.disc-icon {
     cursor: pointer;
     width: 30px;
     margin: 7px;
     color: #228cf1;
 }
 
-.vote-row {
+.disc-vote-row {
     display: flex;
     flex-direction: row;
     align-items: center !important;

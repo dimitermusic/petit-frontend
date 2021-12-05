@@ -1,0 +1,24 @@
+.search-bar {
+    padding: 20px !important;
+    font-size: small;
+    border: none;
+}
+
+.search-bar input {
+    padding: 10px;
+    background-color: #eff3f4;
+}
+
+.search-bar input[placeholder=City] {
+    border-left: 1px solid #e4e4e4;
+}
+
+.search-bar button {
+    background-color: rgb(74, 155, 74) ;
+    color: white;
+}
+
+.search-bar button:hover {
+    color: rgb(74, 155, 74) ;
+    border: 1px solid rgb(74, 155, 74) ;
+}

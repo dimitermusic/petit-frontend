@@ -5,18 +5,18 @@ import Moment from "react-moment";
 import "moment-timezone";
 import "./style.css"
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
-import API from "../../../utils/api";
-import avatar from "../../../images/avatar.jpg"
+import API from "../../utils/api";
+import avatar from "../../images/avatar.jpg"
 
-function Place() {
+function DiscoverPlace() {
     const { ref_id } = useParams();
-    const searchForm = useSelector(state => state.searchForm);
-    const googleResults = useSelector(state => state.googleResults);
+    const discoverResults = useSelector(state => state.discoverResults)
     const tkn = localStorage.getItem("token");
+    const type = localStorage.getItem('type')
     const [review, setReview] = useState({
         location: ""
     });
-    const [placeIdState, setPlaceIdState] = useState();
+    const [placeIdState, setPlaceIdState] = useState()
     const [voteState, setVoteState] = useState({
         stipendUp: 0,
         stipendDown: 0,
@@ -30,11 +30,14 @@ function Place() {
     const [commentTextState, setCommentTextState] = useState();
     const [allCommentsState, setAllCommentsState] = useState([]);
 
+    const handleInputChange = (e) => setCommentTextState(e.target.value);
+
     useEffect(() => {
-        const myResult = googleResults.filter(result => result.reference === ref_id);
+        const myResult = discoverResults.filter(result => result.ref_id === ref_id && result.isJob === type);
+        console.log(myResult[0]);
         API.getOnePlace({
             name: myResult[0].name,
-            isJob: searchForm.type,
+            isJob: myResult[0].isJob,
             location: myResult[0].formatted_address
         }, tkn, ref_id)
             .then(res => {
@@ -62,15 +65,12 @@ function Place() {
                 API.getAllComments(tkn, res.data.id)
                     .then(data => {
                         console.log(data.data);
-                        const reversedComments = data.data.reverse();
-                        console.log(reversedComments);
-                        setAllCommentsState(reversedComments);
-                        console.log(allCommentsState);
+                        setAllCommentsState(data.data);
                     }).catch(err => {
                         console.log(err);
                     })
             })
-    }, [])
+    }, [discoverResults])
 
     const voteStipendUp = () => {
         API.vote({
@@ -208,7 +208,6 @@ function Place() {
         })
     }
 
-    const handleInputChange = (e) => setCommentTextState(e.target.value);
 
     const postComment = (e) => {
         e.preventDefault()
@@ -237,52 +236,15 @@ function Place() {
         }
     }
 
-    const newLocation = review.location.split(",").slice(0, -2).join(",");
-
-    let voteOptions
-
-    if(searchForm.type==="establishment"){
-        voteOptions =  (<div className="uk-flex vote-row">
-        <div className="uk-margin-large-right feature">Has Pet Menu:</div>
-        <div className="uk-margin-small-right">Yes</div>
-        <MdThumbUp className="icon" onClick={voteMenuUp} />
-        <div className="uk-margin-large-right">{voteState.menuUp}</div>
-        <div className="uk-margin-small-right">No</div>
-        <MdThumbDown className="icon" onClick={voteMenuDown} />
-        <div>{voteState.menuDown}</div>
-    </div>)
-    } else {
-        voteOptions = (
-        <div>
-        <div className="uk-flex vote-row">
-        <div className="uk-margin-large-right feature">Has Pet Stipend:</div>
-        <div className="uk-margin-small-right">Yes</div>
-        <MdThumbUp className="icon" onClick={voteStipendUp} />
-        <div className="uk-margin-large-right">{voteState.stipendUp}</div>
-        <div className="uk-margin-small-right">No</div>
-        <MdThumbDown className="icon" onClick={voteStipendDown} />
-        <div>{voteState.stipendDown}</div>
-    </div>
-
-    <div className="uk-flex vote-row">
-        <div className="uk-margin-large-right feature">Has Pet Time Off:</div>
-        <div className="uk-margin-small-right">Yes</div>
-        <MdThumbUp className="icon" onClick={voteTimeOffUp} />
-        <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
-        <div className="uk-margin-small-right">No</div>
-        <MdThumbDown className="icon" onClick={voteTimeOffDown} />
-        <div>{voteState.timeOffDown}</div>
-    </div>
-    </div>)
-    }
+    const newLocation = review.location.split(",").slice(0, -2).join(",")
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
-            <div className="uk-flex place-title">
+            <div className="uk-flex disc-title">
                 <div className="uk-margin-small-right">{review.name}</div>
                 <div className="uk-margin-small-right">at</div>
                 <div className="uk-margin-small-right">{newLocation}</div>
-                <span className="uk-badge place-badge">as {searchForm.type}</span>
+                <span className="uk-badge disc-badge">as {review.isJob}</span>
             </div>
 
             <hr />
@@ -291,18 +253,45 @@ function Place() {
                 <div>Yes</div>
             </div> */}
 
-            <div className="uk-flex vote-row">
+            <div className="uk-flex disc-vote-row">
                 <div className="uk-margin-large-right feature">Ok to Bring In:</div>
                 <div className="uk-margin-small-right">Yes</div>
-                <MdThumbUp className="icon" onClick={voteBringUp} />
+                <MdThumbUp className="disc-icon" onClick={voteBringUp} />
                 <div className="uk-margin-large-right">{voteState.bringUp}</div>
                 <div className="uk-margin-small-right">No</div>
-                <MdThumbDown className="icon" onClick={voteBringDown} />
+                <MdThumbDown className="disc-icon" onClick={voteBringDown} />
                 <div>{voteState.bringDown}</div>
             </div>
-            
-            {voteOptions}
 
+            <div className="uk-flex disc-vote-row">
+                <div className="uk-margin-large-right feature">Has Pet Menu:</div>
+                <div className="uk-margin-small-right">Yes</div>
+                <MdThumbUp className="disc-icon" onClick={voteMenuUp} />
+                <div className="uk-margin-large-right">{voteState.menuUp}</div>
+                <div className="uk-margin-small-right">No</div>
+                <MdThumbDown className="disc-icon" onClick={voteMenuDown} />
+                <div>{voteState.menuDown}</div>
+            </div>
+
+            <div className="uk-flex disc-vote-row">
+                <div className="uk-margin-large-right feature">Has Pet Stipend:</div>
+                <div className="uk-margin-small-right">Yes</div>
+                <MdThumbUp className="disc-icon" onClick={voteStipendUp} />
+                <div className="uk-margin-large-right">{voteState.stipendUp}</div>
+                <div className="uk-margin-small-right">No</div>
+                <MdThumbDown className="disc-icon" onClick={voteStipendDown} />
+                <div>{voteState.stipendDown}</div>
+            </div>
+
+            <div className="uk-flex disc-vote-row">
+                <div className="uk-margin-large-right feature">Has Pet Time Off:</div>
+                <div className="uk-margin-small-right">Yes</div>
+                <MdThumbUp className="disc-icon" onClick={voteTimeOffUp} />
+                <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
+                <div className="uk-margin-small-right">No</div>
+                <MdThumbDown className="disc-icon" onClick={voteTimeOffDown} />
+                <div>{voteState.timeOffDown}</div>
+            </div>
             <br />
             <a target="_blank" className="uk-button uk-button-default" href={`https://www.google.com/search?q=${review.name}+${newLocation}`}>See on Google</a>
             <br />
@@ -312,17 +301,17 @@ function Place() {
                 <p>Comments:</p>
             </div>
             <form>
-                <input
+                <textarea
                     className="uk-textarea"
                     onChange={handleInputChange}
                     value={commentTextState}
                 >
 
-                </input>
+                </textarea>
                 <button
                     className="uk-button uk-button-default"
                     onClick={postComment}
-                >Post Comment</button>
+                >Comment</button>
             </form>
             <hr />
             <div>
@@ -334,8 +323,8 @@ function Place() {
                                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
                                         <div class="uk-width-auto">
                                             {comment.User.profilePic ?
-                                                (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="profile-picture" />) :
-                                                (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="profile-picture" />)}
+                                                (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="" />) :
+                                                (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="" />)}
                                         </div>
                                         <div class="uk-width-expand">
                                             <h4 class="uk-comment-title uk-margin-remove">@{comment.User.username}</h4>
@@ -361,8 +350,8 @@ function Place() {
             <br />
             <br />
             <br />
-        </div >
+        </div>
     )
 }
 
-export default Place;
+export default DiscoverPlace;

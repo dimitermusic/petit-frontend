@@ -1,17 +1,17 @@
-.discover-result {
+.search-result {
     border: none !important;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.discover-result:hover {
+.search-result:hover {
     cursor: pointer !important;
     background-color: rgb(229, 236, 240) !important;
     border: none !important;
 }
 
-.discover-result span {
+.search-result span {
     color: rgb(159, 159, 159);
     font-size: small;
     align-self: flex-end;
