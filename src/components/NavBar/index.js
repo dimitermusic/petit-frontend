@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './style.css';
 
 function NavBar(props) {
+    console.log(props.userState)
     return (
         <>
             <div>
@@ -18,7 +19,7 @@ function NavBar(props) {
                                 <a href={`/profile`}>Profile</a>
                             </li>
                             <li>
-                                <a href="/logout">{localStorage.token?"Logout":"Login"}</a>
+                                <a href="/logout">{props.userState.username?"Logout":"Login"}</a>
                             </li>
                         </ul>
                     </div>

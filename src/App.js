@@ -58,8 +58,8 @@ function App() {
 
   return (
     <>
-      <NavBar />
-
+      <NavBar 
+        userState={userState}/>
       <SearchBar />
       <Routes>
         <Route exact path={"/results"} element={<Results />} />
