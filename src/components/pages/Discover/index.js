@@ -9,6 +9,7 @@ function Discover() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [places, setPlaces] = useState([]);
+    const myToken = localStorage.getItem("token")
 
     useEffect(() => {
         API.getAllPlaces()
@@ -24,6 +25,8 @@ function Discover() {
             })
     }, [])
 
+
+
     return (
         <div>
             <div className="uk-container uk-width-4-5">
@@ -37,7 +40,7 @@ function Discover() {
                                 key={place.ref_id}
                                 id={place.ref_id}
                                 onClick={() =>
-                                    localStorage.token ? navigate(`/discover/${place.ref_id}`) : alert("Please Log In or Create an Account First!")}>
+                                    myToken ? (localStorage.setItem('type',place.isJob), navigate(`/discover/${place.ref_id}`)) : alert("Please Log In or Create an Account First!")}>
                                 {place.name} at {newLocation}
                                 <span className="uk-margin-small-left uk-margin-small-right">
                                     {place.isJob === "establishment" ?
