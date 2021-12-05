@@ -244,7 +244,7 @@ function DiscoverPlace() {
                 <div className="uk-margin-small-right">{review.name}</div>
                 <div className="uk-margin-small-right">at</div>
                 <div className="uk-margin-small-right">{newLocation}</div>
-                <span className="uk-badge disc-badge">{review.isJob}</span>
+                <span className="uk-badge disc-badge">as {review.isJob}</span>
             </div>
 
             <hr />
@@ -327,7 +327,7 @@ function DiscoverPlace() {
                                                 (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="" />)}
                                         </div>
                                         <div class="uk-width-expand">
-                                            <h4 class="uk-comment-title uk-margin-remove">{comment.User.username}</h4>
+                                            <h4 class="uk-comment-title uk-margin-remove">@{comment.User.username}</h4>
                                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
                                                 <li>
                                                     <Moment format="h:mma | MM/DD/YYYY">
