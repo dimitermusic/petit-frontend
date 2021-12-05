@@ -338,7 +338,7 @@ function Place() {
                                                 (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="profile-picture" />)}
                                         </div>
                                         <div class="uk-width-expand">
-                                            <h4 class="uk-comment-title uk-margin-remove">{comment.User.username}</h4>
+                                            <h4 class="uk-comment-title uk-margin-remove">@{comment.User.username}</h4>
                                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
                                                 <li>
                                                     <Moment format="h:mma | MM/DD/YYYY">
