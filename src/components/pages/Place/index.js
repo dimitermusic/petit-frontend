@@ -214,7 +214,7 @@ function Place() {
         e.preventDefault()
 
         if (commentTextState === "") {
-            alert("It's a shame our pet's can't talk to us...good thing you can! Use words in your comment. 🐶")
+            alert("It's a shame our pets can't talk to us...good thing you can! Use words in your comment. 🐶")
         } else {
             API.postComment({
                 placeId: placeIdState,
