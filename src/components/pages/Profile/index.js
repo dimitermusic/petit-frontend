@@ -122,8 +122,21 @@ function Profile(props) {
   return (
     <div>
       <h3 className="uk-text-bold uk-flex uk-flex-center welcome">Welcome @{myUser.username}!</h3>
-      {/* Recieves badge if user submits more than 10 reviews */}
-      <span className="uk-badge uk-flex uk-flex-center badge">PetIt Puppy</span>
+
+      {/* Badge conditionally rendered based on contribution count */}
+      {myVotes <= 24 &&
+        <span className="uk-badge uk-flex uk-flex-center pup-badge">
+          <p>Puppy</p>
+        </span>}
+      {myVotes >= 25 && myVotes <= 99 &&
+        <span className="uk-badge uk-flex uk-flex-center best-friend-badge">
+          <p>Best Friend</p>
+        </span>}
+      {myVotes >= 100 &&
+        <span className="uk-badge uk-flex uk-flex-center whisperer-badge">
+          Whisperer
+        </span>}
+
       <img src={myUser.profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
       <p uk-margin="true">
         <div className="uk-flex uk-flex-center">

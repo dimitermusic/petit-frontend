@@ -2,12 +2,49 @@
     margin-top: 33px !important;
 }
 
-.badge {
+.pup-badge {
+    width: fit-content;
+    margin: auto;
+    height: 30px !important;
+    font-weight: 500;
+    font-size: 14px !important;
+    background-color: rgb(74, 155, 74) !important;
+    box-shadow: 3px 3px 5px 1px #ccc;
+}
+
+.best-friend-badge {
+    width: fit-content;
+    margin: auto;
+    height: 30px !important;
+    font-weight: 500;
+    font-size: 14px !important;
+    background-color: rgb(117, 98, 242) !important;
+    box-shadow: 3px 3px 5px 1px #ccc;
+}
+
+.whisperer-badge {
     width: 100px;
     margin: auto;
     height: 30px !important;
     font-weight: 500;
     font-size: 14px !important;
-    background-color: rgb(74, 155, 74)  !important;
-    box-shadow: 3px 3px 5px 1px #ccc;
+    background-color: rgb(0, 0, 0) !important;
+    border: solid 2px gold !important;
+    box-shadow: 3px 3px 5px 1px rgb(254, 245, 196);
+}
+
+.pup-badge p {
+    margin: auto;
+    padding: 5px;
+}
+
+.best-friend-badge p {
+    margin: auto;
+    padding: 5px;
+}
+
+.whisperer-badge p {
+    color: rgb(255, 232, 100);
+    margin: auto;
+    padding: 5px;
 }
