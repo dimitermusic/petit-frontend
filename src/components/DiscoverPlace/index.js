@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux"
 import API from "../../utils/api";
+import Moment from "react-moment";
+import "moment-timezone";
+import "./style.css"
+import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import avatar from "../../images/avatar.jpg"
-import 'moment-timezone';
 
 function DiscoverPlace() {
     const { ref_id } = useParams();
-    const discoverResults = useSelector(state => state.discoverResults)    
+    const discoverResults = useSelector(state => state.discoverResults)
     const tkn = localStorage.getItem("token");
     const type = localStorage.getItem('type')
     const [review, setReview] = useState({});
-    const [placeIdState, setPlaceIdState]= useState()
+    const [placeIdState, setPlaceIdState] = useState()
     const [voteState, setVoteState] = useState({
         stipendUp: 0,
         stipendDown: 0,
@@ -24,7 +27,9 @@ function DiscoverPlace() {
     })
     const [commentTextState, setCommentTextState] = useState();
     const [allCommentsState, setAllCommentsState] = useState([]);
-    const newLocation = review.location.split(",").slice(0,-2).join(",");
+
+    const newLocation = review.location.split(",").slice(0, -2).join(",");
+
     const handleInputChange = (e) => setCommentTextState(e.target.value);
 
     useEffect(() => {
@@ -38,7 +43,7 @@ function DiscoverPlace() {
             .then(res => {
                 setPlaceIdState(res.data.id)
                 setReview(res.data);
-                const voteStipendUpCount = res.data.Votes.filter(vote =>vote.hasStipendUp === true)
+                const voteStipendUpCount = res.data.Votes.filter(vote => vote.hasStipendUp === true)
                 const voteStipendDownCount = res.data.Votes.filter(vote => vote.hasStipendDown === true)
                 const votePetMenuUpCount = res.data.Votes.filter(vote => vote.hasMenuUp === true)
                 const votePetMenuDownCount = res.data.Votes.filter(vote => vote.hasMenuDown === true)
@@ -48,14 +53,14 @@ function DiscoverPlace() {
                 const voteBringDownCount = res.data.Votes.filter(vote => vote.canBringDown === true)
                 setVoteState({
                     ...voteState,
-                    stipendUp:voteStipendUpCount.length,
-                    stipendDown:voteStipendDownCount.length,
-                    menuUp:votePetMenuUpCount.length,
-                    menuDown:votePetMenuDownCount.length,
-                    timeOffUp:voteTimeOffUpCount.length,
-                    timeOffDown:voteTimeOffDownCount.length,
-                    bringUp:voteBringUpCount.length,
-                    bringDown:voteBringDownCount.length
+                    stipendUp: voteStipendUpCount.length,
+                    stipendDown: voteStipendDownCount.length,
+                    menuUp: votePetMenuUpCount.length,
+                    menuDown: votePetMenuDownCount.length,
+                    timeOffUp: voteTimeOffUpCount.length,
+                    timeOffDown: voteTimeOffDownCount.length,
+                    bringUp: voteBringUpCount.length,
+                    bringDown: voteBringDownCount.length
                 })
                 API.getAllComments(tkn, res.data.id)
                     .then(data => {
@@ -70,34 +75,34 @@ function DiscoverPlace() {
     const voteStipendUp = () => {
         API.vote({
             hasStipendUp: true,
-            hasStipendDown:false,
+            hasStipendDown: false,
             placeId: placeIdState
         }, tkn)
-        .then(res => {
-            const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
-            const newNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
-            setVoteState({
-                ...voteState,
-                stipendUp:voteNumber.length,
-                stipendDown:newNumber.length
+            .then(res => {
+                const voteNumber = res.data.Votes.filter(vote => vote.hasStipendUp === true)
+                const newNumber = res.data.Votes.filter(vote => vote.hasStipendDown === true)
+                setVoteState({
+                    ...voteState,
+                    stipendUp: voteNumber.length,
+                    stipendDown: newNumber.length
+                })
+                console.log("Vote Successful!")
             })
-            console.log("Vote Successful!")
-        })
     }
 
     const voteStipendDown = () => {
         API.vote({
             hasStipendDown: true,
-            hasStipendUp:false,
+            hasStipendUp: false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote=>vote.hasStipendDown===true)
-            const newNumber = res.data.Votes.filter(vote=>vote.hasStipendUp===true)
+            const voteNumber = res.data.Votes.filter(vote => vote.hasStipendDown === true)
+            const newNumber = res.data.Votes.filter(vote => vote.hasStipendUp === true)
             setVoteState({
                 ...voteState,
-                stipendDown:voteNumber.length,
-                stipendUp:newNumber.length
-            })            
+                stipendDown: voteNumber.length,
+                stipendUp: newNumber.length
+            })
             console.log("Vote Successful!")
         })
     }
@@ -105,15 +110,15 @@ function DiscoverPlace() {
     const voteBringUp = () => {
         API.vote({
             canBringUp: true,
-            canBringDown:false,
+            canBringDown: false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote=>vote.canBringUp===true);
-            const another = res.data.Votes.filter(vote=>vote.canBringDown===true)
+            const voteNumber = res.data.Votes.filter(vote => vote.canBringUp === true);
+            const another = res.data.Votes.filter(vote => vote.canBringDown === true)
             setVoteState({
                 ...voteState,
-                bringDown:another.length,
-                bringUp:voteNumber.length
+                bringDown: another.length,
+                bringUp: voteNumber.length
             })
         })
     }
@@ -121,15 +126,15 @@ function DiscoverPlace() {
     const voteBringDown = () => {
         API.vote({
             canBringDown: true,
-            canBringUp:false,
+            canBringUp: false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote=>vote.canBringDown===true);
-            const another = res.data.Votes.filter(vote=>vote.canBringUp===true);
+            const voteNumber = res.data.Votes.filter(vote => vote.canBringDown === true);
+            const another = res.data.Votes.filter(vote => vote.canBringUp === true);
             setVoteState({
                 ...voteState,
-                bringUp:another.length,
-                bringDown:voteNumber.length
+                bringUp: another.length,
+                bringDown: voteNumber.length
             })
             console.log("Vote Successful!")
         })
@@ -138,15 +143,15 @@ function DiscoverPlace() {
     const voteMenuUp = () => {
         API.vote({
             hasMenuUp: true,
-            hasMenuDown:false,
+            hasMenuDown: false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuUp===true)
-            const another = res.data.Votes.filter(vote=>vote.hasMenuDown===true);
+            const voteNumber = res.data.Votes.filter(vote => vote.hasMenuUp === true)
+            const another = res.data.Votes.filter(vote => vote.hasMenuDown === true);
             setVoteState({
                 ...voteState,
-                menuUp:voteNumber.length,
-                menuDown:another.length
+                menuUp: voteNumber.length,
+                menuDown: another.length
             })
             console.log("Vote Successful!")
         })
@@ -155,15 +160,15 @@ function DiscoverPlace() {
     const voteMenuDown = () => {
         API.vote({
             hasMenuDown: true,
-            hasMenuUp:false,
+            hasMenuUp: false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const another = res.data.Votes.filter(vote=>vote.hasMenuUp===true);
-            const voteNumber = res.data.Votes.filter(vote=>vote.hasMenuDown===true)
+            const another = res.data.Votes.filter(vote => vote.hasMenuUp === true);
+            const voteNumber = res.data.Votes.filter(vote => vote.hasMenuDown === true)
             setVoteState({
                 ...voteState,
-                menuUp:another.length,
-                menuDown:voteNumber.length
+                menuUp: another.length,
+                menuDown: voteNumber.length
             })
             console.log("Vote Successful!")
         })
@@ -172,15 +177,15 @@ function DiscoverPlace() {
     const voteTimeOffUp = () => {
         API.vote({
             petTimeOffUp: true,
-            petTimeOffDown:false,
+            petTimeOffDown: false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffUp===true)
-            const another = res.data.Votes.filter(vote=>vote.petTimeOffDown===true);
+            const voteNumber = res.data.Votes.filter(vote => vote.petTimeOffUp === true)
+            const another = res.data.Votes.filter(vote => vote.petTimeOffDown === true);
             setVoteState({
                 ...voteState,
-                timeOffDown:another.length,
-                timeOffUp:voteNumber.length
+                timeOffDown: another.length,
+                timeOffUp: voteNumber.length
             })
             console.log("Vote Successful!")
         })
@@ -189,16 +194,16 @@ function DiscoverPlace() {
     const voteTimeOffDown = () => {
         API.vote({
             petTimeOffDown: true,
-            petTimeOffUp:false,
+            petTimeOffUp: false,
             placeId: placeIdState
         }, tkn).then(res => {
-            const another = res.data.Votes.filter(vote=>vote.petTimeOffUp===true);
-            const voteNumber = res.data.Votes.filter(vote=>vote.petTimeOffDown===true)
+            const another = res.data.Votes.filter(vote => vote.petTimeOffUp === true);
+            const voteNumber = res.data.Votes.filter(vote => vote.petTimeOffDown === true)
             setVoteState({
                 ...voteState,
-                timeOffUp:another.length,
-                timeOffDown:voteNumber.length
-            })           
+                timeOffUp: another.length,
+                timeOffDown: voteNumber.length
+            })
             console.log("Vote Successful!")
         })
     }
@@ -206,33 +211,39 @@ function DiscoverPlace() {
 
     const postComment = (e) => {
         e.preventDefault()
-        API.postComment({
-            placeId: placeIdState,
-            comment: commentTextState,
-        }, tkn).then(res => {
-            console.log(res);
-            console.log("Comment Successfully sent to db!")
-            API.getAllComments(tkn, placeIdState)
-                .then(data => {
-                    console.log(data.data);
-                    setAllCommentsState(data.data);
-                    console.log(allCommentsState);
-                    alert("comment posted successfully!")
-                    setCommentTextState("")
-                }).catch(err => {
-                    console.log(err);
-                })
-        })
+
+        if (commentTextState === "") {
+            alert("It's a shame our pets can't talk to us...good thing you can! Use words in your comment. 🐶")
+        } else {
+            API.postComment({
+                placeId: placeIdState,
+                comment: commentTextState,
+            }, tkn).then(res => {
+                console.log(res);
+                console.log("Comment Successfully sent to db!")
+                API.getAllComments(tkn, placeIdState)
+                    .then(data => {
+                        console.log(data.data);
+                        const reversedComments = data.data.reverse();
+                        console.log(reversedComments);
+                        setAllCommentsState(reversedComments);
+                        console.log(allCommentsState);
+                        setCommentTextState("")
+                    }).catch(err => {
+                        console.log(err);
+                    })
+            })
+        }
     }
 
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
-            <div className="uk-flex">
+            <div className="uk-flex disc-title">
                 <div className="uk-margin-small-right">{review.name}</div>
                 <div className="uk-margin-small-right">at</div>
                 <div className="uk-margin-small-right">{newLocation}</div>
-                <span className="uk-badge">{review.isJob}</span>
+                <span className="uk-badge disc-badge">{review.isJob}</span>
             </div>
 
             <hr />
@@ -241,50 +252,49 @@ function DiscoverPlace() {
                 <div>Yes</div>
             </div> */}
 
-            <div className="uk-flex">
-                <p className="uk-margin-large-right">Ok to Bring In:</p>
+            <div className="uk-flex disc-vote-row">
+                <div className="uk-margin-large-right feature">Ok to Bring In:</div>
                 <div className="uk-margin-small-right">Yes</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteBringUp}>👍</div>
+                <MdThumbUp className="disc-icon" onClick={voteBringUp} />
                 <div className="uk-margin-large-right">{voteState.bringUp}</div>
-
                 <div className="uk-margin-small-right">No</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteBringDown}>👎</div>
+                <MdThumbDown className="disc-icon" onClick={voteBringDown} />
                 <div>{voteState.bringDown}</div>
             </div>
 
-            <div className="uk-flex">
-                <p className="uk-margin-large-right">Pet Menu:</p>
+            <div className="uk-flex disc-vote-row">
+                <div className="uk-margin-large-right feature">Has Pet Menu:</div>
                 <div className="uk-margin-small-right">Yes</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteMenuUp}>👍</div>
+                <MdThumbUp className="disc-icon" onClick={voteMenuUp} />
                 <div className="uk-margin-large-right">{voteState.menuUp}</div>
-
                 <div className="uk-margin-small-right">No</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteMenuDown}>👎</div>
+                <MdThumbDown className="disc-icon" onClick={voteMenuDown} />
                 <div>{voteState.menuDown}</div>
             </div>
 
-            <div className="uk-flex">
-                <p className="uk-margin-large-right">Pet Stipend:</p>
+            <div className="uk-flex disc-vote-row">
+                <div className="uk-margin-large-right feature">Has Pet Stipend:</div>
                 <div className="uk-margin-small-right">Yes</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteStipendUp}>👍</div>
+                <MdThumbUp className="disc-icon" onClick={voteStipendUp} />
                 <div className="uk-margin-large-right">{voteState.stipendUp}</div>
-
                 <div className="uk-margin-small-right">No</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteStipendDown}>👎</div>
+                <MdThumbDown className="disc-icon" onClick={voteStipendDown} />
                 <div>{voteState.stipendDown}</div>
             </div>
 
-            <div className="uk-flex">
-                <p className="uk-margin-large-right">Pet Time Off:</p>
+            <div className="uk-flex disc-vote-row">
+                <div className="uk-margin-large-right feature">Has Pet Time Off:</div>
                 <div className="uk-margin-small-right">Yes</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteTimeOffUp}>👍</div>
+                <MdThumbUp className="disc-icon" onClick={voteTimeOffUp} />
                 <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
-
                 <div className="uk-margin-small-right">No</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteTimeOffDown}>👎</div>
+                <MdThumbDown className="disc-icon" onClick={voteTimeOffDown} />
                 <div>{voteState.timeOffDown}</div>
             </div>
-            <a className="uk-button uk-button-default" href="#">See on Google</a>
+            <br />
+            <a target="_blank" className="uk-button uk-button-default" href={`https://www.google.com/search?q=${review.name}+${newLocation}`}>See on Google</a>
+            <br />
+            <br />
             <hr />
             <div>
                 <p>Comments:</p>
@@ -312,13 +322,17 @@ function DiscoverPlace() {
                                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
                                         <div class="uk-width-auto">
                                             {comment.User.profilePic ?
-                                            (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="" />) :
-                                            (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="" />)}
+                                                (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="" />) :
+                                                (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="" />)}
                                         </div>
                                         <div class="uk-width-expand">
                                             <h4 class="uk-comment-title uk-margin-remove">{comment.User.username}</h4>
                                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                                <li>{comment.createdAt}</li>
+                                                <li>
+                                                    <Moment format="h:mma | MM/DD/YYYY">
+                                                        {comment.createdAt}
+                                                    </Moment>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
