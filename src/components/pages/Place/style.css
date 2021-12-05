@@ -1,4 +1,30 @@
-placeClick {
-    cursor: "pointer";
-    background-color: aquamarine;
+.place-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.place-badge {
+    padding: 11px !important;
+    margin: 11px 11px 11px 0;
+    /* width: 100px; */
+    /* height: 30px !important; */
+    font-weight: 500;
+    /* font-size: 14px !important; */
+    background-color: #228cf1 !important;
+    box-shadow: 3px 3px 5px 1px rgb(235, 235, 235);
+}
+
+.icon {
+    cursor: pointer;
+    width: 30px;
+    margin: 7px;
+    color: #228cf1;
+}
+
+.vote-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
 }
