@@ -162,7 +162,7 @@ function Profile(props) {
           />
         </div>
       </p>
-      <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Votes: {myVotes}</p>
+      <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Contributions: {myVotes}</p>
     </div >
   )
 }
