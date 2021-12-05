@@ -7,8 +7,7 @@ import 'moment-timezone';
 
 function DiscoverPlace() {
     const { ref_id } = useParams();
-    const discoverResults = useSelector(state => state.discoverResults)
-    const discover = discoverResults.filter(result => result.ref_id===ref_id)
+    const discoverResults = useSelector(state => state.discoverResults)    
     const tkn = localStorage.getItem("token");
     const [review, setReview] = useState({});
     const [placeIdState, setPlaceIdState]= useState()
@@ -26,10 +25,13 @@ function DiscoverPlace() {
     const [allCommentsState, setAllCommentsState] = useState([]);
 
     useEffect(() => {
-        const myResult = discoverResults.filter(result => result.reference === ref_id);
+        console.log(discoverResults);   
+        console.log(ref_id);
+        const myResult = discoverResults.filter(result => result.ref_id === ref_id);
+        console.log(myResult[0]);
         API.getOnePlace({
             name: myResult[0].name,
-            isJob: myResult[0].type,
+            isJob: myResult[0].isJob,
             location: myResult[0].formatted_address
         }, tkn, ref_id)
             .then(res => {
@@ -62,7 +64,7 @@ function DiscoverPlace() {
                         console.log(err);
                     })
             })
-    }, [])
+    }, [discoverResults])
 
     const voteStipendUp = () => {
         API.vote({
@@ -223,120 +225,118 @@ function DiscoverPlace() {
         })
     }
 
- const newLocation = review.location.split(",").slice(0,-2).join(",")
+//  const newLocation = review.location.split(",").slice(0,-2).join(",")
 
     return (
-        <>
-        </>
-    //     <div className="uk-margin-large-left uk-margin-large-right">
-    //         <div className="uk-flex">
-    //             <div className="uk-margin-small-right">{review.name}</div>
-    //             <div className="uk-margin-small-right">at</div>
-    //             <div className="uk-margin-small-right">{newLocation}</div>
-    //             <span className="uk-badge">{review.type}</span>
-    //         </div>
+        <div className="uk-margin-large-left uk-margin-large-right">
+            <div className="uk-flex">
+                <div className="uk-margin-small-right">{review.name}</div>
+                <div className="uk-margin-small-right">at</div>
+                {/* <div className="uk-margin-small-right">{newLocation}</div> */}
+                <span className="uk-badge">{review.isJob}</span>
+            </div>
 
-    //         <hr />
-    //         {/* <div className="uk-flex">
-    //             <p className="uk-margin-large-right">Pet Friendly:</p>
-    //             <div>Yes</div>
-    //         </div> */}
+            <hr />
+            {/* <div className="uk-flex">
+                <p className="uk-margin-large-right">Pet Friendly:</p>
+                <div>Yes</div>
+            </div> */}
 
-    //         <div className="uk-flex">
-    //             <p className="uk-margin-large-right">Ok to Bring In:</p>
-    //             <div className="uk-margin-small-right">Yes</div>
-    //             <div style={{ "cursor": "pointer" }} onClick={voteBringUp}>👍</div>
-    //             <div className="uk-margin-large-right">{voteState.bringUp}</div>
+            <div className="uk-flex">
+                <p className="uk-margin-large-right">Ok to Bring In:</p>
+                <div className="uk-margin-small-right">Yes</div>
+                <div style={{ "cursor": "pointer" }} onClick={voteBringUp}>👍</div>
+                <div className="uk-margin-large-right">{voteState.bringUp}</div>
 
-    //             <div className="uk-margin-small-right">No</div>
-    //             <div style={{ "cursor": "pointer" }} onClick={voteBringDown}>👎</div>
-    //             <div>{voteState.bringDown}</div>
-    //         </div>
+                <div className="uk-margin-small-right">No</div>
+                <div style={{ "cursor": "pointer" }} onClick={voteBringDown}>👎</div>
+                <div>{voteState.bringDown}</div>
+            </div>
 
-    //         <div className="uk-flex">
-    //             <p className="uk-margin-large-right">Pet Menu:</p>
-    //             <div className="uk-margin-small-right">Yes</div>
-    //             <div style={{ "cursor": "pointer" }} onClick={voteMenuUp}>👍</div>
-    //             <div className="uk-margin-large-right">{voteState.menuUp}</div>
+            <div className="uk-flex">
+                <p className="uk-margin-large-right">Pet Menu:</p>
+                <div className="uk-margin-small-right">Yes</div>
+                <div style={{ "cursor": "pointer" }} onClick={voteMenuUp}>👍</div>
+                <div className="uk-margin-large-right">{voteState.menuUp}</div>
 
-    //             <div className="uk-margin-small-right">No</div>
-    //             <div style={{ "cursor": "pointer" }} onClick={voteMenuDown}>👎</div>
-    //             <div>{voteState.menuDown}</div>
-    //         </div>
+                <div className="uk-margin-small-right">No</div>
+                <div style={{ "cursor": "pointer" }} onClick={voteMenuDown}>👎</div>
+                <div>{voteState.menuDown}</div>
+            </div>
 
-    //         <div className="uk-flex">
-    //             <p className="uk-margin-large-right">Pet Stipend:</p>
-    //             <div className="uk-margin-small-right">Yes</div>
-    //             <div style={{ "cursor": "pointer" }} onClick={voteStipendUp}>👍</div>
-    //             <div className="uk-margin-large-right">{voteState.stipendUp}</div>
+            <div className="uk-flex">
+                <p className="uk-margin-large-right">Pet Stipend:</p>
+                <div className="uk-margin-small-right">Yes</div>
+                <div style={{ "cursor": "pointer" }} onClick={voteStipendUp}>👍</div>
+                <div className="uk-margin-large-right">{voteState.stipendUp}</div>
 
-    //             <div className="uk-margin-small-right">No</div>
-    //             <div style={{ "cursor": "pointer" }} onClick={voteStipendDown}>👎</div>
-    //             <div>{voteState.stipendDown}</div>
-    //         </div>
+                <div className="uk-margin-small-right">No</div>
+                <div style={{ "cursor": "pointer" }} onClick={voteStipendDown}>👎</div>
+                <div>{voteState.stipendDown}</div>
+            </div>
 
-    //         <div className="uk-flex">
-    //             <p className="uk-margin-large-right">Pet Time Off:</p>
-    //             <div className="uk-margin-small-right">Yes</div>
-    //             <div style={{ "cursor": "pointer" }} onClick={voteTimeOffUp}>👍</div>
-    //             <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
+            <div className="uk-flex">
+                <p className="uk-margin-large-right">Pet Time Off:</p>
+                <div className="uk-margin-small-right">Yes</div>
+                <div style={{ "cursor": "pointer" }} onClick={voteTimeOffUp}>👍</div>
+                <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
 
-    //             <div className="uk-margin-small-right">No</div>
-    //             <div style={{ "cursor": "pointer" }} onClick={voteTimeOffDown}>👎</div>
-    //             <div>{voteState.timeOffDown}</div>
-    //         </div>
-    //         <a className="uk-button uk-button-default" href="#">See on Google</a>
-    //         <hr />
-    //         <div>
-    //             <p>Comments:</p>
-    //         </div>
-    //         <form>
-    //             <textarea
-    //                 className="uk-textarea"
-    //                 onChange={handleInputChange}
-    //                 value={commentTextState}
-    //             >
+                <div className="uk-margin-small-right">No</div>
+                <div style={{ "cursor": "pointer" }} onClick={voteTimeOffDown}>👎</div>
+                <div>{voteState.timeOffDown}</div>
+            </div>
+            <a className="uk-button uk-button-default" href="#">See on Google</a>
+            <hr />
+            <div>
+                <p>Comments:</p>
+            </div>
+            <form>
+                <textarea
+                    className="uk-textarea"
+                    onChange={handleInputChange}
+                    value={commentTextState}
+                >
 
-    //             </textarea>
-    //             <button
-    //                 className="uk-button uk-button-default"
-    //                 onClick={postComment}
-    //             >Comment</button>
-    //         </form>
-    //         <hr />
-    //         <div>
-    //             <ul className="uk-list uk-list-large uk-list-divider">
-    //                 {allCommentsState.map(comment => (
-    //                     <li>
-    //                         <article class="uk-comment">
-    //                             <header class="uk-comment-header">
-    //                                 <div class="uk-grid-medium uk-flex-middle" uk-grid>
-    //                                     <div class="uk-width-auto">
-    //                                         {comment.User.profilePic ?
-    //                                         (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="" />) :
-    //                                         (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="" />)}
-    //                                     </div>
-    //                                     <div class="uk-width-expand">
-    //                                         <h4 class="uk-comment-title uk-margin-remove">{comment.User.username}</h4>
-    //                                         <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-    //                                             <li>{comment.createdAt}</li>
-    //                                         </ul>
-    //                                     </div>
-    //                                 </div>
-    //                             </header>
-    //                             <div class="uk-comment-body">
-    //                                 <p>{comment.comment}</p>
-    //                             </div>
-    //                         </article>
-    //                     </li>
-    //                 ))}
-    //             </ul>
-    //         </div>
-    //         <br />
-    //         <br />
-    //         <br />
-    //         <br />
-    //     </div>
+                </textarea>
+                <button
+                    className="uk-button uk-button-default"
+                    onClick={postComment}
+                >Comment</button>
+            </form>
+            <hr />
+            <div>
+                <ul className="uk-list uk-list-large uk-list-divider">
+                    {allCommentsState.map(comment => (
+                        <li>
+                            <article class="uk-comment">
+                                <header class="uk-comment-header">
+                                    <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                                        <div class="uk-width-auto">
+                                            {comment.User.profilePic ?
+                                            (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="" />) :
+                                            (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="" />)}
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <h4 class="uk-comment-title uk-margin-remove">{comment.User.username}</h4>
+                                            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                                <li>{comment.createdAt}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </header>
+                                <div class="uk-comment-body">
+                                    <p>{comment.comment}</p>
+                                </div>
+                            </article>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
     )
 }
 
