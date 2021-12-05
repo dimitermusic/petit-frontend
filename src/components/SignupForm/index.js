@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from 'prop-types';
 import style from "./style.css";
 import API from "../../utils/api";
+import { USER } from "../../utils/actions";
 
 
 function SignupForm(props) {
-
+  const dispatch = useDispatch()
   const [loginFormState, setLoginFormState] = useState({
     usernameSignIn: "",
     passwordSignIn: "",
@@ -53,6 +55,10 @@ function SignupForm(props) {
         props.setUserState(res.data.user)
         props.setToken(res.data.token)
         localStorage.setItem("token", res.data.token)
+        dispatch({
+          type:USER,
+          payload:res.data.user
+        })
       }).catch(err => {
         console.log(err);
         alert("Incorrect Username or Password")
@@ -76,6 +82,10 @@ function SignupForm(props) {
           props.setUserState(taco.data.user)
           props.setToken(taco.data.token)
           localStorage.setItem("token", taco.data.token)
+          dispatch({
+            type:USER,
+            payload:taco.data.user
+          })
         })
       }).catch(err => {
         console.log(err);
