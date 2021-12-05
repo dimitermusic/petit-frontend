@@ -3,8 +3,7 @@ import './style.css';
 
 function NavBar(props) {
     const [navbarState, setNavbarState] = useState("");
-
-    // useEffect(() => localStorage.token ? setNavbarState("Logout") : setNavbarState("Login"), [<Profile/>])
+    useEffect(() => localStorage.token ? setNavbarState("Logout") : setNavbarState("Login"))
     return (
         <>
             <div>
