@@ -20,7 +20,7 @@ function NavBar(props) {
                                 <a href={`/profile`}>Profile</a>
                             </li>
                             <li>
-                                <a href="/logout">Logout</a>
+                                <a href="/logout">{localStorage.token?"Logout":"Login"}</a>
                             </li>
                         </ul>
                     </div>
