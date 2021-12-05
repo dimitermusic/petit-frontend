@@ -17,7 +17,7 @@ import { USER } from "./utils/actions.js";
 function App() {
   const [userState, setUserState] = useState({ username: "", id: 0 })
   const [token, setToken] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const myToken = localStorage.getItem("token")
