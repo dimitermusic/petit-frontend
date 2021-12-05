@@ -6,6 +6,7 @@ import API from "../../../utils/api";
 import avatar from "../../../images/avatar.jpg"
 import Moment from 'react-moment';
 import 'moment-timezone';
+import { MdThumbUp, MdThumbDown } from "react-icons/md";
 
 function Place() {
     const { ref_id } = useParams();
@@ -213,7 +214,7 @@ function Place() {
         e.preventDefault()
 
         if (commentTextState === "") {
-            alert("It's a shame our pet's can't talk to us...good thing you can! Use words in your comment. 🐶")
+            alert("It's a shame our pets can't talk to us...good thing you can! Use words in your comment. 🐶")
         } else {
             API.postComment({
                 placeId: placeIdState,
@@ -240,11 +241,11 @@ function Place() {
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
-            <div className="uk-flex">
+            <div className="uk-flex place-title">
                 <div className="uk-margin-small-right">{review.name}</div>
                 <div className="uk-margin-small-right">at</div>
                 <div className="uk-margin-small-right">{newLocation}</div>
-                <span className="uk-badge">{searchForm.type}</span>
+                <span className="uk-badge place-badge">as {searchForm.type}</span>
             </div>
 
             <hr />
@@ -253,66 +254,65 @@ function Place() {
                 <div>Yes</div>
             </div> */}
 
-            <div className="uk-flex">
-                <p className="uk-margin-large-right">Ok to Bring In:</p>
+            <div className="uk-flex vote-row">
+                <div className="uk-margin-large-right feature">Ok to Bring In:</div>
                 <div className="uk-margin-small-right">Yes</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteBringUp}>👍</div>
+                <MdThumbUp className="icon" onClick={voteBringUp} />
                 <div className="uk-margin-large-right">{voteState.bringUp}</div>
-
                 <div className="uk-margin-small-right">No</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteBringDown}>👎</div>
+                <MdThumbDown className="icon" onClick={voteBringDown} />
                 <div>{voteState.bringDown}</div>
             </div>
 
-            <div className="uk-flex">
-                <p className="uk-margin-large-right">Pet Menu:</p>
+            <div className="uk-flex vote-row">
+                <div className="uk-margin-large-right feature">Has Pet Menu:</div>
                 <div className="uk-margin-small-right">Yes</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteMenuUp}>👍</div>
+                <MdThumbUp className="icon" onClick={voteMenuUp} />
                 <div className="uk-margin-large-right">{voteState.menuUp}</div>
-
                 <div className="uk-margin-small-right">No</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteMenuDown}>👎</div>
+                <MdThumbDown className="icon" onClick={voteMenuDown} />
                 <div>{voteState.menuDown}</div>
             </div>
 
-            <div className="uk-flex">
-                <p className="uk-margin-large-right">Pet Stipend:</p>
+            <div className="uk-flex vote-row">
+                <div className="uk-margin-large-right feature">Has Pet Stipend:</div>
                 <div className="uk-margin-small-right">Yes</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteStipendUp}>👍</div>
+                <MdThumbUp className="icon" onClick={voteStipendUp} />
                 <div className="uk-margin-large-right">{voteState.stipendUp}</div>
-
                 <div className="uk-margin-small-right">No</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteStipendDown}>👎</div>
+                <MdThumbDown className="icon" onClick={voteStipendDown} />
                 <div>{voteState.stipendDown}</div>
             </div>
 
-            <div className="uk-flex">
-                <p className="uk-margin-large-right">Pet Time Off:</p>
+            <div className="uk-flex vote-row">
+                <div className="uk-margin-large-right feature">Has Pet Time Off:</div>
                 <div className="uk-margin-small-right">Yes</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteTimeOffUp}>👍</div>
+                <MdThumbUp className="icon" onClick={voteTimeOffUp} />
                 <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
-
                 <div className="uk-margin-small-right">No</div>
-                <div style={{ "cursor": "pointer" }} onClick={voteTimeOffDown}>👎</div>
+                <MdThumbDown className="icon" onClick={voteTimeOffDown} />
                 <div>{voteState.timeOffDown}</div>
             </div>
-            <a className="uk-button uk-button-default" href="#">See on Google</a>
+            <br />
+            <a target="_blank" className="uk-button uk-button-default" href={`https://www.google.com/search?q=${review.name}+${newLocation}`}>See on Google</a>
+            <br />
+            <br />
             <hr />
             <div>
                 <p>Comments:</p>
             </div>
             <form>
-                <textarea
+                <input
                     className="uk-textarea"
                     onChange={handleInputChange}
                     value={commentTextState}
                 >
 
-                </textarea>
+                </input>
                 <button
                     className="uk-button uk-button-default"
                     onClick={postComment}
-                >Comment</button>
+                >Post Comment</button>
             </form>
             <hr />
             <div>
@@ -330,7 +330,11 @@ function Place() {
                                         <div class="uk-width-expand">
                                             <h4 class="uk-comment-title uk-margin-remove">{comment.User.username}</h4>
                                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                                <li>{comment.createdAt}</li>
+                                                <li>
+                                                    <Moment format="h:mma | MM/DD/YYYY">
+                                                        {comment.createdAt}
+                                                    </Moment>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -347,7 +351,7 @@ function Place() {
             <br />
             <br />
             <br />
-        </div>
+        </div >
     )
 }
 
