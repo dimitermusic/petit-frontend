@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux"
-import API from "../../utils/api";
 import Moment from "react-moment";
 import "moment-timezone";
 import "./style.css"
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
+import API from "../../utils/api";
 import avatar from "../../images/avatar.jpg"
 
 function DiscoverPlace() {
@@ -13,7 +13,9 @@ function DiscoverPlace() {
     const discoverResults = useSelector(state => state.discoverResults)
     const tkn = localStorage.getItem("token");
     const type = localStorage.getItem('type')
-    const [review, setReview] = useState({});
+    const [review, setReview] = useState({
+        location: ""
+    });
     const [placeIdState, setPlaceIdState] = useState()
     const [voteState, setVoteState] = useState({
         stipendUp: 0,
@@ -27,8 +29,6 @@ function DiscoverPlace() {
     })
     const [commentTextState, setCommentTextState] = useState();
     const [allCommentsState, setAllCommentsState] = useState([]);
-
-    const newLocation = review.location.split(",").slice(0, -2).join(",");
 
     const handleInputChange = (e) => setCommentTextState(e.target.value);
 
@@ -236,6 +236,7 @@ function DiscoverPlace() {
         }
     }
 
+    const newLocation = review.location.split(",").slice(0, -2).join(",")
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right">

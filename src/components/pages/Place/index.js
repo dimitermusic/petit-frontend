@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux"
-import API from "../../utils/api";
 import Moment from "react-moment";
 import "moment-timezone";
 import "./style.css"
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
-import avatar from "../../images/avatar.jpg"
+import API from "../../../utils/api";
+import avatar from "../../../images/avatar.jpg"
 
 function Place() {
     const { ref_id } = useParams();
