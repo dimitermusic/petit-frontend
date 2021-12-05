@@ -9,6 +9,7 @@ function DiscoverPlace() {
     const { ref_id } = useParams();
     const discoverResults = useSelector(state => state.discoverResults)    
     const tkn = localStorage.getItem("token");
+    const type = localStorage.getItem('type')
     const [review, setReview] = useState({});
     const [placeIdState, setPlaceIdState]= useState()
     const [voteState, setVoteState] = useState({
@@ -23,11 +24,11 @@ function DiscoverPlace() {
     })
     const [commentTextState, setCommentTextState] = useState();
     const [allCommentsState, setAllCommentsState] = useState([]);
+    const newLocation = review.location.split(",").slice(0,-2).join(",");
+    const handleInputChange = (e) => setCommentTextState(e.target.value);
 
     useEffect(() => {
-        console.log(discoverResults);   
-        console.log(ref_id);
-        const myResult = discoverResults.filter(result => result.ref_id === ref_id);
+        const myResult = discoverResults.filter(result => result.ref_id === ref_id && result.isJob === type);
         console.log(myResult[0]);
         API.getOnePlace({
             name: myResult[0].name,
@@ -202,7 +203,6 @@ function DiscoverPlace() {
         })
     }
 
-    const handleInputChange = (e) => setCommentTextState(e.target.value);
 
     const postComment = (e) => {
         e.preventDefault()
@@ -225,14 +225,13 @@ function DiscoverPlace() {
         })
     }
 
-//  const newLocation = review.location.split(",").slice(0,-2).join(",")
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
             <div className="uk-flex">
                 <div className="uk-margin-small-right">{review.name}</div>
                 <div className="uk-margin-small-right">at</div>
-                {/* <div className="uk-margin-small-right">{newLocation}</div> */}
+                <div className="uk-margin-small-right">{newLocation}</div>
                 <span className="uk-badge">{review.isJob}</span>
             </div>
 
