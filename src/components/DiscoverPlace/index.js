@@ -30,8 +30,6 @@ function DiscoverPlace() {
     const [commentTextState, setCommentTextState] = useState();
     const [allCommentsState, setAllCommentsState] = useState([]);
 
-    const handleInputChange = (e) => setCommentTextState(e.target.value);
-
     useEffect(() => {
         const myResult = discoverResults.filter(result => result.ref_id === ref_id && result.isJob === type);
         console.log(myResult[0]);
@@ -73,7 +71,7 @@ function DiscoverPlace() {
                         console.log(err);
                     })
             })
-    }, [discoverResults])
+    }, [])
 
     const voteStipendUp = () => {
         API.vote({
@@ -211,9 +209,10 @@ function DiscoverPlace() {
         })
     }
 
-    const postComment = (e) => {
-        e.preventDefault()
+    const handleInputChange = (e) => setCommentTextState(e.target.value);
 
+    const postComment = (e) => {
+        e.preventDefault();
         if (commentTextState === "") {
             alert("It's a shame our pets can't talk to us...good thing you can! Use words in your comment. 🐶")
         } else {
@@ -286,11 +285,6 @@ function DiscoverPlace() {
             </div>
 
             <hr />
-            {/* <div className="uk-flex">
-                <p className="uk-margin-large-right">Pet Friendly:</p>
-                <div>Yes</div>
-            </div> */}
-
             <div className="uk-flex disc-vote-row">
                 <div className="uk-margin-large-right feature">Ok to Bring In:</div>
                 <div className="uk-margin-small-right">Yes</div>
@@ -321,7 +315,7 @@ function DiscoverPlace() {
                 </input>
                 <button
                     className="uk-button uk-button-default"
-                    onSubmit={postComment}
+                    onClick={postComment}
                 >Comment</button>
             </form>
             <hr />

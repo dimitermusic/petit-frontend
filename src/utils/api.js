@@ -78,6 +78,13 @@ const API = {
             }
         })
     },
+    createVote:(data, tkn)=>{
+        return axios.post(`${URL_PREFIX}/api/votes`, data,{
+            headers: {
+                "Authorization": `Bearer ${tkn}`
+            }
+        })
+    },
     vote: (voteData, tkn) => {
         return axios.put(`${URL_PREFIX}/api/votes`, voteData, {
             headers: {
