@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";import API from '../../../utils/api.js'
 import "./style.css"
-import { Image } from 'cloudinary-react';
 import './style.css';
 import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget';
 import { useSelector } from "react-redux";

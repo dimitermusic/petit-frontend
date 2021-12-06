@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import style from "./style.css"
 import API from "../../../utils/api";
+import style from "./style.css"
 import { MY_DISCOVER } from "../../../utils/actions";
 
 function Discover() {
@@ -25,8 +25,6 @@ function Discover() {
             })
     }, [])
 
-
-
     return (
         <div>
             <div className="uk-container uk-width-4-5">
@@ -37,8 +35,7 @@ function Discover() {
                         return (
                             <li
                                 className="discover-result"
-                                key={place.ref_id}
-                                id={place.ref_id}
+                                key={`${place.ref_id}${place.isJob}`}
                                 onClick={() =>
                                     myToken ? (localStorage.setItem('type',place.isJob), navigate(`/discover/${place.ref_id}`)) : alert("Please Log In or Create an Account First!")}>
                                 {place.name} at {newLocation}

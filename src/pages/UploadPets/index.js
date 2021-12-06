@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import UploadComp from '../../components/UploadComp/index.js';
-import PropTypes from 'prop-types';
-import { getThemeProps } from "@mui/system"
-import Axios from "axios";
 
 export default function Upload() {
     const [fileInputState, setFileInputState] = useState('');

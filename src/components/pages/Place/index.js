@@ -334,8 +334,8 @@ function Place() {
                                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
                                         <div class="uk-width-auto">
                                             {comment.User.profilePic ?
-                                                (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="profile-picture" />) :
-                                                (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="profile-picture" />)}
+                                                (<img class="uk-comment-avatar" src={comment.User.profilePic} width="80" height="80" alt="my-pic" />) :
+                                                (<img class="uk-comment-avatar" src={avatar} width="80" height="80" alt="default" />)}
                                         </div>
                                         <div class="uk-width-expand">
                                             <h4 class="uk-comment-title uk-margin-remove">@{comment.User.username}</h4>
