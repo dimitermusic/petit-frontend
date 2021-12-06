@@ -276,7 +276,7 @@ function DiscoverPlace() {
     }
 
     return (
-        <div className="uk-margin-large-left uk-margin-large-right">
+        <div className="uk-margin-large-left uk-margin-large-right ">
             <div className="uk-flex disc-title">
                 <div className="uk-margin-small-right">{review.name}</div>
                 <div className="uk-margin-small-right">at</div>
