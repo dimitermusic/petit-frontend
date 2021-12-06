@@ -12,7 +12,9 @@ function Results() {
     const googleResults = useSelector(state => state.googleResults);
 
     useEffect(() => {
+        console.log("api");
         if (searchForm.search !== undefined) {
+            console.log('this is after the seearch');
             API.apiFetch({
                 name: searchForm.search,
                 city: searchForm.city
