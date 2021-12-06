@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import PropTypes from 'prop-types';
-import style from "./style.css";
 import API from "../../utils/api";
 import { USER } from "../../utils/actions";
 
