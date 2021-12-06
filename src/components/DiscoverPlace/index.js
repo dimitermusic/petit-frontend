@@ -211,7 +211,6 @@ function DiscoverPlace() {
         })
     }
 
-
     const postComment = (e) => {
         e.preventDefault()
 
