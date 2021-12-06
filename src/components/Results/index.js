@@ -20,6 +20,7 @@ function Results() {
                 city: searchForm.city
             })
                 .then(res => {
+                    console.log(res);
                     dispatch({
                         type: GOOGLE_FETCH,
                         payload: res.data
