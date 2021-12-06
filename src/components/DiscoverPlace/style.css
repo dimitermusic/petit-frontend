@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline;
 }
 
 .disc-badge {
@@ -11,6 +11,8 @@
     font-weight: 500;
     background-color: #228cf1 !important;
     box-shadow: 3px 3px 5px 1px rgb(235, 235, 235);
+    position: relative;
+    bottom: 2.5px;
 }
 
 .disc-icon {
@@ -28,4 +30,18 @@
 
 .comments {
     margin-bottom: 100px;
+}
+
+.name {
+    font-weight: bolder;
+    font-size: 30px;
+    align-self: flex-end;
+    color: #228cf1;
+}
+
+@media only screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio : 3) {
+    .disc-title {
+        display: flex;
+        flex-direction: column;
+    }
 }

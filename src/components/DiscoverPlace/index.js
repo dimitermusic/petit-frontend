@@ -277,11 +277,16 @@ function DiscoverPlace() {
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right ">
-            <div className="uk-flex disc-title">
-                <div className="uk-margin-small-right">{review.name}</div>
-                <div className="uk-margin-small-right">at</div>
-                <div className="uk-margin-small-right">{newLocation}</div>
-                <span className="uk-badge disc-badge">as {review.isJob}</span>
+            <div className="disc-title">
+                <div>
+                    <p className="uk-margin-small-right name">{review.name}</p>
+                </div>
+                <div>
+                    <p className="uk-margin-small-right location">{newLocation}</p>
+                </div>
+                <div>
+                    <span className="uk-badge disc-badge">as {review.isJob}</span>
+                </div>
             </div>
 
             <hr />
@@ -322,7 +327,7 @@ function DiscoverPlace() {
             <div className="comments">
                 <ul className="uk-list uk-list-large uk-list-divider">
                     {allCommentsState.map(comment => (
-                        <li>
+                        <li id={comment.id}>
                             <article class="uk-comment">
                                 <header class="uk-comment-header">
                                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
