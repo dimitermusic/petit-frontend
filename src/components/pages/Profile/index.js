@@ -8,7 +8,7 @@ import generateSignature from '../../../utils/generateSignature'
 
 function Profile(props) {
   const myUser = useSelector(state => state.globalUser);
-  const myVotes = useSelector(state => state.globalVotes)
+  const myVotes = useSelector(state => state.globalVotes);
 
   const handleProPicSubmit = taco => {
     console.log("event is triggered")
@@ -137,7 +137,7 @@ function Profile(props) {
         </span>}
 
       <img src={myUser.profilePic} width="300" alt="avatar" className="uk-img uk-placeholder uk-align-center"></img>
-      <p uk-margin="true">
+      <div uk-margin="true">
         <div className="uk-flex uk-flex-center">
           <WidgetLoader />
           <Widget
@@ -173,7 +173,7 @@ function Profile(props) {
             buttonType={'button'}
           />
         </div>
-      </p>
+      </div>
       <p className="uk-text-bold uk-text-small uk-flex uk-flex-center ">Contributions: {myVotes}</p>
     </div >
   )
