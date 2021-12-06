@@ -278,11 +278,16 @@ function Place() {
 
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
-            <div className="uk-flex place-title">
-                <div className="uk-margin-small-right">{review.name}</div>
-                <div className="uk-margin-small-right">at</div>
-                <div className="uk-margin-small-right">{newLocation}</div>
-                <span className="uk-badge place-badge">as {searchForm.type}</span>
+            <div className="place-title">
+                <div>
+                    <p className="uk-margin-small-right name">{review.name}</p>
+                </div>
+                <div>
+                    <p className="uk-margin-small-right location">{newLocation}</p>
+                </div>
+                <div>
+                    <span className="uk-badge disc-badge">as {searchForm.type}</span>
+                </div>
             </div>
             <hr />
             <div className="uk-flex vote-row">
