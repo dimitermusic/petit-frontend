@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types';
-import { getThemeProps } from "@mui/system"
-import "./style.css";
 import React, { useEffect, useState } from 'react';
+import "./style.css";
 import { Image } from 'cloudinary-react';
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+
 
 export default function PetGallery(props) {
     
