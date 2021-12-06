@@ -213,7 +213,6 @@ function DiscoverPlace() {
 
     const postComment = (e) => {
         e.preventDefault()
-
         if (commentTextState === "") {
             alert("It's a shame our pets can't talk to us...good thing you can! Use words in your comment. 🐶")
         } else {
@@ -277,7 +276,7 @@ function DiscoverPlace() {
     }
 
     return (
-        <div className="uk-margin-large-left uk-margin-large-right">
+        <div className="uk-margin-large-left uk-margin-large-right ">
             <div className="uk-flex disc-title">
                 <div className="uk-margin-small-right">{review.name}</div>
                 <div className="uk-margin-small-right">at</div>

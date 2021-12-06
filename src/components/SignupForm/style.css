@@ -1,19 +1,15 @@
-.signupform {
-    margin: auto;
-}
-
 .splash {
-    width: 100%;
-    min-height: 70vh;
     background-image: url(../../images/dog-and-person.webp);
     background-size: cover;
-    background-position-y: -200px;
+    background-repeat: no-repeat;
     object-fit: cover;
     padding-top: 50px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
+    padding-bottom: 40px;
 }
 
 .splash h1 {
@@ -59,10 +55,10 @@
 
 @media only screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio : 3) {
     .col-one {
+        padding: 0;
         display: block;
         height: 50px;
         margin-bottom: 74px;
-        justify-content: space-around;
         padding: 0;
     }
 
@@ -76,6 +72,7 @@
 
     .col-two {
         padding: 0;
+        margin-top: 47px;
         margin-bottom: 47px;
     }
 }
