@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Petit [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+Full Stack social networking app allowing users to inform each other on the pet-friendliness of employers and establishments using MySQL, React, Node, and Express.
 
-## Available Scripts
+## Table of Contents
+  - [Description](#description)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Links](#links)
+  - [Questions](#questions)
+  - [Creators](#creators)
 
-In the project directory, you can run:
+## Installation
+Visit the deployed site [here!](https://petit-petfriendly.herokuapp.com/)
 
-### `npm start`
+## Usage
+Home/Splash page with quick tag line and call to action.  
+![Home](./src/images/home.png)  
+Profile page with username, editable profile photo, and the amount of votes contributed to places.  
+![Profile](./src/images/profile.png)  
+Discover page with preseeded places as well as recent search results.  
+![Discover](./src/images/discover.png)  
+Place page with name, location and type if reviewing as an establishment or job. Options to up and down vote on the pet-friendly features of a place (dynamically changing based on if reviewing as establishment or job). A button to search the place on google. A comments section below.   
+![Place](./src/images/place.png)  
+Search for exact names of places or using keywords and exact location or keywords and view list of results to choose from.  
+![Search](./src/images/search.png)  
+Comments section with user photo, name, date comment was created, and content of comment.
+![Comments](./src/images/comments.png)  
+Website is mobile optimized.  
+![Mobile](./src/images/mobile.png)  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Contributing
+Feedback is always welcome!
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## License
+This application is covered under the MIT License
 
-### `npm test`
+## Links
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Deployed Site](https://petit-petfriendly.herokuapp.com/)  
+[Repository](https://github.com/dimitermusic/petit-frontend)
 
-### `npm run build`
+## Questions
+If you have any questions, please visit my Github profile or email me using the links below
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[Github](https://github.com/dimitermusic)  
+[Email](mailto:dimiteryyordanov@gmail.com)  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Creators
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Created by [Dimiter Yordanov](https://github.com/dimitermusic), [Charlotte Hulseman](https://github.com/charlottehulseman), [Kellie Kumasaka](https://github.com/kelliekumasaka), and [Jonathan Newman](https://github.com/specsnstats)
