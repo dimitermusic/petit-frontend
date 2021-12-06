@@ -238,6 +238,42 @@ function DiscoverPlace() {
 
     const newLocation = review.location.split(",").slice(0, -2).join(",")
 
+    let voteOptions
+    console.log(review.isJob)
+
+    if (review.isJob === "establishment") {
+        voteOptions = <div className="uk-flex disc-vote-row">
+            <div className="uk-margin-large-right feature">Has Pet Menu:</div>
+            <div className="uk-margin-small-right">Yes</div>
+            <MdThumbUp className="disc-icon" onClick={voteMenuUp} />
+            <div className="uk-margin-large-right">{voteState.menuUp}</div>
+            <div className="uk-margin-small-right">No</div>
+            <MdThumbDown className="disc-icon" onClick={voteMenuDown} />
+            <div>{voteState.menuDown}</div>
+        </div>
+    } else {
+        voteOptions = <div><div className="uk-flex disc-vote-row">
+            <div className="uk-margin-large-right feature">Has Pet Stipend:</div>
+            <div className="uk-margin-small-right">Yes</div>
+            <MdThumbUp className="disc-icon" onClick={voteStipendUp} />
+            <div className="uk-margin-large-right">{voteState.stipendUp}</div>
+            <div className="uk-margin-small-right">No</div>
+            <MdThumbDown className="disc-icon" onClick={voteStipendDown} />
+            <div>{voteState.stipendDown}</div>
+        </div>
+
+            <div className="uk-flex disc-vote-row">
+                <div className="uk-margin-large-right feature">Has Pet Time Off:</div>
+                <div className="uk-margin-small-right">Yes</div>
+                <MdThumbUp className="disc-icon" onClick={voteTimeOffUp} />
+                <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
+                <div className="uk-margin-small-right">No</div>
+                <MdThumbDown className="disc-icon" onClick={voteTimeOffDown} />
+                <div>{voteState.timeOffDown}</div>
+            </div>
+        </div>
+    }
+
     return (
         <div className="uk-margin-large-left uk-margin-large-right">
             <div className="uk-flex disc-title">
@@ -263,35 +299,8 @@ function DiscoverPlace() {
                 <div>{voteState.bringDown}</div>
             </div>
 
-            <div className="uk-flex disc-vote-row">
-                <div className="uk-margin-large-right feature">Has Pet Menu:</div>
-                <div className="uk-margin-small-right">Yes</div>
-                <MdThumbUp className="disc-icon" onClick={voteMenuUp} />
-                <div className="uk-margin-large-right">{voteState.menuUp}</div>
-                <div className="uk-margin-small-right">No</div>
-                <MdThumbDown className="disc-icon" onClick={voteMenuDown} />
-                <div>{voteState.menuDown}</div>
-            </div>
+            {voteOptions}
 
-            <div className="uk-flex disc-vote-row">
-                <div className="uk-margin-large-right feature">Has Pet Stipend:</div>
-                <div className="uk-margin-small-right">Yes</div>
-                <MdThumbUp className="disc-icon" onClick={voteStipendUp} />
-                <div className="uk-margin-large-right">{voteState.stipendUp}</div>
-                <div className="uk-margin-small-right">No</div>
-                <MdThumbDown className="disc-icon" onClick={voteStipendDown} />
-                <div>{voteState.stipendDown}</div>
-            </div>
-
-            <div className="uk-flex disc-vote-row">
-                <div className="uk-margin-large-right feature">Has Pet Time Off:</div>
-                <div className="uk-margin-small-right">Yes</div>
-                <MdThumbUp className="disc-icon" onClick={voteTimeOffUp} />
-                <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
-                <div className="uk-margin-small-right">No</div>
-                <MdThumbDown className="disc-icon" onClick={voteTimeOffDown} />
-                <div>{voteState.timeOffDown}</div>
-            </div>
             <br />
             <a target="_blank" className="uk-button uk-button-default" href={`https://www.google.com/search?q=${review.name}+${newLocation}`}>See on Google</a>
             <br />
