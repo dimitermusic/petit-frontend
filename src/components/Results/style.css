@@ -16,3 +16,7 @@
     font-size: small;
     align-self: flex-end;
 }
+
+.results {
+    padding-bottom: 100px;
+}
