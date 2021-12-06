@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import API from "../../../utils/api";
-import style from "./style.css"
+import "./style.css"
 import { MY_DISCOVER } from "../../../utils/actions";
 
 function Discover() {
@@ -27,7 +27,7 @@ function Discover() {
 
     return (
         <div>
-            <div className="uk-container uk-width-4-5">
+            <div className="uk-container uk-width-4-5 disc-results">
                 <h1 className="uk-heading-divider uk-text-center">Discover</h1>
                 <ul className="uk-list uk-list-large uk-list-divider uk-list-striped" id='search-results'>
                     {places.map(place => {
@@ -37,7 +37,7 @@ function Discover() {
                                 className="discover-result"
                                 key={`${place.ref_id}${place.isJob}`}
                                 onClick={() =>
-                                    myToken ? (localStorage.setItem('type',place.isJob), navigate(`/discover/${place.ref_id}`)) : alert("Please Log In or Create an Account First!")}>
+                                    myToken ? (localStorage.setItem('type', place.isJob), navigate(`/discover/${place.ref_id}`)) : alert("Please Log In or Create an Account First!")}>
                                 {place.name} at {newLocation}
                                 <span className="uk-margin-small-left uk-margin-small-right">
                                     {place.isJob === "establishment" ?

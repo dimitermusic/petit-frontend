@@ -34,6 +34,7 @@ function SearchBar() {
 
     const searchDispatch = (e) => {
         e.stopPropagation();
+        console.log("api hit")
         dispatch({
             type: SET_SEARCH,
             payload: searchFormState

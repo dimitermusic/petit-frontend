@@ -12,12 +12,15 @@ function Results() {
     const googleResults = useSelector(state => state.googleResults);
 
     useEffect(() => {
+        console.log("api");
         if (searchForm.search !== undefined) {
+            console.log('this is after the seearch');
             API.apiFetch({
                 name: searchForm.search,
                 city: searchForm.city
             })
                 .then(res => {
+                    console.log(res);
                     dispatch({
                         type: GOOGLE_FETCH,
                         payload: res.data
@@ -31,7 +34,7 @@ function Results() {
 
     return (
         <>
-            <div className="uk-container uk-width-4-5">
+            <div className="uk-container uk-width-4-5 results">
                 <h1 className="uk-heading-divider uk-text-center">Search Results</h1>
                 <ul className="uk-list uk-list-large uk-list-divider uk-list-striped" id='search-results'>
                     {googleResults.map(place => {

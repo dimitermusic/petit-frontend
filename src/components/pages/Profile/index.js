@@ -1,14 +1,15 @@
-import React from "react";
-import API from '../../../utils/api.js'
-import "./style.css"
+import React, { useEffect } from "react";
+import { Navigate } from "react-router-dom";import API from '../../../utils/api.js';
+import "./style.css";
+import { Image } from 'cloudinary-react';
 import './style.css';
 import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget';
 import { useSelector } from "react-redux";
-import generateSignature from '../../../utils/generateSignature'
+import generateSignature from '../../../utils/generateSignature';
 
 function Profile(props) {
   const myUser = useSelector(state => state.globalUser);
-  const myVotes = useSelector(state => state.globalVotes)
+  const myVotes = useSelector(state => state.globalVotes);
 
   const handleProPicSubmit = taco => {
     console.log("event is triggered")
@@ -23,6 +24,7 @@ function Profile(props) {
           .then(res => {
             console.log(res)
             props.setUserState(res.data)
+            window.location.reload(true)
           })
       }).catch(err => {
         console.log("whoops")

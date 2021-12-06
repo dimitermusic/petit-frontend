@@ -1,0 +1,13 @@
+.footer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(74, 155, 74) !important;
+    justify-content: center !important;
+    align-items: center;
+}
+
+.footer a {
+    color: white !important;
+    text-decoration: none !important;
+}
