@@ -7,12 +7,13 @@ import Discover from "./components/pages/Discover/index.js";
 import API from "./utils/api";
 import Profile from "./components/pages/Profile/index.js";
 import NavBar from "./components/NavBar/index.js";
-import Results from "./components/Results/index";
+import Results from "./components/Results/index.js";
 import PetGallery from "./pages/PetGallery/index.js";
 import UploadPets from "./pages/UploadPets/index.js";
 import Place from "./components/pages/Place/index.js";
 import DiscoverPlace from "./components/DiscoverPlace/index.js"
 import { USER } from "./utils/actions.js";
+import "./style.css"
 
 function App() {
   const [userState, setUserState] = useState({ username: "", id: 0 })
@@ -57,9 +58,9 @@ function App() {
   }
 
   return (
-    <>
-      <NavBar 
-        userState={userState}/>
+    <div className="page">
+      <NavBar
+        userState={userState} />
       <SearchBar />
       <Routes>
         <Route exact path={"/results"} element={<Results />} />
@@ -74,7 +75,7 @@ function App() {
         <Route exact path={"/petgallery"} element={<PetGallery />} />
         <Route exact path={"/uploadpets"} element={<UploadPets />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

@@ -30,8 +30,6 @@ function DiscoverPlace() {
     const [commentTextState, setCommentTextState] = useState();
     const [allCommentsState, setAllCommentsState] = useState([]);
 
-    const handleInputChange = (e) => setCommentTextState(e.target.value);
-
     useEffect(() => {
         const myResult = discoverResults.filter(result => result.ref_id === ref_id && result.isJob === type);
         console.log(myResult[0]);
@@ -65,7 +63,10 @@ function DiscoverPlace() {
                 API.getAllComments(tkn, res.data.id)
                     .then(data => {
                         console.log(data.data);
-                        setAllCommentsState(data.data);
+                        const reversedComments = data.data.reverse();
+                        console.log(reversedComments);
+                        setAllCommentsState(reversedComments);
+                        console.log(allCommentsState);
                     }).catch(err => {
                         console.log(err);
                     })
@@ -208,10 +209,10 @@ function DiscoverPlace() {
         })
     }
 
+    const handleInputChange = (e) => setCommentTextState(e.target.value);
 
     const postComment = (e) => {
-        e.preventDefault()
-
+        e.preventDefault();
         if (commentTextState === "") {
             alert("It's a shame our pets can't talk to us...good thing you can! Use words in your comment. 🐶")
         } else {
@@ -238,50 +239,29 @@ function DiscoverPlace() {
 
     const newLocation = review.location.split(",").slice(0, -2).join(",")
 
-    return (
-        <div className="uk-margin-large-left uk-margin-large-right">
-            <div className="uk-flex disc-title">
-                <div className="uk-margin-small-right">{review.name}</div>
-                <div className="uk-margin-small-right">at</div>
-                <div className="uk-margin-small-right">{newLocation}</div>
-                <span className="uk-badge disc-badge">as {review.isJob}</span>
-            </div>
+    let voteOptions
+    console.log(review.isJob)
 
-            <hr />
-            {/* <div className="uk-flex">
-                <p className="uk-margin-large-right">Pet Friendly:</p>
-                <div>Yes</div>
-            </div> */}
-
-            <div className="uk-flex disc-vote-row">
-                <div className="uk-margin-large-right feature">Ok to Bring In:</div>
-                <div className="uk-margin-small-right">Yes</div>
-                <MdThumbUp className="disc-icon" onClick={voteBringUp} />
-                <div className="uk-margin-large-right">{voteState.bringUp}</div>
-                <div className="uk-margin-small-right">No</div>
-                <MdThumbDown className="disc-icon" onClick={voteBringDown} />
-                <div>{voteState.bringDown}</div>
-            </div>
-
-            <div className="uk-flex disc-vote-row">
-                <div className="uk-margin-large-right feature">Has Pet Menu:</div>
-                <div className="uk-margin-small-right">Yes</div>
-                <MdThumbUp className="disc-icon" onClick={voteMenuUp} />
-                <div className="uk-margin-large-right">{voteState.menuUp}</div>
-                <div className="uk-margin-small-right">No</div>
-                <MdThumbDown className="disc-icon" onClick={voteMenuDown} />
-                <div>{voteState.menuDown}</div>
-            </div>
-
-            <div className="uk-flex disc-vote-row">
-                <div className="uk-margin-large-right feature">Has Pet Stipend:</div>
-                <div className="uk-margin-small-right">Yes</div>
-                <MdThumbUp className="disc-icon" onClick={voteStipendUp} />
-                <div className="uk-margin-large-right">{voteState.stipendUp}</div>
-                <div className="uk-margin-small-right">No</div>
-                <MdThumbDown className="disc-icon" onClick={voteStipendDown} />
-                <div>{voteState.stipendDown}</div>
-            </div>
+    if (review.isJob === "establishment") {
+        voteOptions = <div className="uk-flex disc-vote-row">
+            <div className="uk-margin-large-right feature">Has Pet Menu:</div>
+            <div className="uk-margin-small-right">Yes</div>
+            <MdThumbUp className="disc-icon" onClick={voteMenuUp} />
+            <div className="uk-margin-large-right">{voteState.menuUp}</div>
+            <div className="uk-margin-small-right">No</div>
+            <MdThumbDown className="disc-icon" onClick={voteMenuDown} />
+            <div>{voteState.menuDown}</div>
+        </div>
+    } else {
+        voteOptions = <div><div className="uk-flex disc-vote-row">
+            <div className="uk-margin-large-right feature">Has Pet Stipend:</div>
+            <div className="uk-margin-small-right">Yes</div>
+            <MdThumbUp className="disc-icon" onClick={voteStipendUp} />
+            <div className="uk-margin-large-right">{voteState.stipendUp}</div>
+            <div className="uk-margin-small-right">No</div>
+            <MdThumbDown className="disc-icon" onClick={voteStipendDown} />
+            <div>{voteState.stipendDown}</div>
+        </div>
 
             <div className="uk-flex disc-vote-row">
                 <div className="uk-margin-large-right feature">Has Pet Time Off:</div>
@@ -292,6 +272,31 @@ function DiscoverPlace() {
                 <MdThumbDown className="disc-icon" onClick={voteTimeOffDown} />
                 <div>{voteState.timeOffDown}</div>
             </div>
+        </div>
+    }
+
+    return (
+        <div className="uk-margin-large-left uk-margin-large-right ">
+            <div className="uk-flex disc-title">
+                <div className="uk-margin-small-right">{review.name}</div>
+                <div className="uk-margin-small-right">at</div>
+                <div className="uk-margin-small-right">{newLocation}</div>
+                <span className="uk-badge disc-badge">as {review.isJob}</span>
+            </div>
+
+            <hr />
+            <div className="uk-flex disc-vote-row">
+                <div className="uk-margin-large-right feature">Ok to Bring In:</div>
+                <div className="uk-margin-small-right">Yes</div>
+                <MdThumbUp className="disc-icon" onClick={voteBringUp} />
+                <div className="uk-margin-large-right">{voteState.bringUp}</div>
+                <div className="uk-margin-small-right">No</div>
+                <MdThumbDown className="disc-icon" onClick={voteBringDown} />
+                <div>{voteState.bringDown}</div>
+            </div>
+
+            {voteOptions}
+
             <br />
             <a target="_blank" className="uk-button uk-button-default" href={`https://www.google.com/search?q=${review.name}+${newLocation}`}>See on Google</a>
             <br />
@@ -301,20 +306,20 @@ function DiscoverPlace() {
                 <p>Comments:</p>
             </div>
             <form>
-                <textarea
+                <input
                     className="uk-textarea"
                     onChange={handleInputChange}
                     value={commentTextState}
                 >
 
-                </textarea>
+                </input>
                 <button
                     className="uk-button uk-button-default"
                     onClick={postComment}
                 >Comment</button>
             </form>
             <hr />
-            <div>
+            <div className="comments">
                 <ul className="uk-list uk-list-large uk-list-divider">
                     {allCommentsState.map(comment => (
                         <li>
@@ -346,10 +351,6 @@ function DiscoverPlace() {
                     ))}
                 </ul>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
         </div>
     )
 }

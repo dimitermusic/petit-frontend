@@ -1,6 +1,6 @@
 import axios from "axios";
-const URL_PREFIX = "https://petit-backend.herokuapp.com"
 // const URL_PREFIX = "http://localhost:3001"
+const URL_PREFIX = "https://petit-backend.herokuapp.com"
 
 const API = {
     getProfile: (tkn) => {
@@ -75,6 +75,13 @@ const API = {
         return axios.put(`${URL_PREFIX}/api/reactions/${id}`, reactData, {
             headers: {
                 "Authorization": `Bearer: ${tkn}`
+            }
+        })
+    },
+    createVote:(data, tkn)=>{
+        return axios.post(`${URL_PREFIX}/api/votes`, data,{
+            headers: {
+                "Authorization": `Bearer ${tkn}`
             }
         })
     },

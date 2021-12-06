@@ -58,7 +58,7 @@ function Place() {
                     timeOffDown: voteTimeOffDownCount.length,
                     bringUp: voteBringUpCount.length,
                     bringDown: voteBringDownCount.length
-                })
+                });
                 API.getAllComments(tkn, res.data.id)
                     .then(data => {
                         console.log(data.data);
@@ -241,39 +241,39 @@ function Place() {
 
     let voteOptions
 
-    if(searchForm.type==="establishment"){
-        voteOptions =  (<div className="uk-flex vote-row">
-        <div className="uk-margin-large-right feature">Has Pet Menu:</div>
-        <div className="uk-margin-small-right">Yes</div>
-        <MdThumbUp className="icon" onClick={voteMenuUp} />
-        <div className="uk-margin-large-right">{voteState.menuUp}</div>
-        <div className="uk-margin-small-right">No</div>
-        <MdThumbDown className="icon" onClick={voteMenuDown} />
-        <div>{voteState.menuDown}</div>
-    </div>)
+    if (searchForm.type === "establishment") {
+        voteOptions = (<div className="uk-flex vote-row">
+            <div className="uk-margin-large-right feature">Has Pet Menu:</div>
+            <div className="uk-margin-small-right">Yes</div>
+            <MdThumbUp className="icon" onClick={voteMenuUp} />
+            <div className="uk-margin-large-right">{voteState.menuUp}</div>
+            <div className="uk-margin-small-right">No</div>
+            <MdThumbDown className="icon" onClick={voteMenuDown} />
+            <div>{voteState.menuDown}</div>
+        </div>)
     } else {
         voteOptions = (
-        <div>
-        <div className="uk-flex vote-row">
-        <div className="uk-margin-large-right feature">Has Pet Stipend:</div>
-        <div className="uk-margin-small-right">Yes</div>
-        <MdThumbUp className="icon" onClick={voteStipendUp} />
-        <div className="uk-margin-large-right">{voteState.stipendUp}</div>
-        <div className="uk-margin-small-right">No</div>
-        <MdThumbDown className="icon" onClick={voteStipendDown} />
-        <div>{voteState.stipendDown}</div>
-    </div>
+            <div>
+                <div className="uk-flex vote-row">
+                    <div className="uk-margin-large-right feature">Has Pet Stipend:</div>
+                    <div className="uk-margin-small-right">Yes</div>
+                    <MdThumbUp className="icon" onClick={voteStipendUp} />
+                    <div className="uk-margin-large-right">{voteState.stipendUp}</div>
+                    <div className="uk-margin-small-right">No</div>
+                    <MdThumbDown className="icon" onClick={voteStipendDown} />
+                    <div>{voteState.stipendDown}</div>
+                </div>
 
-    <div className="uk-flex vote-row">
-        <div className="uk-margin-large-right feature">Has Pet Time Off:</div>
-        <div className="uk-margin-small-right">Yes</div>
-        <MdThumbUp className="icon" onClick={voteTimeOffUp} />
-        <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
-        <div className="uk-margin-small-right">No</div>
-        <MdThumbDown className="icon" onClick={voteTimeOffDown} />
-        <div>{voteState.timeOffDown}</div>
-    </div>
-    </div>)
+                <div className="uk-flex vote-row">
+                    <div className="uk-margin-large-right feature">Has Pet Time Off:</div>
+                    <div className="uk-margin-small-right">Yes</div>
+                    <MdThumbUp className="icon" onClick={voteTimeOffUp} />
+                    <div className="uk-margin-large-right">{voteState.timeOffUp}</div>
+                    <div className="uk-margin-small-right">No</div>
+                    <MdThumbDown className="icon" onClick={voteTimeOffDown} />
+                    <div>{voteState.timeOffDown}</div>
+                </div>
+            </div>)
     }
 
     return (
@@ -284,13 +284,7 @@ function Place() {
                 <div className="uk-margin-small-right">{newLocation}</div>
                 <span className="uk-badge place-badge">as {searchForm.type}</span>
             </div>
-
             <hr />
-            {/* <div className="uk-flex">
-                <p className="uk-margin-large-right">Pet Friendly:</p>
-                <div>Yes</div>
-            </div> */}
-
             <div className="uk-flex vote-row">
                 <div className="uk-margin-large-right feature">Ok to Bring In:</div>
                 <div className="uk-margin-small-right">Yes</div>
@@ -300,7 +294,7 @@ function Place() {
                 <MdThumbDown className="icon" onClick={voteBringDown} />
                 <div>{voteState.bringDown}</div>
             </div>
-            
+
             {voteOptions}
 
             <br />
@@ -325,7 +319,7 @@ function Place() {
                 >Post Comment</button>
             </form>
             <hr />
-            <div>
+            <div className="comments">
                 <ul className="uk-list uk-list-large uk-list-divider">
                     {allCommentsState.map(comment => (
                         <li>
@@ -357,10 +351,6 @@ function Place() {
                     ))}
                 </ul>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
         </div >
     )
 }

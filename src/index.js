@@ -6,6 +6,7 @@ import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import "../node_modules/uikit/dist/js/uikit.min.js";
 import { ApiProvider } from './utils/ApiContext';
+import Footer from "./components/Footer/index.js"
 const { BrowserRouter } = require("react-router-dom")
 
 UIkit.use(Icons);
@@ -15,6 +16,7 @@ ReactDOM.render(
     <ApiProvider>
       <BrowserRouter>
         <App />
+        < Footer />
       </BrowserRouter>
     </ApiProvider>
   </React.StrictMode>,
