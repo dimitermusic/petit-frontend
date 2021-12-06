@@ -71,7 +71,7 @@ function DiscoverPlace() {
                         console.log(err);
                     })
             })
-    }, [discoverResults])
+    }, [])
 
     const voteStipendUp = () => {
         API.vote({
