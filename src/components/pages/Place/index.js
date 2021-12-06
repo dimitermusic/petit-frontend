@@ -58,7 +58,7 @@ function Place() {
                     timeOffDown: voteTimeOffDownCount.length,
                     bringUp: voteBringUpCount.length,
                     bringDown: voteBringDownCount.length
-                })
+                });
                 API.getAllComments(tkn, res.data.id)
                     .then(data => {
                         console.log(data.data);
@@ -284,13 +284,7 @@ function Place() {
                 <div className="uk-margin-small-right">{newLocation}</div>
                 <span className="uk-badge place-badge">as {searchForm.type}</span>
             </div>
-
             <hr />
-            {/* <div className="uk-flex">
-                <p className="uk-margin-large-right">Pet Friendly:</p>
-                <div>Yes</div>
-            </div> */}
-
             <div className="uk-flex vote-row">
                 <div className="uk-margin-large-right feature">Ok to Bring In:</div>
                 <div className="uk-margin-small-right">Yes</div>
