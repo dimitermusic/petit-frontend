@@ -1,8 +1,9 @@
 import React from "react";
 import './style.css';
+import { useNavigate } from "react-router-dom";
+
 
 function NavBar(props) {
-    console.log(props.userState)
     return (
         <>
             <div>
@@ -16,7 +17,7 @@ function NavBar(props) {
                                 <a href="/discover">Discover</a>
                             </li>
                             <li>
-                                <a href={`/profile`}>Profile</a>
+                                <a href={props.userState.username ? `/profile` : "/login"}>Profile</a>
                             </li>
                             <li>
                                 <a href="/logout">{props.userState.username?"Logout":"Login"}</a>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import API from "../../../utils/api";
+import style from "./style.css"
 import { MY_DISCOVER } from "../../../utils/actions";
 
 function Discover() {
