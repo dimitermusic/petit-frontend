@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import API from "../../utils/api";
 import { USER } from "../../utils/actions";
+import "./style.css"
 
 
 function SignupForm(props) {
@@ -54,8 +55,8 @@ function SignupForm(props) {
         props.setToken(res.data.token)
         localStorage.setItem("token", res.data.token)
         dispatch({
-          type:USER,
-          payload:res.data.user
+          type: USER,
+          payload: res.data.user
         })
       }).catch(err => {
         console.log(err);
@@ -81,8 +82,8 @@ function SignupForm(props) {
           props.setToken(taco.data.token)
           localStorage.setItem("token", taco.data.token)
           dispatch({
-            type:USER,
-            payload:taco.data.user
+            type: USER,
+            payload: taco.data.user
           })
         })
       }).catch(err => {
@@ -95,49 +96,55 @@ function SignupForm(props) {
   }
 
   return (
-    <div>
-      {/* LOGIN */}
-      <h1 className="uk-flex uk-flex-center">Login</h1>
-      <div className="uk-card">
-        {/* Username for signin */}
-        <div className="uk-inline uk-margin-auto uk-flex uk-form-width-medium">
-          <span className="uk-form-icon" uk-icon="icon: user"></span>
-          <input className="uk-input" type="text" value={loginFormState.usernameSignIn} name="usernameSignIn" onChange={handleLoginChange} />
-        </div>
-
-        {/* Password for signin */}
-        <div className="uk-inline uk-margin-auto uk-form-width-medium uk-flex">
-          <span className="uk-form-icon " uk-icon="icon: lock"></span>
-          <input className="uk-input" type="password" value={loginFormState.passwordSignIn} name="passwordSignIn" onChange={handleLoginChange} />
-        </div>
-
-        {/* button for signin */}
-        <button className="uk-button uk-margin-auto uk-flex uk-button-default" onClick={handleSigninSubmit}>Login</button>
+    <div className="splash">
+      <div className="col-one">
+        <h1>Pet-friendly Places.</h1>
+        <h2>Join the conversation today!</h2>
       </div>
+      {/* LOGIN */}
+      <div className="col-two">
+        <h1 className="uk-flex uk-flex-center">Login</h1>
+        <div className="uk-card">
+          {/* Username for signin */}
+          <div className="uk-inline uk-margin-auto uk-flex uk-form-width-medium">
+            <span className="uk-form-icon" uk-icon="icon: user"></span>
+            <input className="uk-input" type="text" placeholder="username" value={loginFormState.usernameSignIn} name="usernameSignIn" onChange={handleLoginChange} />
+          </div>
 
-      {/* CREATE ACCOUNT */}
-      <h1 className="uk-flex uk-flex-center">Create Account</h1>
-      <div className="uk-card">
-        {/* Username for create account */}
-        <div className="uk-inline uk-margin-auto uk-flex uk-form-width-medium">
-          <span className="uk-form-icon" uk-icon="icon: user"></span>
-          <input className="uk-input" type="text" value={loginFormState.usernameSignUp} name="usernameSignUp" onChange={handleLoginChange} />
+          {/* Password for signin */}
+          <div className="uk-inline uk-margin-auto uk-form-width-medium uk-flex">
+            <span className="uk-form-icon " uk-icon="icon: lock"></span>
+            <input className="uk-input" type="password" placeholder="password" value={loginFormState.passwordSignIn} name="passwordSignIn" onChange={handleLoginChange} />
+          </div>
+
+          {/* button for signin */}
+          <button className="uk-button uk-margin-auto uk-flex uk-button-default" onClick={handleSigninSubmit}>Login</button>
         </div>
 
-        {/* email for create account */}
-        <div className="uk-inline uk-margin-auto uk-form-width-medium uk-flex">
-          <span className="uk-form-icon" uk-icon="icon: mail"></span>
-          <input className="uk-input" type="email" value={loginFormState.emailSignUp} name="emailSignUp" onChange={handleLoginChange} />
-        </div>
+        {/* CREATE ACCOUNT */}
+        <h1 className="uk-flex uk-flex-center">Create Account</h1>
+        <div className="uk-card">
+          {/* Username for create account */}
+          <div className="uk-inline uk-margin-auto uk-flex uk-form-width-medium">
+            <span className="uk-form-icon" uk-icon="icon: user"></span>
+            <input className="uk-input" type="text" placeholder="username" value={loginFormState.usernameSignUp} name="usernameSignUp" onChange={handleLoginChange} />
+          </div>
 
-        {/* Password for create account */}
-        <div className="uk-inline uk-margin-auto uk-form-width-medium uk-flex">
-          <span className="uk-form-icon" uk-icon="icon: lock"></span>
-          <input className="uk-input" type="password" value={loginFormState.passwordSignUp} name="passwordSignUp" onChange={handleLoginChange} />
-        </div>
+          {/* email for create account */}
+          <div className="uk-inline uk-margin-auto uk-form-width-medium uk-flex">
+            <span className="uk-form-icon" uk-icon="icon: mail"></span>
+            <input className="uk-input" type="email" placeholder="email" value={loginFormState.emailSignUp} name="emailSignUp" onChange={handleLoginChange} />
+          </div>
 
-        {/* button for create account */}
-        <button className="uk-button uk-margin-auto uk-flex uk-button-default" onClick={handleSignupSubmit}>Create Account</button>
+          {/* Password for create account */}
+          <div className="uk-inline uk-margin-auto uk-form-width-medium uk-flex">
+            <span className="uk-form-icon" uk-icon="icon: lock"></span>
+            <input className="uk-input" type="password" placeholder="password" value={loginFormState.passwordSignUp} name="passwordSignUp" onChange={handleLoginChange} />
+          </div>
+
+          {/* button for create account */}
+          <button className="uk-button uk-margin-auto uk-flex uk-button-default" onClick={handleSignupSubmit}>Sign Up</button>
+        </div>
       </div>
     </div>
   )

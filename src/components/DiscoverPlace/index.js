@@ -65,7 +65,10 @@ function DiscoverPlace() {
                 API.getAllComments(tkn, res.data.id)
                     .then(data => {
                         console.log(data.data);
-                        setAllCommentsState(data.data);
+                        const reversedComments = data.data.reverse();
+                        console.log(reversedComments);
+                        setAllCommentsState(reversedComments);
+                        console.log(allCommentsState);
                     }).catch(err => {
                         console.log(err);
                     })
@@ -301,20 +304,20 @@ function DiscoverPlace() {
                 <p>Comments:</p>
             </div>
             <form>
-                <textarea
+                <input
                     className="uk-textarea"
                     onChange={handleInputChange}
                     value={commentTextState}
                 >
 
-                </textarea>
+                </input>
                 <button
                     className="uk-button uk-button-default"
-                    onClick={postComment}
+                    onSubmit={postComment}
                 >Comment</button>
             </form>
             <hr />
-            <div>
+            <div className="comments">
                 <ul className="uk-list uk-list-large uk-list-divider">
                     {allCommentsState.map(comment => (
                         <li>
@@ -346,10 +349,6 @@ function DiscoverPlace() {
                     ))}
                 </ul>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
         </div>
     )
 }

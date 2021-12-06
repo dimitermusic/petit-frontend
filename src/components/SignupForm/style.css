@@ -1,3 +1,82 @@
-.signupform{
+.signupform {
     margin: auto;
+}
+
+.splash {
+    width: 100%;
+    min-height: 70vh;
+    background-image: url(../../images/dog-and-person.webp);
+    background-size: cover;
+    background-color: black;
+    background-position-y: -200px;
+    object-fit: cover;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.splash h1 {
+    color: white;
+}
+
+.splash h2 {
+    color: white;
+}
+
+.splash button {
+    background-color: rgb(74, 155, 74);
+    color: white;
+    border: none;
+}
+
+.splash button:hover {
+    background-color: white;
+    color: rgb(74, 155, 74);
+}
+
+.col-one {
+    padding: 47px;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.col-one h1 {
+    font-size: 62px;
+}
+
+.col-two {
+    padding: 47px;
+}
+
+.uk-card {
+    opacity: .8;
+}
+
+@media only screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio : 3) {
+    .col-one {
+        display: block;
+        height: 50px;
+        margin-bottom: 74px;
+        justify-content: space-around;
+        padding: 0;
+    }
+
+    .col-one h1 {
+        font-size: 33px;
+    }
+
+    .col-one h2 {
+        font-size: 24px;
+    }
+
+    .col-two {
+        padding: 0;
+        margin-bottom: 47px;
+    }
 }
