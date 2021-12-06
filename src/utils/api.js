@@ -1,10 +1,5 @@
 import axios from "axios";
-<<<<<<< HEAD
 const URL_PREFIX = "http://localhost:3001"
-=======
-const URL_PREFIX = "https://petit-backend.herokuapp.com"
-// const URL_PREFIX = "http://localhost:3001"
->>>>>>> 879f04c34e1dd99e4644fd82beeb14d43e7d6330
 
 const API = {
     getProfile: (tkn) => {

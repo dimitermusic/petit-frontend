@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";import API from '../../../utils/api.js'
 import "./style.css"
+import { Image } from 'cloudinary-react';
 import './style.css';
 import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget';
 import { useSelector } from "react-redux";
@@ -9,13 +10,6 @@ import generateSignature from '../../../utils/generateSignature'
 function Profile(props) {
   const myUser = useSelector(state => state.globalUser);
   const myVotes = useSelector(state => state.globalVotes);
-
-  useEffect(()=>{
-    if(!localStorage.token){
-      console.log("you made it this far!");
-      <Navigate to="/login" />
-    }
-  },[])
 
   const handleProPicSubmit = taco => {
     console.log("event is triggered")
